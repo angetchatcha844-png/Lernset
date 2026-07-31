@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lernwortschatz — Wörter & Artikel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F6F0E1; --ink:#232A3B; --ink-soft:#5B6072;
+    --red:#B23A32; --mustard:#D9A62E; --green:#3F6B3F; --line:#C9BE9E;
+    --card-shadow: 0 2px 0 var(--line), 0 10px 24px rgba(35,42,59,0.10);
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0; background:var(--paper); color:var(--ink);
+    font-family:'Work Sans', sans-serif; min-height:100vh; padding:32px 16px 64px;
+  }
+  .wrap{max-width:640px; margin:0 auto;}
+  .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.14em;
+    text-transform:uppercase; color:var(--red); margin:0 0 6px;}
+  h1{font-family:'Fraunces', serif; font-weight:700; font-size:32px; margin:0 0 6px; letter-spacing:-0.01em;}
+  .sub{color:var(--ink-soft); font-size:14.5px; margin:0 0 20px;}
+
+  .scorebar{display:flex; justify-content:space-between; align-items:center;
+    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--ink-soft); margin-bottom:14px;}
+  .scorebar b{color:var(--ink); font-size:15px;}
+  .topbtn{border:1px solid var(--line); background:transparent; color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace; font-size:12px; padding:4px 9px; border-radius:4px; cursor:pointer;}
+  .topbtn:hover{border-color:var(--red); color:var(--red);}
+
+  .progressbg{height:5px; background:var(--line); border-radius:3px; margin-bottom:22px; overflow:hidden;}
+  .progressfg{height:100%; background:var(--mustard); width:0%; transition:width .3s ease;}
+
+  .card{background:#FFFDF7; border:1px solid var(--line); border-radius:6px;
+    box-shadow:var(--card-shadow); padding:28px 26px 24px; position:relative; overflow:hidden;}
+  .card::before{content:''; position:absolute; top:0; left:0; right:0; height:6px;
+    background:repeating-linear-gradient(90deg, var(--mustard) 0 14px, transparent 14px 22px); opacity:.55;}
+  .cat{display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.08em;
+    text-transform:uppercase; color:#fff; background:var(--ink); padding:3px 9px; border-radius:3px; margin-bottom:16px;}
+  .word{font-family:'Fraunces', serif; font-size:30px; font-weight:700; margin:0 0 4px;}
+  .hint{color:var(--ink-soft); font-size:13px; margin:0 0 20px;}
+
+  .field{margin-bottom:14px;}
+  .field label{display:block; font-family:'IBM Plex Mono', monospace; font-size:12px;
+    letter-spacing:.05em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:5px;}
+  .field input{
+    width:100%; border:1.5px solid var(--line); border-radius:5px; padding:11px 13px;
+    font-size:15.5px; font-family:'Work Sans'; background:var(--paper); color:var(--ink);
+  }
+  .field input:focus{outline:2px solid var(--red); outline-offset:1px;}
+  .field.ok input{border-color:var(--green); background:#EEF4EA;}
+  .field.bad input{border-color:var(--red); background:#F9EDEB;}
+
+  button.checkbtn{
+    width:100%; border:none; background:var(--ink); color:#fff; border-radius:5px;
+    padding:13px; font-family:'Work Sans'; font-weight:600; font-size:15px; cursor:pointer; margin-top:4px;
+  }
+  button.checkbtn:hover{background:var(--red);}
+
+  .options{display:flex; gap:9px; margin-bottom:6px;}
+  .opt{
+    flex:1; text-align:center; border:1.5px solid var(--line); background:var(--paper);
+    border-radius:5px; padding:14px 8px; font-size:17px; font-weight:700; font-family:'Fraunces', serif;
+    cursor:pointer; transition:.15s ease; color:var(--ink);
+  }
+  .opt:hover{border-color:var(--ink-soft);}
+  .opt.correct{background:#E7EFE2; border-color:var(--green); color:var(--green);}
+  .opt.incorrect{background:#F5E4E1; border-color:var(--red); color:var(--red);}
+  .opt:disabled{cursor:default;}
+
+  .feedback{margin-top:16px; padding:12px 14px; border-radius:5px; font-size:14.5px; display:none; line-height:1.55;}
+  .feedback.show{display:block;}
+  .feedback.ok{background:#E7EFE2; color:var(--green); border:1px solid var(--green);}
+  .feedback.bad{background:#F5E4E1; color:var(--red); border:1px solid var(--red);}
+  .feedback b{font-family:'IBM Plex Mono', monospace;}
+  .feedback .transline{display:block; margin-top:6px; font-family:'Work Sans'; color:var(--ink);}
+
+  .nextbtn{margin-top:14px; width:100%; border:none; background:var(--red); color:#fff;
+    padding:13px; border-radius:5px; font-family:'Work Sans'; font-weight:600; font-size:15px;
+    cursor:pointer; display:none;}
+  .nextbtn.show{display:block;}
+  .nextbtn:hover{background:#961e17;}
+  .countdown{font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--ink-soft);
+    margin-top:8px; text-align:right;}
+
+  .done-screen{text-align:center; padding:40px 20px;}
+  .done-screen .big{font-family:'Fraunces', serif; font-size:52px; font-weight:700; color:var(--red);}
+  .done-screen p{color:var(--ink-soft); font-size:15px;}
+  .restart, .menubtn{margin-top:10px; border:1.5px solid var(--ink); background:transparent; color:var(--ink);
+    padding:11px 22px; border-radius:5px; font-family:'Work Sans'; font-weight:600; cursor:pointer; font-size:14.5px;}
+  .restart:hover, .menubtn:hover{background:var(--ink); color:#fff;}
+
+  .modgrid{display:flex; flex-direction:column; gap:10px;}
+  .sectionlabel{
+    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.1em; text-transform:uppercase;
+    color:var(--ink-soft); margin:18px 0 8px;
+  }
+  .sectionlabel:first-child{margin-top:0;}
+  .modcard{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    border:1.5px solid var(--line); background:#FFFDF7; border-radius:6px;
+    padding:14px 16px; cursor:pointer; transition:.15s ease; text-align:left; width:100%;
+  }
+  .modcard:hover{border-color:var(--red);}
+  .modcard.completed{border-color:var(--green); background:#EEF4EA;}
+  .modleft{display:flex; flex-direction:column; gap:3px;}
+  .modtitle{font-family:'Fraunces', serif; font-weight:700; font-size:17px;}
+  .modrange{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft);}
+  .modscore{font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--green); font-weight:600; white-space:nowrap;}
+  .modarrow{color:var(--red); font-size:18px;}
+
+  .dirchoice{text-align:center; padding:10px 4px 4px;}
+  .dirchoice p{color:var(--ink-soft); font-size:14px; margin-bottom:18px;}
+  .dirbtn{
+    display:block; width:100%; border:1.5px solid var(--line); background:var(--paper);
+    border-radius:6px; padding:16px; margin-bottom:12px; cursor:pointer; text-align:left;
+  }
+  .dirbtn:hover{border-color:var(--red);}
+  .dirbtn b{font-family:'Fraunces', serif; font-size:17px; display:block;}
+  .dirbtn span{color:var(--ink-soft); font-size:13px;}
+  .backlink{background:transparent; border:none; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace;
+    font-size:12px; cursor:pointer; margin-top:6px;}
+  .backlink:hover{color:var(--red);}
+
+  footer{text-align:center; color:var(--ink-soft); font-size:12.5px; margin-top:22px; font-family:'IBM Plex Mono', monospace;}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="eyebrow">Lernwortschatz · Kapitel 1–2</p>
+  <h1>Wörter & Artikel</h1>
+  <p class="sub" id="subtitle">Choisis un module de 10 mots ou d'articles à réviser.</p>
+
+  <div class="scorebar" id="scorebarTop" style="display:none;">
+    <span>Mot <b id="qpos">1</b> / <b id="qtotal"></b></span>
+    <span>Score module : <b id="scorenow">0</b></span>
+    <button class="topbtn" id="menuBtnTop">☰ Menu des modules</button>
+  </div>
+  <div class="progressbg" id="progressbg" style="display:none;"><div class="progressfg" id="progressfg"></div></div>
+
+  <div class="card" id="card"></div>
+  <footer>Lernwortschatz · vocabulaire tiré des pages Menschen A1 · by Ange TNT</footer>
+</div>
+
+<script>
+/* ---------- Vocabulaire : mot, catégorie, sens en français ---------- */
+const allWords = [
+  ["Hallo","Begrüßung",["salut (bonjour familier)","salut","bonjour"]],
+  ["Guten Morgen","Begrüßung",["bonjour (le matin)","bonjour"]],
+  ["Guten Tag","Begrüßung",["bonjour (dans la journée)","bonjour"]],
+  ["Guten Abend","Begrüßung",["bonsoir"]],
+  ["Gute Nacht","Begrüßung",["bonne nuit"]],
+  ["Auf Wiedersehen","Begrüßung",["au revoir (formel)","au revoir"]],
+  ["Tschüss","Begrüßung",["salut (au revoir familier)","salut","au revoir"]],
+  ["Ich heiße","Name",["je m'appelle"]],
+  ["Ich bin","Name",["je suis"]],
+  ["Mein Name ist","Name",["mon nom est"]],
+  ["Das ist","Name",["c'est"]],
+
+  ["Wer","Name",["qui"]],
+  ["Wie","Name",["comment"]],
+  ["Frau","Personalien",["madame","femme"]],
+  ["Herr","Personalien",["monsieur","homme"]],
+  ["Name","Personalien",["nom"]],
+  ["Vorname","Personalien",["prénom"]],
+  ["Familienname","Personalien",["nom de famille"]],
+  ["Woher","Herkunft",["d'où"]],
+  ["kommen aus","Herkunft",["venir de"]],
+  ["aus","Herkunft",["de","depuis"]],
+
+  ["Land","Länder",["pays"]],
+  ["Deutschland","Länder",["allemagne"]],
+  ["Österreich","Länder",["autriche"]],
+  ["Schweiz","Länder",["suisse"]],
+  ["Wie geht's?","Befinden",["comment ça va"]],
+  ["sehr gut","Befinden",["très bien"]],
+  ["gut","Befinden",["bien"]],
+  ["es geht","Befinden",["ça va"]],
+  ["nicht so gut","Befinden",["pas très bien"]],
+  ["Alphabet","Weitere Wörter",["alphabet"]],
+
+  ["buchstabieren","Weitere Wörter",["épeler"]],
+  ["auch","Weitere Wörter",["aussi"]],
+  ["danke","Weitere Wörter",["merci"]],
+  ["ja","Weitere Wörter",["oui"]],
+  ["nein","Weitere Wörter",["non"]],
+  ["sehr","Weitere Wörter",["très"]],
+  ["und","Weitere Wörter",["et"]],
+  ["Arbeitgeber","Arbeit",["employeur"]],
+  ["Ausbildung","Arbeit",["formation"]],
+  ["Beruf","Arbeit",["métier","profession"]],
+
+  ["Hochschule","Arbeit",["grande école","université"]],
+  ["Universität","Arbeit",["université (académique)","université"]],
+  ["Job","Arbeit",["emploi","job"]],
+  ["Praktikum","Arbeit",["stage"]],
+  ["Schule","Arbeit",["école"]],
+  ["Stelle","Arbeit",["poste"]],
+  ["arbeiten als","Arbeit",["travailler comme"]],
+  ["arbeiten bei","Arbeit",["travailler chez"]],
+  ["studieren","Arbeit",["étudier"]],
+  ["arbeitslos","Arbeit",["au chômage"]],
+  ["von Beruf","Arbeit",["de profession"]],
+  ["Was...?","Arbeit",["quoi"]],
+
+  ["Alter","Persönliches",["âge"]],
+  ["Familienstand","Persönliches",["état civil"]],
+  ["Jahr","Persönliches",["année","an"]],
+  ["...Jahre alt sein","Persönliches",["avoir ... ans"]],
+  ["Kind","Persönliches",["enfant"]],
+  ["leben","Persönliches",["vivre"]],
+  ["allein leben","Persönliches",["vivre seul"]],
+  ["zusammenleben","Persönliches",["vivre ensemble"]],
+  ["wohnen in","Persönliches",["habiter à"]],
+  ["geschieden","Persönliches",["divorcé"]],
+
+  ["verheiratet","Persönliches",["marié"]],
+  ["in","Persönliches",["dans","à"]],
+  ["Wo...?","Persönliches",["où"]],
+  ["Architekt","Berufe",["architecte"]],
+  ["Arzt","Berufe",["médecin"]],
+  ["Friseur","Berufe",["coiffeur"]],
+  ["Ingenieur","Berufe",["ingénieur"]],
+  ["Journalist","Berufe",["journaliste"]],
+  ["Kellner","Berufe",["serveur"]],
+  ["Krankenschwester","Berufe",["infirmière"]],
+
+  ["Lehrer","Berufe",["enseignant","professeur"]],
+  ["Mechatroniker","Berufe",["mécatronicien"]],
+  ["Student","Berufe",["étudiant"]],
+  ["Schauspieler","Berufe",["acteur"]],
+  ["Schüler","Berufe",["élève"]],
+  ["Sekretär","Berufe",["secrétaire"]],
+  ["Verkäufer","Berufe",["vendeur"]],
+  ["glauben","Weitere Wörter",["croire","penser"]],
+  ["haben","Weitere Wörter",["avoir"]],
+  ["machen","Weitere Wörter",["faire"]],
+
+  ["richtig","Weitere Wörter",["correct","juste"]],
+  ["falsch","Weitere Wörter",["faux"]],
+  ["super","Weitere Wörter",["super"]],
+  ["aber","Weitere Wörter",["mais"]],
+  ["kein-","Weitere Wörter",["aucun","pas de"]],
+  ["nicht","Weitere Wörter",["ne...pas"]],
+];
+
+/* ---------- Articles : article, mot (singulier), pluriel, sens en français ---------- */
+const articleWords = [
+  ["der","Arbeitgeber","Arbeitgeber","employeur"],
+  ["die","Ausbildung","Ausbildungen","formation"],
+  ["der","Beruf","Berufe","métier"],
+  ["die","Hochschule","Hochschulen","université / grande école"],
+  ["der","Job","Jobs","emploi"],
+  ["das","Praktikum","Praktika","stage"],
+  ["die","Schule","Schulen","école"],
+  ["die","Stelle","Stellen","poste"],
+  ["das","Alter","—","âge"],
+  ["der","Familienstand","—","état civil"],
+
+  ["das","Jahr","Jahre","année"],
+  ["das","Kind","Kinder","enfant"],
+  ["der","Architekt","Architekten","architecte"],
+  ["der","Arzt","Ärzte","médecin"],
+  ["der","Friseur","Friseure","coiffeur"],
+  ["der","Ingenieur","Ingenieure","ingénieur"],
+  ["der","Journalist","Journalisten","journaliste"],
+  ["der","Kellner","Kellner","serveur"],
+  ["die","Krankenschwester","Krankenschwestern","infirmière"],
+  ["der","Lehrer","Lehrer","enseignant"],
+
+  ["der","Mechatroniker","Mechatroniker","mécatronicien"],
+  ["der","Student","Studenten","étudiant"],
+  ["der","Schauspieler","Schauspieler","acteur"],
+  ["der","Schüler","Schüler","élève"],
+  ["der","Sekretär","Sekretäre","secrétaire"],
+  ["der","Verkäufer","Verkäufer","vendeur"],
+  ["die","Frau","Frauen","madame / femme"],
+  ["der","Herr","Herren","monsieur"],
+  ["der","Name","Namen","nom"],
+  ["der","Vorname","Vornamen","prénom"],
+
+  ["das","Land","Länder","pays"],
+  ["die","Schweiz","—","Suisse"],
+  ["das","Alphabet","Alphabete","alphabet"],
+];
+
+const MOD_SIZE = 10;
+
+function chunk(arr){
+  const out=[];
+  for(let i=0;i<arr.length;i+=MOD_SIZE) out.push(arr.slice(i,i+MOD_SIZE));
+  return out;
+}
+
+/* module list: {type:'vocab'|'artikel', items:[...], label} */
+const modules = [
+  ...chunk(allWords).map(items=>({type:'vocab', items})),
+  ...chunk(articleWords).map(items=>({type:'artikel', items})),
+];
+const moduleScores = modules.map(()=>null);
+
+let currentMod = 0;
+let direction = 'de-fr'; // for vocab modules: 'de-fr' or 'fr-de'
+let modItems = [];
+let idx=0, score=0, answered=false, autoTimer=null, countdownTimer=null;
+const DELAY = 4;
+
+const cardEl = document.getElementById('card');
+const scorebarTopEl = document.getElementById('scorebarTop');
+const progressbgEl = document.getElementById('progressbg');
+const progressfgEl = document.getElementById('progressfg');
+const qposEl = document.getElementById('qpos');
+const qtotalEl = document.getElementById('qtotal');
+const scoreEl = document.getElementById('scorenow');
+const subtitleEl = document.getElementById('subtitle');
+
+document.getElementById('menuBtnTop').addEventListener('click', ()=>{ clearAutoAdvance(); showMenu(); });
+
+function norm(s){
+  return s.trim().toLowerCase()
+    .replace(/['’]/g,"'").replace(/[.!?]/g,'')
+    .replace(/ß/g,"ss")
+    .normalize("NFD").replace(/[\u0300-\u036f]/g,"");
+}
+function normKeepUmlaut(s){
+  return s.trim().toLowerCase().replace(/[.!?]/g,'').replace(/ß/g,"ss");
+}
+function matches(input, accepted, keepUmlaut){
+  const n = keepUmlaut ? normKeepUmlaut(input) : norm(input);
+  if(!n) return false;
+  return accepted.some(a=>{
+    const na = keepUmlaut ? normKeepUmlaut(a) : norm(a);
+    return n===na || n.includes(na) || na.includes(n);
+  });
+}
+
+/* ---------------- MENU ---------------- */
+function showMenu(){
+  scorebarTopEl.style.display='none';
+  progressbgEl.style.display='none';
+  subtitleEl.textContent = "Choisis un module de 10 mots ou d'articles à réviser.";
+
+  let html = `<div class="modgrid">`;
+  let sectionShown = {vocab:false, artikel:false};
+  modules.forEach((mod,i)=>{
+    if(mod.type==='vocab' && !sectionShown.vocab){ html += `<p class="sectionlabel">Vocabulaire</p>`; sectionShown.vocab=true; }
+    if(mod.type==='artikel' && !sectionShown.artikel){ html += `<p class="sectionlabel">Articles — der / die / das</p>`; sectionShown.artikel=true; }
+    const first = mod.items[0][mod.type==='vocab'?0:1];
+    const last = mod.items[mod.items.length-1][mod.type==='vocab'?0:1];
+    const done = moduleScores[i];
+    const label = mod.type==='vocab' ? `Module ${i+1}` : `Artikel ${i - chunk(allWords).length + 1}`;
+    html += `<button class="modcard ${done?'completed':''}" data-mod="${i}">
+      <div class="modleft">
+        <span class="modtitle">${label}</span>
+        <span class="modrange">${first} → ${last} · ${mod.items.length} ${mod.type==='vocab'?'mots':'articles'}</span>
+      </div>
+      ${done ? `<span class="modscore">${done.score}/${done.total} ✓</span>` : `<span class="modarrow">→</span>`}
+    </button>`;
+  });
+  html += `</div>`;
+  cardEl.innerHTML = html;
+  cardEl.querySelectorAll('.modcard').forEach(btn=>{
+    btn.addEventListener('click', ()=> openModule(parseInt(btn.dataset.mod)));
+  });
+}
+
+/* ---------------- DIRECTION CHOICE (vocab modules only) ---------------- */
+function openModule(i){
+  const mod = modules[i];
+  if(mod.type==='artikel'){
+    startModule(i);
+    return;
+  }
+  currentMod = i;
+  scorebarTopEl.style.display='none';
+  progressbgEl.style.display='none';
+  subtitleEl.textContent = `Module ${i+1} — choisis le sens de la révision.`;
+  cardEl.innerHTML = `
+    <div class="dirchoice">
+      <p>Comment veux-tu réviser ce module ?</p>
+      <button class="dirbtn" id="deFrBtn">
+        <b>Allemand → Français</b>
+        <span>Le mot allemand est donné, tu écris le sens en français.</span>
+      </button>
+      <button class="dirbtn" id="frDeBtn">
+        <b>Français → Allemand</b>
+        <span>Le sens en français est donné, tu écris le mot en allemand.</span>
+      </button>
+      <button class="backlink" id="backBtn">← Retour au menu</button>
+    </div>
+  `;
+  document.getElementById('deFrBtn').addEventListener('click', ()=>{ direction='de-fr'; startModule(i); });
+  document.getElementById('frDeBtn').addEventListener('click', ()=>{ direction='fr-de'; startModule(i); });
+  document.getElementById('backBtn').addEventListener('click', showMenu);
+}
+
+/* ---------------- QUIZ ---------------- */
+function startModule(i){
+  currentMod = i;
+  modItems = modules[i].items.slice();
+  idx=0; score=0; answered=false;
+  scorebarTopEl.style.display='flex';
+  progressbgEl.style.display='block';
+  qtotalEl.textContent = modItems.length;
+  const mod = modules[i];
+  const dirLabel = mod.type==='vocab' ? (direction==='de-fr' ? ' · Allemand → Français' : ' · Français → Allemand') : '';
+  subtitleEl.textContent = (mod.type==='vocab' ? `Module ${i+1}` : `Articles ${i+1}`) + dirLabel;
+  render();
+}
+
+function updateProgress(){
+  progressfgEl.style.width = Math.round((idx/modItems.length)*100)+"%";
+}
+
+function render(){
+  answered=false;
+  const mod = modules[currentMod];
+  qposEl.textContent = idx+1;
+  scoreEl.textContent = score;
+  updateProgress();
+
+  if(mod.type==='vocab'){
+    renderVocab();
+  } else {
+    renderArtikel();
+  }
+}
+
+function renderVocab(){
+  const [word, cat, fr] = modItems[idx];
+  const promptText = direction==='de-fr' ? word : fr[0];
+  const label = direction==='de-fr' ? 'Français' : 'Deutsch';
+
+  cardEl.innerHTML = `
+    <span class="cat">${cat}</span>
+    <p class="word">${promptText}</p>
+    <p class="hint">${direction==='de-fr' ? 'Donne le sens en français.' : 'Écris le mot en allemand.'}</p>
+    <div class="field" id="fieldAns">
+      <label>${label}</label>
+      <input type="text" id="inAns" autocomplete="off" placeholder="…">
+    </div>
+    <button class="checkbtn" id="checkbtn">Vérifier</button>
+    <div class="feedback" id="fb"></div>
+    <button class="nextbtn" id="nextbtn">${idx===modItems.length-1 ? 'Voir le résultat du module →' : 'Suivant maintenant →'}</button>
+    <p class="countdown" id="countdown"></p>
+  `;
+
+  const inAns = document.getElementById('inAns');
+  const submit = ()=>checkVocab(word, fr);
+  document.getElementById('checkbtn').addEventListener('click', submit);
+  inAns.addEventListener('keydown', e=>{ if(e.key==='Enter') submit(); });
+  document.getElementById('nextbtn').addEventListener('click', next);
+  inAns.focus();
+}
+
+function checkVocab(word, fr){
+  if(answered) return;
+  answered=true;
+  const inAns = document.getElementById('inAns');
+  const target = direction==='de-fr' ? fr : [word];
+  const keepUmlaut = direction==='fr-de';
+  const ok = matches(inAns.value, target, keepUmlaut);
+  inAns.disabled = true;
+  document.getElementById('checkbtn').disabled = true;
+  document.getElementById('fieldAns').classList.add(ok?'ok':'bad');
+  if(ok) score++;
+
+  const translation = direction==='de-fr' ? fr[0] : word;
+  const fb = document.getElementById('fb');
+  fb.className = 'feedback show '+(ok?'ok':'bad');
+  fb.innerHTML = (ok ? `<b>✓ Richtig!</b>` : `<b>✗ Presque.</b> Réponse correcte : <b>${translation}</b>`)
+    + `<span class="transline">${word} = ${fr[0]}</span>`;
+  scoreEl.textContent = score;
+  document.getElementById('nextbtn').classList.add('show');
+  startAutoAdvance();
+}
+
+function renderArtikel(){
+  const [article, noun, plural, trans] = modItems[idx];
+  cardEl.innerHTML = `
+    <span class="cat">Artikel</span>
+    <p class="word">${noun}</p>
+    <p class="hint">Quel article correspond à ce mot ?</p>
+    <div class="options">
+      <button class="opt" data-a="der">der</button>
+      <button class="opt" data-a="die">die</button>
+      <button class="opt" data-a="das">das</button>
+    </div>
+    <div class="feedback" id="fb"></div>
+    <button class="nextbtn" id="nextbtn">${idx===modItems.length-1 ? 'Voir le résultat du module →' : 'Suivant maintenant →'}</button>
+    <p class="countdown" id="countdown"></p>
+  `;
+  cardEl.querySelectorAll('.opt').forEach(btn=>{
+    btn.addEventListener('click', ()=>checkArtikel(btn, article, noun, plural, trans));
+  });
+  document.getElementById('nextbtn').addEventListener('click', next);
+}
+
+function checkArtikel(btn, article, noun, plural, trans){
+  if(answered) return;
+  answered=true;
+  const chosen = btn.dataset.a;
+  const ok = chosen === article;
+  if(ok) score++;
+  cardEl.querySelectorAll('.opt').forEach(o=>{
+    o.disabled = true;
+    if(o.dataset.a === article) o.classList.add('correct');
+    else if(o===btn) o.classList.add('incorrect');
+  });
+  const pluralLine = plural==='—' ? 'pas de pluriel courant' : `die ${plural}`;
+  const fb = document.getElementById('fb');
+  fb.className = 'feedback show '+(ok?'ok':'bad');
+  fb.innerHTML = (ok ? `<b>✓ Richtig!</b> ${article} ${noun}` : `<b>✗ Presque.</b> Réponse correcte : <b>${article} ${noun}</b>`)
+    + `<span class="transline">Pluriel : ${pluralLine} · Traduction : ${trans}</span>`;
+  scoreEl.textContent = score;
+  document.getElementById('nextbtn').classList.add('show');
+  startAutoAdvance();
+}
+
+/* ---------------- FLOW CONTROL ---------------- */
+function startAutoAdvance(){
+  let remaining = DELAY;
+  const cd = document.getElementById('countdown');
+  cd.textContent = `Suite dans ${remaining}s…`;
+  clearInterval(countdownTimer); clearTimeout(autoTimer);
+  countdownTimer = setInterval(()=>{
+    remaining--;
+    if(remaining>0 && cd) cd.textContent = `Suite dans ${remaining}s…`;
+  }, 1000);
+  autoTimer = setTimeout(()=>{ clearInterval(countdownTimer); next(); }, DELAY*1000);
+}
+function clearAutoAdvance(){ clearTimeout(autoTimer); clearInterval(countdownTimer); }
+
+function next(){
+  clearAutoAdvance();
+  if(idx < modItems.length-1){ idx++; render(); }
+  else finishModule();
+}
+
+function finishModule(){
+  progressfgEl.style.width="100%";
+  moduleScores[currentMod] = {score, total: modItems.length};
+  const pct = Math.round((score/modItems.length)*100);
+  let msg = "Repasse sur ce module pour consolider.";
+  if(pct>=90) msg="Module maîtrisé, bravo !";
+  else if(pct>=70) msg="Très solide.";
+  else if(pct>=50) msg="Bonne base, encore un peu d'entraînement.";
+
+  const isLast = currentMod === modules.length-1;
+  const doneCount = moduleScores.filter(Boolean).length;
+
+  cardEl.innerHTML = `<div class="done-screen">
+    <div class="big">${score}/${modItems.length}</div>
+    <p>Module terminé — ${pct}% — ${msg}</p>
+    <p style="font-family:'IBM Plex Mono',monospace; font-size:12.5px;">${doneCount}/${modules.length} modules complétés au total</p>
+    <button class="restart" id="retryBtn">Refaire ce module</button>
+    ${!isLast ? `<button class="menubtn" id="nextModBtn">Module suivant →</button>` : ``}
+    <button class="menubtn" id="menuBtn2">☰ Retour au menu</button>
+  </div>`;
+  document.getElementById('retryBtn').addEventListener('click', ()=>{
+    if(modules[currentMod].type==='vocab') openModule(currentMod); else startModule(currentMod);
+  });
+  document.getElementById('menuBtn2').addEventListener('click', showMenu);
+  if(!isLast){
+    document.getElementById('nextModBtn').addEventListener('click', ()=>{
+      const ni = currentMod+1;
+      if(modules[ni].type==='vocab') openModule(ni); else startModule(ni);
+    });
+  }
+}
+
+showMenu();
+</script>
+</body>
+</html>
