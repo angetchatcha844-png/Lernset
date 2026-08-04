@@ -125,6 +125,82 @@
   .backlink:hover{color:var(--red);}
 
   footer{text-align:center; color:var(--ink-soft); font-size:12.5px; margin-top:22px; font-family:'IBM Plex Mono', monospace;}
+
+  /* ===== Quiz module (fusionne) ===== */
+  .partpos{color:var(--ink-soft); font-size:11.5px;}
+  .restart-inline{
+    border:1px solid var(--line); background:transparent; color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace; font-size:12px; padding:4px 9px;
+    border-radius:4px; cursor:pointer;
+  }
+  .restart-inline:hover{border-color:var(--red); color:var(--red);}
+
+  .modeSelect{display:flex; flex-direction:column; gap:12px; margin-bottom:24px;}
+  .modeCard{
+    text-align:left; border:1.5px solid var(--line); background:#FFFDF7;
+    border-radius:6px; padding:18px 20px; cursor:pointer; transition:.15s ease;
+  }
+  .modeCard:hover{border-color:var(--red);}
+  .modeCard.hard{border-color:#8a2d27; background:#2A1E1E;}
+  .modeCard.hard:hover{border-color:var(--red);}
+  .modeCard .modeTitle{display:block; font-family:'Fraunces', serif; font-weight:700; font-size:19px; margin-bottom:5px;}
+  .modeCard.hard .modeTitle{color:#F2C4C0;}
+  .modeCard .modeDesc{display:block; font-size:13px; color:var(--ink-soft); line-height:1.5;}
+  .modeCard.hard .modeDesc{color:#D9B8B5;}
+  .partCard{position:relative;}
+  .partCard.partDone{border-color:var(--green); background:#F3F8F0;}
+  .partCard.partDone .modeTitle{color:var(--green);}
+
+  .rail{display:flex; gap:6px; margin:20px 0 26px; flex-wrap:wrap;}
+  .partbtn{
+    border:1.5px solid var(--line); background:var(--paper); color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:600;
+    padding:7px 12px; border-radius:5px; cursor:pointer; transition:.15s ease;
+  }
+  .partbtn:hover{border-color:var(--ink-soft); color:var(--ink);}
+  .partbtn.done{background:var(--mustard); border-color:var(--mustard); color:var(--ink);}
+  .partbtn.now{background:var(--red); border-color:var(--red); color:#fff; transform:translateY(-2px);}
+
+  .qnum{color:var(--ink-soft); font-size:13px; font-family:'IBM Plex Mono',monospace; margin-left:8px;}
+  .prevbtn{
+    float:right; border:1px solid var(--line); background:transparent; color:var(--ink-soft);
+    font-family:'IBM Plex Mono', monospace; font-size:11.5px; padding:4px 9px;
+    border-radius:4px; cursor:pointer;
+  }
+  .prevbtn:hover{border-color:var(--ink); color:var(--ink);}
+  .question{font-family:'Fraunces', serif; font-size:22px; line-height:1.35; font-weight:600; margin:0 0 20px;}
+
+  .qoptions{display:flex; flex-direction:column; gap:9px; margin-bottom:6px;}
+  .qopt{
+    text-align:left; border:1.5px solid var(--line); background:var(--paper);
+    border-radius:5px; padding:12px 14px; font-size:15.5px; font-family:'Work Sans';
+    cursor:pointer; transition:.15s ease; color:var(--ink); width:100%;
+  }
+  .qopt:hover{border-color:var(--ink-soft);}
+  .qopt.correct{background:#E7EFE2; border-color:var(--green); color:var(--green); font-weight:600;}
+  .qopt.incorrect{background:#F5E4E1; border-color:var(--red); color:var(--red); font-weight:600;}
+  .qopt:disabled{cursor:default;}
+
+  .textrow{display:flex; gap:8px;}
+  input.textin{
+    flex:1; border:1.5px solid var(--line); border-radius:5px; padding:12px 14px;
+    font-size:15.5px; font-family:'Work Sans'; background:var(--paper); color:var(--ink);
+  }
+  input.textin:focus{outline:2px solid var(--red); outline-offset:1px;}
+  .langhint{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--ink-soft); margin:6px 0 0; font-style:italic;}
+  .feedback .meaning{display:inline-block; margin-top:6px; font-size:13px; font-style:italic; color:var(--ink-soft);}
+
+  .dropdown{margin-bottom:12px; border:1.5px solid var(--line); border-radius:6px; overflow:hidden; background:#FFFDF7;}
+  .dropdown-header{
+    width:100%; display:flex; align-items:center; justify-content:space-between;
+    border:none; background:transparent; padding:15px 16px; cursor:pointer;
+    font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:.1em;
+    text-transform:uppercase; color:var(--ink-soft);
+  }
+  .dropdown-header:hover{color:var(--red);}
+  .dropdown-arrow{font-size:14px; color:var(--red);}
+  .dropdown-body{padding:0 14px 14px;}
+  .dropdown-body .modgrid{display:flex; flex-direction:column; gap:10px;}
 </style>
 </head>
 <body>
@@ -139,6 +215,15 @@
     <button class="topbtn" id="menuBtnTop">☰ Menu des modules</button>
   </div>
   <div class="progressbg" id="progressbg" style="display:none;"><div class="progressfg" id="progressfg"></div></div>
+
+  <div class="scorebar" id="qzScorebarWrap" style="display:none;">
+    <span>Question <b id="qzQpos">1</b> / <b id="qzQtotal">100</b> <span id="qzPartpos" class="partpos"></span></span>
+    <span>Score : <b id="qzScorenow">0</b></span>
+    <button class="restart-inline" id="qzRestartInlineBtn">Recommencer</button>
+    <button class="restart-inline" id="qzPartMenuBtn">Parties</button>
+    <button class="restart-inline" id="qzHomeBtn">Accueil</button>
+  </div>
+  <div class="rail" id="qzRail" style="display:none;"></div>
 
   <div class="card" id="card"></div>
   <footer>Lernwortschatz · vocabulaire tiré des pages Menschen A1 · by Ange TNT</footer>
@@ -340,29 +425,78 @@ function matches(input, accepted, keepUmlaut){
 function showMenu(){
   scorebarTopEl.style.display='none';
   progressbgEl.style.display='none';
-  subtitleEl.textContent = "Choisis un module de 10 mots ou d'articles à réviser.";
+  const qzBar = document.getElementById('qzScorebarWrap');
+  const qzRailEl = document.getElementById('qzRail');
+  if(qzBar) qzBar.style.display='none';
+  if(qzRailEl) qzRailEl.style.display='none';
+  subtitleEl.textContent = "Choisis un module de 10 mots, d'articles, ou un quiz complet à réviser.";
 
-  let html = `<div class="modgrid">`;
-  let sectionShown = {vocab:false, artikel:false};
+  let vocabCards = '';
+  let artikelCards = '';
   modules.forEach((mod,i)=>{
-    if(mod.type==='vocab' && !sectionShown.vocab){ html += `<p class="sectionlabel">Vocabulaire</p>`; sectionShown.vocab=true; }
-    if(mod.type==='artikel' && !sectionShown.artikel){ html += `<p class="sectionlabel">Articles — der / die / das</p>`; sectionShown.artikel=true; }
     const first = mod.items[0][mod.type==='vocab'?0:1];
     const last = mod.items[mod.items.length-1][mod.type==='vocab'?0:1];
     const done = moduleScores[i];
     const label = mod.type==='vocab' ? `Module ${i+1}` : `Artikel ${i - chunk(allWords).length + 1}`;
-    html += `<button class="modcard ${done?'completed':''}" data-mod="${i}">
+    const cardHtml = `<button class="modcard ${done?'completed':''}" data-mod="${i}">
       <div class="modleft">
         <span class="modtitle">${label}</span>
         <span class="modrange">${first} → ${last} · ${mod.items.length} ${mod.type==='vocab'?'mots':'articles'}</span>
       </div>
       ${done ? `<span class="modscore">${done.score}/${done.total} ✓</span>` : `<span class="modarrow">→</span>`}
     </button>`;
+    if(mod.type==='vocab') vocabCards += cardHtml; else artikelCards += cardHtml;
   });
-  html += `</div>`;
+
+  const quizCards = `<button class="modcard" id="quizStdCard">
+      <div class="modleft">
+        <span class="modtitle">Quiz standard</span>
+        <span class="modrange">100 questions — Begrüßung, Fragen, Berufe, Verben, Zahlen, textes</span>
+      </div>
+      <span class="modarrow">→</span>
+    </button>
+    <button class="modcard" id="quizHardCard">
+      <div class="modleft">
+        <span class="modtitle">Quiz difficile · Conjugaison</span>
+        <span class="modrange">50 questions — formes proches, corrections, mein-/dein-, ja/nein/doch</span>
+      </div>
+      <span class="modarrow">→</span>
+    </button>`;
+
+  function dropdown(id, title, bodyHtml){
+    return `<div class="dropdown">
+      <button class="dropdown-header" data-drop="${id}">
+        <span>${title}</span>
+        <span class="dropdown-arrow" id="arrow-${id}">▾</span>
+      </button>
+      <div class="dropdown-body" id="body-${id}" style="display:none;">
+        <div class="modgrid">${bodyHtml}</div>
+      </div>
+    </div>`;
+  }
+
+  let html = dropdown('vocab', 'Vocabulaire', vocabCards);
+  html += dropdown('artikel', 'Articles — der / die / das', artikelCards);
+  html += dropdown('quiz', 'Quiz', quizCards);
+
   cardEl.innerHTML = html;
-  cardEl.querySelectorAll('.modcard').forEach(btn=>{
+
+  cardEl.querySelectorAll('.dropdown-header').forEach(hdr=>{
+    hdr.addEventListener('click', ()=>{
+      const id = hdr.dataset.drop;
+      const body = document.getElementById('body-'+id);
+      const arrow = document.getElementById('arrow-'+id);
+      const open = body.style.display !== 'none';
+      body.style.display = open ? 'none' : 'block';
+      arrow.textContent = open ? '▾' : '▴';
+    });
+  });
+
+  document.getElementById('quizStdCard').addEventListener('click', ()=> window.QuizApp.start('standard'));
+  document.getElementById('quizHardCard').addEventListener('click', ()=> window.QuizApp.start('hard'));
+  cardEl.querySelectorAll('.modcard[data-mod]').forEach(btn=>{
     btn.addEventListener('click', ()=> openModule(parseInt(btn.dataset.mod)));
+
   });
 }
 
@@ -570,6 +704,521 @@ function finishModule(){
     });
   }
 }
+
+(function(){
+const bank = [
+  // Begrüßung / Abschied
+  {cat:"Begrüßung", type:"mcq", q:"Comment dit-on « Bonjour » (le matin) en allemand ?", opts:["Guten Abend","Guten Morgen","Gute Nacht","Tschüss"], answer:"Guten Morgen"},
+  {cat:"Begrüßung", type:"mcq", q:"Que dit-on pour se dire au revoir de façon formelle ?", opts:["Hallo","Auf Wiedersehen","Guten Tag","Wie geht's"], answer:"Auf Wiedersehen"},
+  {cat:"Begrüßung", type:"mcq", q:"« Tschüss » veut dire :", opts:["Bonsoir","Salut / Au revoir (familier)","Bonne nuit","Bonjour"], answer:"Salut / Au revoir (familier)"},
+  {cat:"Begrüßung", type:"mcq", q:"Comment salue-t-on le soir avant de dormir ?", opts:["Guten Abend","Gute Nacht","Guten Morgen","Guten Tag"], answer:"Gute Nacht"},
+  {cat:"Begrüßung", type:"mcq", q:"En Autriche, on dit souvent « Grüß Gott » à la place de :", opts:["Guten Tag","Tschüss","Gute Nacht","Wie geht's"], answer:"Guten Tag"},
+  {cat:"Begrüßung", type:"mcq", q:"En Suisse (CH), « Grüezi » remplace :", opts:["Guten Tag","Gute Nacht","Auf Wiedersehen","Guten Morgen"], answer:"Guten Tag"},
+  {cat:"Begrüßung", type:"mcq", q:"Quelle réponse correspond à « Wie geht's? »", opts:["Ich heiße Paco.","Gut, danke. Und dir?","Aus Spanien.","Guten Morgen."], answer:"Gut, danke. Und dir?"},
+  {cat:"Begrüßung", type:"text", q:"Complète : « ___ Tag! » (Bonjour, formule courante)", answer:"guten", tr:"Bonjour !"},
+  {cat:"Begrüßung", type:"mcq", q:"« Servus » est une salutation typique de :", opts:["l'Allemagne standard","l'Autriche","la Suisse","aucune"], answer:"l'Autriche"},
+  {cat:"Begrüßung", type:"mcq", q:"Quelle expression n'est PAS une salutation ?", opts:["Hallo","Servus","Familienname","Guten Abend"], answer:"Familienname"},
+
+  // W-Fragen
+  {cat:"W-Fragen", type:"text", q:"« ___ heißt du? » — question pour demander le nom.", answer:"wie", tr:"Comment t'appelles-tu ?"},
+  {cat:"W-Fragen", type:"text", q:"« ___ kommst du? » — question pour demander l'origine.", answer:"woher", tr:"D'où viens-tu ?"},
+  {cat:"W-Fragen", type:"text", q:"« Und ___ ist das? » (demander qui c'est)", answer:"wer", tr:"Et qui est-ce ?"},
+  {cat:"W-Fragen", type:"mcq", q:"Pour demander une provenance (d'où), on utilise :", opts:["Wie","Wer","Woher","Was"], answer:"Woher"},
+  {cat:"W-Fragen", type:"mcq", q:"« Wer bist du? » signifie :", opts:["Comment vas-tu ?","Qui es-tu ?","D'où viens-tu ?","Que fais-tu ?"], answer:"Qui es-tu ?"},
+  {cat:"W-Fragen", type:"mcq", q:"Pour demander le métier de quelqu'un, on dit :", opts:["Wie heißt du?","Was machst du beruflich?","Woher kommst du?","Wer ist das?"], answer:"Was machst du beruflich?"},
+  {cat:"W-Fragen", type:"mcq", q:"Réponse correcte à « Woher kommst du? »", opts:["Ich heiße Miguel.","Aus Spanien.","Das ist Anna.","Gut, danke."], answer:"Aus Spanien."},
+  {cat:"W-Fragen", type:"text", q:"« ___ alt sind Sie? » (demander l'âge, formel)", answer:"wie", tr:"Quel âge avez-vous ?"},
+  {cat:"W-Fragen", type:"mcq", q:"« Wie ist die Telefonnummer? » demande :", opts:["l'âge","le numéro de téléphone","le nom de famille","la nationalité"], answer:"le numéro de téléphone"},
+  {cat:"W-Fragen", type:"mcq", q:"Quelle question correspond à la réponse « Sie ist zehn. » ?", opts:["Wie alt sind Sie?","Wie alt sind die Kinder?","Woher kommen Sie?","Wer ist das?"], answer:"Wie alt sind die Kinder?"},
+
+  // Conjugaison — sein/haben
+  {cat:"Verben: sein", type:"mcq", q:"Ich ___ Nicole. (sein)", opts:["bin","bist","ist","sind"], answer:"bin", tr:"Je suis Nicole."},
+  {cat:"Verben: sein", type:"mcq", q:"Wer ___ das? (sein)", opts:["bin","bist","ist","sind"], answer:"ist", tr:"Qui est-ce ?"},
+  {cat:"Verben: sein", type:"mcq", q:"Wie alt ___ Sie? (sein)", opts:["bin","bist","sind","ist"], answer:"sind", tr:"Quel âge avez-vous ?"},
+  {cat:"Verben: sein", type:"mcq", q:"Du ___ Studentin. (sein)", opts:["bin","bist","ist","seid"], answer:"bist", tr:"Tu es étudiante."},
+  {cat:"Verben: haben", type:"mcq", q:"Ich ___ zwei Kinder. (haben)", opts:["habe","hast","hat","haben"], answer:"habe", tr:"J'ai deux enfants."},
+  {cat:"Verben: haben", type:"mcq", q:"Wir ___ ein Kind. (haben)", opts:["habe","hast","haben","hat"], answer:"haben", tr:"Nous avons un enfant."},
+  {cat:"Verben: haben", type:"mcq", q:"Sie (elle) ___ einen Job als Verkäuferin. (haben)", opts:["habe","hast","hat","haben"], answer:"hat", tr:"Elle a un travail de vendeuse."},
+
+  // Berufe
+  {cat:"Berufe", type:"mcq", q:"Quel article correspond à « Verkäufer » (vendeur) ?", opts:["der","die","das"], answer:"der"},
+  {cat:"Berufe", type:"mcq", q:"Une femme vendeuse se dit :", opts:["Verkäuferin","Verkäufer","Verkäuferer","Verkäuf"], answer:"Verkäuferin"},
+  {cat:"Berufe", type:"mcq", q:"« Krankenschwester » désigne :", opts:["un professeur","une infirmière","un architecte","un serveur"], answer:"une infirmière"},
+  {cat:"Berufe", type:"mcq", q:"« Kellner » signifie :", opts:["serveur","cuisinier","comptable","chauffeur"], answer:"serveur"},
+  {cat:"Berufe", type:"mcq", q:"Traduis « Ingenieur » :", opts:["ingénieur","journaliste","secrétaire","enseignant"], answer:"ingénieur"},
+  {cat:"Berufe", type:"mcq", q:"« Schauspieler » veut dire :", opts:["acteur","élève","médecin","architecte"], answer:"acteur"},
+  {cat:"Berufe", type:"mcq", q:"« Arzt » signifie :", opts:["médecin","avocat","artiste","ouvrier"], answer:"médecin"},
+  {cat:"Berufe", type:"mcq", q:"« Friseur » désigne :", opts:["coiffeur","fleuriste","boulanger","cuisinier"], answer:"coiffeur"},
+  {cat:"Berufe", type:"mcq", q:"« Sekretärin » est le féminin de :", opts:["Sekretär","Sekretärer","Sekret","Sekretärin selbst"], answer:"Sekretär"},
+  {cat:"Berufe", type:"mcq", q:"Complète : « Ich arbeite ___ Kellnerin. »", opts:["als","bei","in","von"], answer:"als", tr:"Je travaille comme serveuse."},
+  {cat:"Berufe", type:"mcq", q:"Complète : « Frau Stern arbeitet ___ Siemens. »", opts:["als","bei","von","in"], answer:"bei", tr:"Madame Stern travaille chez Siemens."},
+  {cat:"Berufe", type:"mcq", q:"« Ich bin Ingenieur ___ Beruf. »", opts:["von","als","bei","in"], answer:"von", tr:"Je suis ingénieur de métier."},
+  {cat:"Berufe", type:"mcq", q:"« Mechatroniker » correspond à quel domaine ?", opts:["automatique/mécatronique","droit","médecine","journalisme"], answer:"automatique/mécatronique"},
+  {cat:"Berufe", type:"mcq", q:"« Ich mache eine Ausbildung als Mechatroniker bei Airbus. » — que fait la personne ?", opts:["un stage payant","une formation professionnelle","des études universitaires","un travail bénévole"], answer:"une formation professionnelle"},
+  {cat:"Berufe", type:"mcq", q:"« arbeitslos » signifie :", opts:["au chômage","à la retraite","étudiant","en formation"], answer:"au chômage"},
+
+  // Familienstand
+  {cat:"Familienstand", type:"mcq", q:"« verheiratet » signifie :", opts:["marié(e)","divorcé(e)","célibataire","fiancé(e)"], answer:"marié(e)"},
+  {cat:"Familienstand", type:"mcq", q:"« geschieden » signifie :", opts:["divorcé(e)","marié(e)","veuf/veuve","célibataire"], answer:"divorcé(e)"},
+  {cat:"Familienstand", type:"mcq", q:"« Single » (en allemand) désigne :", opts:["une personne célibataire","une personne mariée","un enfant unique","un veuf"], answer:"une personne célibataire"},
+  {cat:"Familienstand", type:"mcq", q:"« Sie leben zusammen » signifie :", opts:["ils vivent ensemble","ils sont divorcés","ils vivent séparément","ils travaillent ensemble"], answer:"ils vivent ensemble"},
+  {cat:"Familienstand", type:"mcq", q:"« Ich lebe allein » signifie :", opts:["je vis seul(e)","je vis en couple","j'ai deux enfants","je suis marié(e)"], answer:"je vis seul(e)"},
+  {cat:"Familienstand", type:"mcq", q:"« Sie sind nicht verheiratet, aber sie leben zusammen. » décrit :", opts:["un couple pacsé/en concubinage","un couple marié","un couple divorcé","deux collègues"], answer:"un couple pacsé/en concubinage"},
+  {cat:"Familienstand", type:"text", q:"Traduis en allemand : « les enfants » (das Kind au pluriel) → die ___", answer:"kinder"},
+  {cat:"Familienstand", type:"mcq", q:"« Wir haben zwei Kinder. » signifie :", opts:["Nous avons deux enfants.","Nous avons deux emplois.","Nous vivons à deux.","Nous sommes divorcés."], answer:"Nous avons deux enfants."},
+
+  // Zahlen
+  {cat:"Zahlen", type:"text", q:"Écris le chiffre : « neunundneunzig »", answer:"99"},
+  {cat:"Zahlen", type:"text", q:"Écris le chiffre : « vierundfünfzig »", answer:"54"},
+  {cat:"Zahlen", type:"text", q:"Écris le chiffre : « fünfundvierzig »", answer:"45"},
+  {cat:"Zahlen", type:"text", q:"Écris le chiffre : « siebenundsiebzig »", answer:"77"},
+  {cat:"Zahlen", type:"text", q:"Écris le chiffre : « sechsundzwanzig »", answer:"26"},
+  {cat:"Zahlen", type:"text", q:"Calcule et écris en chiffre : fünfzehn + siebenunddreißig", answer:"52"},
+  {cat:"Zahlen", type:"text", q:"Calcule et écris en chiffre : sechsundfünfzig + acht", answer:"64"},
+  {cat:"Zahlen", type:"text", q:"Calcule et écris en chiffre : dreiunddreißig + neun", answer:"42"},
+  {cat:"Zahlen", type:"text", q:"Calcule et écris en chiffre : fünfundzwanzig + siebenundsechzig", answer:"92"},
+  {cat:"Zahlen", type:"mcq", q:"Comment écrit-on « 33 » en toutes lettres ?", opts:["dreiunddreißig","dreißigdrei","dreidreißig","dreiunddreizig"], answer:"dreiunddreißig"},
+
+  // Vocabulaire général
+  {cat:"Wortschatz", type:"mcq", q:"« Alter » signifie :", opts:["âge","métier","adresse","nom"], answer:"âge"},
+  {cat:"Wortschatz", type:"mcq", q:"« Arbeitgeber » signifie :", opts:["employeur","employé","stagiaire","collègue"], answer:"employeur"},
+  {cat:"Wortschatz", type:"mcq", q:"« Herkunft » signifie :", opts:["l'origine / provenance","le métier","l'âge","la nationalité"], answer:"l'origine / provenance"},
+  {cat:"Wortschatz", type:"mcq", q:"« Praktikum » signifie :", opts:["un stage","un salaire","un diplôme","une formation longue"], answer:"un stage"},
+  {cat:"Wortschatz", type:"mcq", q:"« Hochschule » signifie :", opts:["une université / grande école","une école primaire","une entreprise","une bibliothèque"], answer:"une université / grande école"},
+  {cat:"Wortschatz", type:"mcq", q:"« Wohnort » signifie :", opts:["lieu de résidence","lieu de travail","pays d'origine","numéro de téléphone"], answer:"lieu de résidence"},
+  {cat:"Wortschatz", type:"mcq", q:"« Land » signifie :", opts:["pays","ville","langue","région"], answer:"pays"},
+  {cat:"Wortschatz", type:"mcq", q:"« buchstabieren » signifie :", opts:["épeler","écrire","lire à voix haute","traduire"], answer:"épeler"},
+  {cat:"Wortschatz", type:"mcq", q:"« richtig » veut dire :", opts:["correct/juste","faux","peut-être","toujours"], answer:"correct/juste"},
+  {cat:"Wortschatz", type:"mcq", q:"« falsch » veut dire :", opts:["faux","correct","facile","difficile"], answer:"faux"},
+  {cat:"Wortschatz", type:"mcq", q:"« glauben » signifie :", opts:["croire / penser","savoir","vouloir","devoir"], answer:"croire / penser"},
+  {cat:"Wortschatz", type:"mcq", q:"« zurzeit » signifie :", opts:["actuellement","autrefois","jamais","toujours"], answer:"actuellement"},
+  {cat:"Wortschatz", type:"mcq", q:"« momentan » signifie :", opts:["en ce moment","le mois dernier","rarement","exactement"], answer:"en ce moment"},
+  {cat:"Wortschatz", type:"mcq", q:"« kein- / nicht » servent tous les deux à :", opts:["exprimer la négation","poser une question","exprimer le futur","comparer"], answer:"exprimer la négation"},
+  {cat:"Wortschatz", type:"mcq", q:"« Familienname » signifie :", opts:["nom de famille","prénom","surnom","pays d'origine"], answer:"nom de famille"},
+  {cat:"Wortschatz", type:"mcq", q:"« Vorname » signifie :", opts:["prénom","nom de famille","surnom","titre"], answer:"prénom"},
+
+  // Compréhension (texte Marie Durant / Julia)
+  {cat:"Familie: Stammbaum", type:"mcq", q:"Comment dit-on « le grand-père » en allemand ?", opts:["der Großvater","die Großmutter","der Enkel","der Onkel"], answer:"der Großvater"},
+  {cat:"Familie: Stammbaum", type:"mcq", q:"Der Bruder meiner Mutter ist mein ___.", opts:["Onkel","Cousin","Neffe","Schwager"], answer:"Onkel", tr:"Le frère de ma mère est mon oncle."},
+  {cat:"Familie: Stammbaum", type:"mcq", q:"Que signifie « die Enkelin » ?", opts:["la petite-fille","la nièce","la cousine","la belle-fille"], answer:"la petite-fille"},
+  {cat:"Familie: Stammbaum", type:"mcq", q:"Die Schwester meines Vaters ist meine ___.", opts:["Tante","Nichte","Cousine","Schwägerin"], answer:"Tante", tr:"La sœur de mon père est ma tante."},
+  {cat:"Familie: Stammbaum", type:"mcq", q:"Comment dit-on « le neveu » en allemand ?", opts:["der Neffe","die Nichte","der Cousin","der Enkel"], answer:"der Neffe"},
+  {cat:"Familie: Stammbaum", type:"mcq", q:"Der Sohn meines Onkels ist mein ___.", opts:["Cousin","Neffe","Bruder","Schwager"], answer:"Cousin", tr:"Le fils de mon oncle est mon cousin."},
+  {cat:"Familie: Stammbaum", type:"mcq", q:"Que signifie « die Schwiegermutter » ?", opts:["la belle-mère","la grand-mère","la marraine","la tante"], answer:"la belle-mère"},
+  {cat:"Familie: Stammbaum", type:"mcq", q:"Die Tochter meiner Schwester ist meine ___.", opts:["Nichte","Cousine","Enkelin","Schwägerin"], answer:"Nichte", tr:"La fille de ma sœur est ma nièce."},
+  {cat:"Familie: Stammbaum", type:"mcq", q:"Comment dit-on « les jumeaux » en allemand ?", opts:["die Zwillinge","die Geschwister","die Enkelkinder","die Cousins"], answer:"die Zwillinge"},
+  {cat:"Familie: Stammbaum", type:"mcq", q:"Der Vater meines Vaters ist mein ___.", opts:["Großvater","Onkel","Schwiegervater","Stiefvater"], answer:"Großvater", tr:"Le père de mon père est mon grand-père."},
+];
+
+/* ---------- Banque difficile (50 questions) — extraite des photos Familie & Sprachen ---------- */
+const hardBank = [
+  // Artikel Familie — sans indice, réponse = article + mot complet (10)
+  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « petit-fils »", answer:"der enkel"},
+  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « grand-mère »", answer:"die großmutter"},
+  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « les enfants » (pluriel)", answer:"die kinder"},
+  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « frères et sœurs »", answer:"die geschwister"},
+  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « les parents » (pluriel)", answer:"die eltern"},
+  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « les grands-parents » (pluriel)", answer:"die großeltern"},
+  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « le fils »", answer:"der sohn"},
+  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « la fille » (progéniture)", answer:"die tochter"},
+  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « le mari »", answer:"der mann"},
+  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « l'épouse »", answer:"die ehefrau", alt:["die frau"]},
+
+  // Konjugation extrême — sans infinitif visible, contexte riche (10)
+  {cat:"Schwer: Konjugation", type:"text", q:"Meine Oma und mein Opa ___ noch zusammen in Österreich. (leben)", answer:"leben", tr:"Ma grand-mère et mon grand-père vivent encore ensemble en Autriche."},
+  {cat:"Schwer: Konjugation", type:"text", q:"___ deine Kollegen auch Deutsch? (sprechen)", answer:"sprechen", tr:"Tes collègues parlent-ils aussi allemand ?"},
+  {cat:"Schwer: Konjugation", type:"text", q:"Mein Bruder ___ nicht verheiratet, er ist Single. (sein)", answer:"ist", tr:"Mon frère n'est pas marié, il est célibataire."},
+  {cat:"Schwer: Konjugation", type:"text", q:"Wie viele Sprachen ___ deine Partnerin? (sprechen)", answer:"spricht", tr:"Combien de langues parle ta partenaire ?"},
+  {cat:"Schwer: Konjugation", type:"text", q:"Meine Enkelkinder ___ aus Frankreich. (kommen)", answer:"kommen", tr:"Mes petits-enfants viennent de France."},
+  {cat:"Schwer: Konjugation", type:"text", q:"___ ihr Geschwister oder seid ihr Einzelkinder? (haben)", answer:"habt", tr:"Avez-vous des frères et sœurs, ou êtes-vous enfants uniques ?"},
+  {cat:"Schwer: Konjugation", type:"text", q:"Mein Freund und ich ___ zusammen in Berlin. (wohnen)", answer:"wohnen", tr:"Mon ami et moi habitons ensemble à Berlin."},
+  {cat:"Schwer: Konjugation", type:"text", q:"___ du auch Russisch? (sprechen)", answer:"sprichst", tr:"Parles-tu aussi russe ?"},
+  {cat:"Schwer: Konjugation", type:"text", q:"Meine Tante ___ als Ärztin. (arbeiten)", answer:"arbeitet", tr:"Ma tante travaille comme médecin."},
+  {cat:"Schwer: Konjugation", type:"text", q:"Meine Großeltern ___ vier Enkelkinder. (haben)", answer:"haben", tr:"Mes grands-parents ont quatre petits-enfants."},
+
+  // mein-/dein- — accord avec des noms de famille piégeux (10)
+  {cat:"Schwer: mein-/dein-", type:"text", q:"Wie heißt ___ Großmutter? (dein)", answer:"deine", tr:"Comment s'appelle ta grand-mère ?"},
+  {cat:"Schwer: mein-/dein-", type:"text", q:"___ Enkel wohnt in Kamerun. (mein)", answer:"mein", tr:"Mon petit-fils habite au Cameroun."},
+  {cat:"Schwer: mein-/dein-", type:"text", q:"Sind das ___ Enkelkinder? (dein)", answer:"deine", tr:"Ce sont tes petits-enfants ?"},
+  {cat:"Schwer: mein-/dein-", type:"text", q:"___ Geschwister leben in Bafoussam. (mein)", answer:"meine", tr:"Mes frères et sœurs vivent à Bafoussam."},
+  {cat:"Schwer: mein-/dein-", type:"text", q:"Ist das ___ Partner? (dein)", answer:"dein", tr:"C'est ton partenaire ?"},
+  {cat:"Schwer: mein-/dein-", type:"text", q:"___ Großeltern sind schon 80 Jahre alt. (mein)", answer:"meine", tr:"Mes grands-parents ont déjà 80 ans."},
+  {cat:"Schwer: mein-/dein-", type:"text", q:"___ Kollege ist auch Ingenieur. (mein)", answer:"mein", tr:"Mon collègue est aussi ingénieur."},
+  {cat:"Schwer: mein-/dein-", type:"text", q:"Ist ___ Schwester auch Studentin? (dein)", answer:"deine", tr:"Ta sœur est-elle aussi étudiante ?"},
+  {cat:"Schwer: mein-/dein-", type:"text", q:"___ Bild ist sehr schön. (mein)", answer:"mein", tr:"Ma photo est très belle."},
+  {cat:"Schwer: mein-/dein-", type:"text", q:"___ Freundin kommt aus Spanien. (dein)", answer:"deine", tr:"Ta copine vient d'Espagne."},
+
+  // Ja / Nein / Doch (10)
+  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds négativement (un mot) : « Bist du Single? »", answer:"nein", tr:"Es-tu célibataire ? — Non."},
+  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds en contredisant (un mot) : « Du hast keine Geschwister, oder? » — mais tu as un frère.", answer:"doch", tr:"Tu n'as pas de frères et sœurs, n'est-ce pas ? — Si, j'ai un frère.", doch:true},
+  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds positivement (un mot) : « Sprichst du Deutsch? »", answer:"ja", tr:"Parles-tu allemand ? — Oui."},
+  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds en contredisant (un mot) : « Deine Eltern leben nicht mehr zusammen, oder? » — mais si, ils vivent ensemble.", answer:"doch", tr:"Tes parents ne vivent plus ensemble, n'est-ce pas ? — Si, ils vivent ensemble.", doch:true},
+  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds négativement (un mot) : « Ist deine Schwester verheiratet? »", answer:"nein", tr:"Ta sœur est-elle mariée ? — Non."},
+  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds en contredisant (un mot) : « Du bist nicht verheiratet, oder? » — mais tu l'es.", answer:"doch", tr:"Tu n'es pas marié(e), n'est-ce pas ? — Si, je le suis.", doch:true},
+  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds positivement (un mot) : « Hast du Kinder? »", answer:"ja", tr:"As-tu des enfants ? — Oui."},
+  {cat:"Schwer: ja/nein/doch", type:"mcq", q:"Quand utilise-t-on « doch » plutôt que « ja » ?", opts:["Pour contredire une question négative","Pour répondre à une question positive","Pour poser une question","Pour saluer quelqu'un"], answer:"Pour contredire une question négative"},
+  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds négativement (un mot) : « Kommst du aus Frankreich? »", answer:"nein", tr:"Viens-tu de France ? — Non."},
+  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds en contredisant (un mot) : « Deine Großeltern leben nicht in Europa, oder? » — mais si.", answer:"doch", tr:"Tes grands-parents ne vivent pas en Europe, n'est-ce pas ? — Si.", doch:true},
+
+  // Fehlerkorrektur — repère et corrige la faute (10)
+  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Meine Bruder ist Arzt. »", answer:"mein bruder ist arzt", tr:"Mon frère est médecin."},
+  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Dein Schwester wohnt in Berlin. »", answer:"deine schwester wohnt in berlin", tr:"Ta sœur habite à Berlin."},
+  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Meine Eltern ist geschieden. »", answer:"meine eltern sind geschieden", tr:"Mes parents sont divorcés."},
+  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Wir spricht drei Sprachen. »", answer:"wir sprechen drei sprachen", tr:"Nous parlons trois langues."},
+  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Er kommen aus Kamerun. »", answer:"er kommt aus kamerun", tr:"Il vient du Cameroun."},
+  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Meine Geschwister ist noch klein. »", answer:"meine geschwister sind noch klein", tr:"Mes frères et sœurs sont encore petits."},
+  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Dein Opa und dein Oma leben in Spanien. »", answer:"dein opa und deine oma leben in spanien", tr:"Ton grand-père et ta grand-mère vivent en Espagne."},
+  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Ich habt zwei Enkelkinder. »", answer:"ich habe zwei enkelkinder", tr:"J'ai deux petits-enfants."},
+cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Meine Tochter sprichst Englisch. »", answer:"meine tochter spricht englisch", tr:"Ma fille parle anglais."},
+  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Bist das deine Eltern? »", answer:"sind das deine eltern", tr:"Ce sont tes parents ?"},
+];
+
+/* ---------- Programmatic generation: verb conjugation drills ---------- */
+const conj = {
+  machen:  {ich:"mache",  du:"machst",  er:"macht",  wir:"machen", ihr:"macht",  sie:"machen"},
+  leben:   {ich:"lebe",   du:"lebst",   er:"lebt",   wir:"leben",  ihr:"lebt",   sie:"leben"},
+  wohnen:  {ich:"wohne",  du:"wohnst",  er:"wohnt",  wir:"wohnen", ihr:"wohnt",  sie:"wohnen"},
+  arbeiten:{ich:"arbeite",du:"arbeitest",er:"arbeitet",wir:"arbeiten",ihr:"arbeitet",sie:"arbeiten"},
+  kommen:  {ich:"komme",  du:"kommst",  er:"kommt",  wir:"kommen", ihr:"kommt",  sie:"kommen"},
+  heißen:  {ich:"heiße",  du:"heißt",   er:"heißt",  wir:"heißen", ihr:"heißt",  sie:"heißen"},
+  studieren:{ich:"studiere",du:"studierst",er:"studiert",wir:"studieren",ihr:"studiert",sie:"studieren"},
+};
+const pronounLabel = {ich:"Ich", du:"Du", er:"Er/Sie", wir:"Wir", ihr:"Ihr", sie:"sie/Sie"};
+const persons = ["ich","du","er","wir","ihr","sie"];
+const verbList = Object.keys(conj);
+const filler = { arbeiten:"[im Büro]", wohnen:"[in Berlin]", leben:"[in Malaga]", machen:"[eine Ausbildung]", kommen:"[aus Kamerun]", heißen:"[Ange]", studieren:"[Maschinenbau]" };
+
+/* traductions françaises pour la « signification » affichée après réponse */
+const conjFr = {
+  machen:   {ich:"fais",   du:"fais",    er:"fait",   wir:"faisons",       ihr:"faites",       sie:"font"},
+  leben:    {ich:"vis",    du:"vis",     er:"vit",    wir:"vivons",        ihr:"vivez",        sie:"vivent"},
+  wohnen:   {ich:"habite", du:"habites", er:"habite", wir:"habitons",      ihr:"habitez",      sie:"habitent"},
+  arbeiten: {ich:"travaille", du:"travailles", er:"travaille", wir:"travaillons", ihr:"travaillez", sie:"travaillent"},
+  kommen:   {ich:"viens",  du:"viens",   er:"vient",  wir:"venons",        ihr:"venez",        sie:"viennent"},
+  heißen:   {ich:"m'appelle", du:"t'appelles", er:"s'appelle", wir:"nous appelons", ihr:"vous appelez", sie:"s'appellent"},
+  studieren:{ich:"étudie", du:"étudies", er:"étudie", wir:"étudions",      ihr:"étudiez",      sie:"étudient"},
+};
+const pronounFr = {ich:"Je", du:"Tu", er:"Il/Elle", wir:"Nous", ihr:"Vous", sie:"Ils/Elles"};
+const fillerFr = { arbeiten:"au bureau", wohnen:"à Berlin", leben:"à Malaga", machen:"une formation", kommen:"du Cameroun", heißen:"Ange", studieren:"en mécanique" };
+
+const generated = [];
+verbList.forEach(v=>{
+  persons.forEach(p=>{
+    const correct = conj[v][p];
+    // build distractors from other persons of same verb
+    let distractors = persons.filter(x=>x!==p).map(x=>conj[v][x]).filter(x=>x!==correct);
+    distractors = [...new Set(distractors)].slice(0,3);
+    while(distractors.length<3){ distractors.push(correct+"n"); }
+    const opts = [correct, ...distractors];
+    // shuffle options
+    for(let i=opts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [opts[i],opts[j]]=[opts[j],opts[i]];}
+    const trText = `${pronounFr[p]} ${conjFr[v][p]} ${fillerFr[v]}.`;
+    generated.push({
+      cat:"Verben: "+v,
+      type:"mcq",
+      q:`${pronounLabel[p]} ___ ${filler[v]}. (${v})`,
+      opts, answer: correct, tr: trText
+    });
+  });
+});
+
+// shuffle generated pool, then take just enough to reach 100 total
+for(let i=generated.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [generated[i],generated[j]]=[generated[j],generated[i]];}
+const needed = Math.max(0, 100 - bank.length);
+let standardQuestions = bank.concat(generated.slice(0, needed));
+standardQuestions = standardQuestions.slice(0,100);
+
+function shuffleCopy(arr){
+  const a = arr.slice();
+  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];}
+  return a;
+  }
+  /* ---------- Quiz engine ---------- */
+let mode = null; // 'standard' | 'hard'
+let questions = [];
+let idx = 0, score = 0, answered = false, wrongIdx = new Set();
+let partSize = 1; // taille de chaque fragment (10 fragments par quiz)
+let completedParts = new Set();
+const card = document.getElementById('card');
+const rail = document.getElementById('qzRail');
+const qposEl = document.getElementById('qzQpos');
+const scoreEl = document.getElementById('qzScorenow');
+const scorebarWrap = document.getElementById('qzScorebarWrap');
+
+function goHome(){
+  clearAutoAdvance();
+  scorebarWrap.style.display='none';
+  rail.style.display='none';
+  showMenu();
+}
+
+function startMode(chosen){
+  mode = chosen;
+  questions = shuffleCopy(chosen==='standard' ? standardQuestions : hardBank);
+  idx=0; score=0; wrongIdx=new Set(); completedParts=new Set();
+  partSize = Math.max(1, Math.ceil(questions.length/10));
+  document.getElementById('subtitle').textContent = chosen==='standard'
+    ? "Quiz standard — 100 questions de révision — Begrüßung, Fragen, Berufe, Verben, Zahlen."
+    : "Quiz difficile — 50 questions extrêmement difficiles — conjugaison, articles, mein-/dein-, ja/nein/doch, correction de fautes.";
+  buildRail();
+  showPartMenu();
+}
+
+function showPartMenu(){
+  clearAutoAdvance();
+  scorebarWrap.style.display='none';
+  rail.style.display='none';
+  const totalParts = Math.ceil(questions.length/partSize);
+  let html = `<button class="backlink" id="qzBackHome">← Retour à l'accueil</button>
+    <p class="sub">Choisis une partie — ${questions.length} questions réparties en ${totalParts} parties. Score actuel : ${score}/${idx}.</p>
+    <div class="modeSelect">`;
+  for(let p=0; p<totalParts; p++){
+    const start = p*partSize;
+    const end = Math.min(start+partSize, questions.length);
+    const done = completedParts.has(p);
+    html += `<button class="modeCard partCard ${done?'partDone':''}" data-p="${p}">
+      <span class="modeTitle">Partie ${p+1}${done ? ' ✓' : ''}</span>
+      <span class="modeDesc">Questions ${start+1}–${end}</span>
+    </button>`;
+  }
+  html += `</div>`;
+  card.innerHTML = html;
+  document.getElementById('qzBackHome').addEventListener('click', goHome);
+  card.querySelectorAll('[data-p]').forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      idx = parseInt(btn.dataset.p) * partSize;
+      scorebarWrap.style.display='flex';
+      rail.style.display='flex';
+      document.getElementById('qzQtotal').textContent = questions.length;
+      render();
+    });
+  });
+}
+
+document.getElementById('qzHomeBtn').addEventListener('click', goHome);
+document.getElementById('qzPartMenuBtn').addEventListener('click', ()=>{
+  clearAutoAdvance();
+  showPartMenu();
+});
+
+function buildRail(){
+  rail.innerHTML='';
+  const totalParts = Math.ceil(questions.length/partSize);
+  for(let p=0; p<totalParts; p++){
+    const b=document.createElement('button');
+    b.className='partbtn';
+    b.id='partbtn'+p;
+    b.textContent = 'Partie ' + (p+1);
+    b.addEventListener('click', ()=>jumpToPart(p));
+    rail.appendChild(b);
+  }
+}
+function updateRail(){
+  const totalParts = Math.ceil(questions.length/partSize);
+  const currentPart = Math.floor(idx/partSize);
+  for(let p=0; p<totalParts; p++){
+    const b=document.getElementById('partbtn'+p);
+    if(!b) continue;
+    const partEnd = Math.min((p+1)*partSize, questions.length) - 1;
+    let cls = 'partbtn';
+    if(p===currentPart) cls += ' now';
+    else if(partEnd < idx) cls += ' done';
+    b.className = cls;
+  }
+}
+function jumpToPart(p){
+  clearAutoAdvance();
+  idx = p*partSize;
+  render();
+}
+
+function norm(s){ return s.trim().toLowerCase().replace(/[.!?]/g,''); }
+
+function render(){
+  answered=false;
+  const q = questions[idx];
+  qposEl.textContent = idx+1;
+  scoreEl.textContent = score;
+  const totalParts = Math.ceil(questions.length/partSize);
+  const currentPart = Math.floor(idx/partSize)+1;
+  document.getElementById('qzPartpos').textContent = `· Partie ${currentPart}/${totalParts}`;
+  updateRail();
+
+  let html = `<span class="cat">${q.cat}</span><span class="qnum">#${idx+1}</span>`;
+  if(idx>0){
+    html += `<button class="prevbtn" id="prevbtn">← Précédent</button>`;
+  }
+  html += `<p class="question">${q.q}</p>`;
+
+  if(q.type==='mcq'){
+    html += `<div class="qoptions">` + q.opts.map((o,i)=>
+      `<button class="qopt" data-i="${i}">${o}</button>`).join('') + `</div>`;
+  } else {
+    const langHint = /^[0-9]+$/.test(q.answer) ? "en chiffres" : "en allemand";
+    html += `<div class="textrow">
+      <input type="text" class="textin" id="tin" placeholder="Ta réponse…" autocomplete="off">
+      <button class="checkbtn" id="checkbtn">Vérifier</button>
+    </div>
+    <p class="langhint">Réponds ${langHint}</p>`;
+  }
+  html += `<div class="feedback" id="fb"></div>
+    <button class="nextbtn" id="nextbtn">${idx===questions.length-1 ? 'Voir le résultat maintenant' : 'Suivant maintenant →'}</button>
+    <p class="countdown" id="countdown"></p>`;
+  card.innerHTML = html;
+
+  if(q.type==='mcq'){
+    card.querySelectorAll('.qopt').forEach(btn=>{
+      btn.addEventListener('click', ()=>handleMcq(btn, q));
+    });
+  } else {
+    const input = document.getElementById('tin');
+    const check = document.getElementById('checkbtn');
+    const submit = ()=>handleText(input.value, q);
+    check.addEventListener('click', submit);
+    input.addEventListener('keydown', e=>{ if(e.key==='Enter') submit(); });
+    input.focus();
+  }
+  document.getElementById('nextbtn').addEventListener('click', next);
+  if(idx>0){
+    document.getElementById('prevbtn').addEventListener('click', prev);
+  }
+}
+
+function prev(){
+  if(idx>0){
+    clearAutoAdvance();
+    idx--;
+    render();
+  }
+}
+
+let autoTimer = null, countdownTimer = null;
+const DOCH_RULE = "Règle : on utilise « doch » (et non « ja ») pour contredire une question ou une affirmation formulée à la négative.";
+
+function showFeedback(ok, correctText, q){
+  const fb = document.getElementById('fb');
+  fb.className = 'feedback show ' + (ok?'ok':'bad');
+  let html = ok ? `<b>✓ Richtig!</b>` : `<b>✗ Presque.</b> Réponse correcte : <b>${correctText}</b>`;
+  if(q && q.tr){
+    html += `<br><span class="meaning">Signification : ${q.tr}</span>`;
+  }
+  const isDochMiss = !ok && q && norm(q.answer)==="doch";
+  if(isDochMiss){
+    html += `<br><span class="meaning">${DOCH_RULE}</span>`;
+  }
+  fb.innerHTML = html;
+  document.getElementById('nextbtn').classList.add('show');
+  startAutoAdvance(isDochMiss ? 10 : 2);
+}
+
+function startAutoAdvance(DELAY){
+  DELAY = DELAY || 4; // secondes avant la question suivante
+  let remaining = DELAY;
+  const cd = document.getElementById('countdown');
+  cd.textContent = `Suite dans ${remaining}s…`;
+  clearInterval(countdownTimer); clearTimeout(autoTimer);
+  countdownTimer = setInterval(()=>{
+    remaining--;
+    if(remaining>0 && cd) cd.textContent = `Suite dans ${remaining}s…`;
+  }, 1000);
+  autoTimer = setTimeout(()=>{ clearInterval(countdownTimer); next(); }, DELAY*1000);
+}
+function clearAutoAdvance(){ clearTimeout(autoTimer); clearInterval(countdownTimer); }
+
+function handleMcq(btn, q){
+  if(answered) return;
+  answered = true;
+  const chosen = btn.textContent;
+  const ok = chosen === q.answer;
+  if(ok) score++; else wrongIdx.add(idx);
+  card.querySelectorAll('.qopt').forEach(o=>{
+    o.disabled = true;
+    if(o.textContent === q.answer) o.classList.add('correct');
+    else if(o===btn) o.classList.add('incorrect');
+  });
+  scoreEl.textContent = score;
+  showFeedback(ok, q.answer, q);
+}
+
+function handleText(val, q){
+  if(answered) return;
+  answered = true;
+  const ok = norm(val) === norm(q.answer) || (q.alt && q.alt.some(a=>norm(val)===norm(a)));
+  if(ok) score++; else wrongIdx.add(idx);
+  document.getElementById('tin').disabled = true;
+  document.getElementById('checkbtn').disabled = true;
+  scoreEl.textContent = score;
+  showFeedback(ok, q.answer, q);
+}
+
+function next(){
+  clearAutoAdvance();
+  if(idx < questions.length-1){
+    const finishedPart = (idx+1) % partSize === 0;
+    idx++;
+    if(finishedPart){
+      showPartBreak();
+    } else {
+      render();
+    }
+  } else {
+    finish();
+  }
+  }
+function showPartBreak(){
+  updateRail();
+  const totalParts = Math.ceil(questions.length/partSize);
+  const partDone = idx/partSize; // partie qui vient de se terminer
+  completedParts.add(partDone-1);
+  const pct = Math.round((score/idx)*100);
+  card.innerHTML = `<div class="done-screen">
+    <div class="big">${partDone}/${totalParts}</div>
+    <p>Partie ${partDone} terminée — Score cumulé : ${score}/${idx} (${pct}%)</p>
+    <button class="restart" id="continuePartBtn">Continuer →</button>
+    <button class="restart" id="prevPartBtn">← Précédent</button>
+    <button class="menubtn" id="qzMidHome">☰ Retour à l'accueil</button>
+  </div>`;
+  document.getElementById('continuePartBtn').addEventListener('click', render);
+  document.getElementById('prevPartBtn').addEventListener('click', prev);
+  document.getElementById('qzMidHome').addEventListener('click', goHome);
+}
+
+function restartQuiz(){
+  clearAutoAdvance();
+  idx=0; score=0; wrongIdx.clear(); completedParts=new Set();
+  questions = shuffleCopy(mode==='standard' ? standardQuestions : hardBank);
+  partSize = Math.max(1, Math.ceil(questions.length/10));
+  buildRail(); render();
+}
+
+function finish(){
+  updateRail();
+  completedParts.add(Math.floor((idx)/partSize));
+  const pct = Math.round((score/questions.length)*100);
+  let msg = "Weiter so! Continue à réviser.";
+  if(pct>=90) msg="Ausgezeichnet! Ces bases sont solides.";
+  else if(pct>=70) msg="Sehr gut! Encore un peu de pratique sur les points ratés.";
+  else if(pct>=50) msg="Gut. Revois les catégories où tu as trébuché.";
+  card.innerHTML = `<div class="done-screen">
+    <div class="big">${score}/${questions.length}</div>
+    <p>${pct}% de bonnes réponses — ${msg}</p>
+    <button class="restart" id="restartbtn">Recommencer</button>
+    <button class="menubtn" id="qzHomeBtn2">☰ Retour à l'accueil</button>
+  </div>`;
+  document.getElementById('restartbtn').addEventListener('click', restartQuiz);
+  document.getElementById('qzHomeBtn2').addEventListener('click', goHome);
+}
+
+document.getElementById('qzRestartInlineBtn').addEventListener('click', ()=>{
+  if(confirm('Recommencer le quiz depuis le début ?')) restartQuiz();
+});
+
+scorebarWrap.style.display='none';
+rail.style.display='none';
+
+window.QuizApp = { start: startMode };
+
+})();
 
 showMenu();
 </script>
