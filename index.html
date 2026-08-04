@@ -869,7 +869,7 @@ const hardBank = [
   {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Meine Geschwister ist noch klein. »", answer:"meine geschwister sind noch klein", tr:"Mes frères et sœurs sont encore petits."},
   {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Dein Opa und dein Oma leben in Spanien. »", answer:"dein opa und deine oma leben in spanien", tr:"Ton grand-père et ta grand-mère vivent en Espagne."},
   {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Ich habt zwei Enkelkinder. »", answer:"ich habe zwei enkelkinder", tr:"J'ai deux petits-enfants."},
-cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Meine Tochter sprichst Englisch. »", answer:"meine tochter spricht englisch", tr:"Ma fille parle anglais."},
+  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Meine Tochter sprichst Englisch. »", answer:"meine tochter spricht englisch", tr:"Ma fille parle anglais."},
   {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Bist das deine Eltern? »", answer:"sind das deine eltern", tr:"Ce sont tes parents ?"},
 ];
 
@@ -932,8 +932,9 @@ function shuffleCopy(arr){
   const a = arr.slice();
   for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];}
   return a;
-  }
-  /* ---------- Quiz engine ---------- */
+}
+
+/* ---------- Quiz engine ---------- */
 let mode = null; // 'standard' | 'hard'
 let questions = [];
 let idx = 0, score = 0, answered = false, wrongIdx = new Set();
@@ -1164,7 +1165,8 @@ function next(){
   } else {
     finish();
   }
-  }
+}
+
 function showPartBreak(){
   updateRail();
   const totalParts = Math.ceil(questions.length/partSize);
