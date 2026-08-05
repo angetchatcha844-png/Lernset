@@ -417,7 +417,7 @@ function matches(input, accepted, keepUmlaut){
   if(!n) return false;
   return accepted.some(a=>{
     const na = keepUmlaut ? normKeepUmlaut(a) : norm(a);
-    return n===na || n.includes(na) || na.includes(n);
+    return n===na;
   });
 }
 
