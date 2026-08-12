@@ -1,1228 +1,1805 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Lernwortschatz — Wörter & Artikel</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;600&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --paper:#F6F0E1; --ink:#232A3B; --ink-soft:#5B6072;
-    --red:#B23A32; --mustard:#D9A62E; --green:#3F6B3F; --line:#C9BE9E;
-    --card-shadow: 0 2px 0 var(--line), 0 10px 24px rgba(35,42,59,0.10);
-  }
-  *{box-sizing:border-box;}
-  body{
-    margin:0; background:var(--paper); color:var(--ink);
-    font-family:'Work Sans', sans-serif; min-height:100vh; padding:32px 16px 64px;
-  }
-  .wrap{max-width:640px; margin:0 auto;}
-  .eyebrow{font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.14em;
-    text-transform:uppercase; color:var(--red); margin:0 0 6px;}
-  h1{font-family:'Fraunces', serif; font-weight:700; font-size:32px; margin:0 0 6px; letter-spacing:-0.01em;}
-  .sub{color:var(--ink-soft); font-size:14.5px; margin:0 0 20px;}
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Allemand A1 – Leçons 4, 5, 6</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,600;9..144,700&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: #FAF6EE; font-family: 'IBM Plex Sans', sans-serif; color: #26241F; min-height: 100vh; padding: 16px; }
+    .app { max-width: 680px; margin: 0 auto; }
+    .card { background: #FFFFFF; border-radius: 16px; padding: 20px; border: 1px solid #E4DECB; }
+    .btn-primary { background: #2F5D50; color: #FAF6EE; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 600; font-size: 14px; cursor: pointer; font-family: inherit; transition: opacity 0.2s; }
+    .btn-primary:disabled { opacity: 0.4; cursor: default; }
+    .btn-secondary { background: transparent; border: 2px solid #E4DECB; color: #6B6552; padding: 10px 20px; border-radius: 8px; font-weight: 500; font-size: 13px; cursor: pointer; font-family: inherit; }
+    .btn-secondary:hover { background: #F5F1E8; }
+    .badge { display: inline-flex; align-items: center; gap: 4px; padding: 2px 10px; border-radius: 999px; border: 2px solid #C7BFA9; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; background: transparent; color: #9C9482; }
+    .badge.in-progress { border-color: #C9A227; background: #FBF3D9; color: #C9A227; }
+    .badge.completed { border-color: #2F5D50; background: #E1EEE9; color: #2F5D50; }
+    .gauge { position: relative; width: 68px; height: 68px; flex-shrink: 0; }
+    .gauge svg { transform: rotate(-90deg); }
+    .gauge .center { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 700; font-size: 13px; color: #1F2A24; }
+    .option-btn { display: flex; align-items: center; justify-content: space-between; width: 100%; text-align: left; padding: 10px 14px; border-radius: 8px; border: 2px solid #E4DECB; background: #FFFFFF; font-family: inherit; font-size: 14.5px; color: #26241F; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+    .option-btn:hover:not(:disabled) { border-color: #2F5D62; background: #EEF4F3; }
+    .option-btn.selected { border-color: #2F5D62; background: #EEF4F3; }
+    .option-btn.correct { border-color: #2F5D50; background: #E1EEE9; }
+    .option-btn.wrong { border-color: #B4552F; background: #FBE7DD; }
+    .option-btn:disabled { cursor: default; }
+    .input-text { width: 100%; padding: 10px 14px; border-radius: 8px; border: 2px solid #E4DECB; font-size: 14.5px; font-family: inherit; outline: none; background: #FFFFFF; }
+    .input-text:disabled { cursor: default; }
+    .input-text.correct { border-color: #2F5D50; background: #E1EEE9; }
+    .input-text.wrong { border-color: #B4552F; background: #FBE7DD; }
+    .tf-btn { padding: 10px 24px; border-radius: 8px; border: 2px solid #E4DECB; font-size: 14px; font-weight: 500; font-family: inherit; color: #26241F; background: #FFFFFF; cursor: pointer; transition: border-color 0.2s, background 0.2s; }
+    .tf-btn:hover:not(:disabled) { border-color: #2F5D62; background: #EEF4F3; }
+    .tf-btn.selected { border-color: #2F5D62; background: #EEF4F3; }
+    .tf-btn.correct { border-color: #2F5D50; background: #E1EEE9; }
+    .tf-btn.wrong { border-color: #B4552F; background: #FBE7DD; }
+    .tf-btn:disabled { cursor: default; }
+    .dialogue-box { background: #F5F1E8; border: 1px solid #E4DECB; border-radius: 12px; padding: 16px; white-space: pre-line; font-size: 14px; line-height: 1.6; color: #26241F; margin-bottom: 16px; }
+    .tip-box { background: #FBF3D9; border: 1px solid #C9A227; border-radius: 12px; padding: 16px; display: flex; gap: 10px; margin-bottom: 20px; }
+    .tip-box .icon { color: #C9A227; flex-shrink: 0; margin-top: 2px; }
+    .tip-box .label { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; color: #C9A227; margin-bottom: 4px; }
+    .tip-box p { font-size: 13.5px; line-height: 1.5; color: #44412F; }
+    .flex { display: flex; }
+    .flex-wrap { flex-wrap: wrap; }
+    .items-center { align-items: center; }
+    .justify-between { justify-content: space-between; }
+    .justify-center { justify-content: center; }
+    .gap-1 { gap: 4px; }
+    .gap-2 { gap: 8px; }
+    .gap-3 { gap: 12px; }
+    .mt-3 { margin-top: 12px; }
+    .mt-4 { margin-top: 16px; }
+    .mt-5 { margin-top: 20px; }
+    .mb-3 { margin-bottom: 12px; }
+    .mb-4 { margin-bottom: 16px; }
+    .w-full { width: 100%; }
+    .text-center { text-align: center; }
+    .text-muted { color: #6B6552; }
+    .text-faint { color: #9C9482; }
+    .text-sm { font-size: 13px; }
+    .text-xs { font-size: 12px; }
+    .shrink-0 { flex-shrink: 0; }
+    .uppercase { text-transform: uppercase; }
+    .tracking-wide { letter-spacing: 0.5px; }
+    .font-semibold { font-weight: 600; }
+    .font-bold { font-weight: 700; }
+    .italic { font-style: italic; }
+    .section-button { display: flex; align-items: center; gap: 12px; width: 100%; padding: 16px; border-radius: 12px; border: 2px solid #E4DECB; background: #F5F1E8; text-align: left; cursor: pointer; font-family: inherit; transition: background 0.2s; }
+    .section-button:hover { background: #EDE8DC; }
+    .section-button .icon-circle { width: 40px; height: 40px; border-radius: 50%; background: #FFFFFF; border: 1px solid #E4DECB; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .section-button .info { flex: 1; }
+    .section-button .info .title { font-size: 15px; font-weight: 600; color: #1F2A24; font-family: 'Fraunces', serif; }
+    .section-button .info .sub { font-size: 12px; color: #6B6552; }
+    .header-title { font-family: 'Fraunces', serif; font-size: 28px; font-weight: 600; color: #1F2A24; line-height: 1.2; }
+    .header-sub { font-size: 14px; color: #6B6552; }
+    .score-circle { width: 56px; height: 56px; border-radius: 50%; border: 3px solid #C9A227; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-weight: 700; font-size: 15px; color: #FAF6EE; background: #1F2A24; }
+    .bg-ink { background: #1F2A24; border-radius: 12px; padding: 16px; display: flex; align-items: center; gap: 16px; margin-bottom: 24px; }
+    .bg-ink .label { font-size: 13px; font-weight: 600; color: #FAF6EE; }
+    .grid-exercises { display: grid; gap: 8px; }
+    /* Onglets de sélection des leçons */
+    .lesson-tabs { display: flex; gap: 8px; margin-bottom: 20px; flex-wrap: wrap; }
+    .lesson-tab { padding: 8px 20px; border-radius: 30px; border: 2px solid #E4DECB; background: transparent; font-family: 'Fraunces', serif; font-weight: 600; font-size: 16px; color: #6B6552; cursor: pointer; transition: all 0.2s; }
+    .lesson-tab:hover { border-color: #C9A227; color: #1F2A24; }
+    .lesson-tab.active { background: #1F2A24; border-color: #1F2A24; color: #FAF6EE; }
 
-  .scorebar{display:flex; justify-content:space-between; align-items:center;
-    font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--ink-soft); margin-bottom:14px;}
-  .scorebar b{color:var(--ink); font-size:15px;}
-  .topbtn{border:1px solid var(--line); background:transparent; color:var(--ink-soft);
-    font-family:'IBM Plex Mono', monospace; font-size:12px; padding:4px 9px; border-radius:4px; cursor:pointer;}
-  .topbtn:hover{border-color:var(--red); color:var(--red);}
-
-  .progressbg{height:5px; background:var(--line); border-radius:3px; margin-bottom:22px; overflow:hidden;}
-  .progressfg{height:100%; background:var(--mustard); width:0%; transition:width .3s ease;}
-
-  .card{background:#FFFDF7; border:1px solid var(--line); border-radius:6px;
-    box-shadow:var(--card-shadow); padding:28px 26px 24px; position:relative; overflow:hidden;}
-  .card::before{content:''; position:absolute; top:0; left:0; right:0; height:6px;
-    background:repeating-linear-gradient(90deg, var(--mustard) 0 14px, transparent 14px 22px); opacity:.55;}
-  .cat{display:inline-block; font-family:'IBM Plex Mono', monospace; font-size:11px; letter-spacing:.08em;
-    text-transform:uppercase; color:#fff; background:var(--ink); padding:3px 9px; border-radius:3px; margin-bottom:16px;}
-  .word{font-family:'Fraunces', serif; font-size:30px; font-weight:700; margin:0 0 4px;}
-  .hint{color:var(--ink-soft); font-size:13px; margin:0 0 20px;}
-
-  .field{margin-bottom:14px;}
-  .field label{display:block; font-family:'IBM Plex Mono', monospace; font-size:12px;
-    letter-spacing:.05em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:5px;}
-  .field input{
-    width:100%; border:1.5px solid var(--line); border-radius:5px; padding:11px 13px;
-    font-size:15.5px; font-family:'Work Sans'; background:var(--paper); color:var(--ink);
-  }
-  .field input:focus{outline:2px solid var(--red); outline-offset:1px;}
-  .field.ok input{border-color:var(--green); background:#EEF4EA;}
-  .field.bad input{border-color:var(--red); background:#F9EDEB;}
-
-  button.checkbtn{
-    width:100%; border:none; background:var(--ink); color:#fff; border-radius:5px;
-    padding:13px; font-family:'Work Sans'; font-weight:600; font-size:15px; cursor:pointer; margin-top:4px;
-  }
-  button.checkbtn:hover{background:var(--red);}
-
-  .options{display:flex; gap:9px; margin-bottom:6px;}
-  .opt{
-    flex:1; text-align:center; border:1.5px solid var(--line); background:var(--paper);
-    border-radius:5px; padding:14px 8px; font-size:17px; font-weight:700; font-family:'Fraunces', serif;
-    cursor:pointer; transition:.15s ease; color:var(--ink);
-  }
-  .opt:hover{border-color:var(--ink-soft);}
-  .opt.correct{background:#E7EFE2; border-color:var(--green); color:var(--green);}
-  .opt.incorrect{background:#F5E4E1; border-color:var(--red); color:var(--red);}
-  .opt:disabled{cursor:default;}
-
-  .feedback{margin-top:16px; padding:12px 14px; border-radius:5px; font-size:14.5px; display:none; line-height:1.55;}
-  .feedback.show{display:block;}
-  .feedback.ok{background:#E7EFE2; color:var(--green); border:1px solid var(--green);}
-  .feedback.bad{background:#F5E4E1; color:var(--red); border:1px solid var(--red);}
-  .feedback b{font-family:'IBM Plex Mono', monospace;}
-  .feedback .transline{display:block; margin-top:6px; font-family:'Work Sans'; color:var(--ink);}
-
-  .nextbtn{margin-top:14px; width:100%; border:none; background:var(--red); color:#fff;
-    padding:13px; border-radius:5px; font-family:'Work Sans'; font-weight:600; font-size:15px;
-    cursor:pointer; display:none;}
-  .nextbtn.show{display:block;}
-  .nextbtn:hover{background:#961e17;}
-  .countdown{font-family:'IBM Plex Mono', monospace; font-size:12.5px; color:var(--ink-soft);
-    margin-top:8px; text-align:right;}
-
-  .done-screen{text-align:center; padding:40px 20px;}
-  .done-screen .big{font-family:'Fraunces', serif; font-size:52px; font-weight:700; color:var(--red);}
-  .done-screen p{color:var(--ink-soft); font-size:15px;}
-  .restart, .menubtn{margin-top:10px; border:1.5px solid var(--ink); background:transparent; color:var(--ink);
-    padding:11px 22px; border-radius:5px; font-family:'Work Sans'; font-weight:600; cursor:pointer; font-size:14.5px;}
-  .restart:hover, .menubtn:hover{background:var(--ink); color:#fff;}
-
-  .modgrid{display:flex; flex-direction:column; gap:10px;}
-  .sectionlabel{
-    font-family:'IBM Plex Mono', monospace; font-size:12px; letter-spacing:.1em; text-transform:uppercase;
-    color:var(--ink-soft); margin:18px 0 8px;
-  }
-  .sectionlabel:first-child{margin-top:0;}
-  .modcard{
-    display:flex; align-items:center; justify-content:space-between; gap:12px;
-    border:1.5px solid var(--line); background:#FFFDF7; border-radius:6px;
-    padding:14px 16px; cursor:pointer; transition:.15s ease; text-align:left; width:100%;
-  }
-  .modcard:hover{border-color:var(--red);}
-  .modcard.completed{border-color:var(--green); background:#EEF4EA;}
-  .modleft{display:flex; flex-direction:column; gap:3px;}
-  .modtitle{font-family:'Fraunces', serif; font-weight:700; font-size:17px;}
-  .modrange{font-family:'IBM Plex Mono', monospace; font-size:12px; color:var(--ink-soft);}
-  .modscore{font-family:'IBM Plex Mono', monospace; font-size:13px; color:var(--green); font-weight:600; white-space:nowrap;}
-  .modarrow{color:var(--red); font-size:18px;}
-
-  .dirchoice{text-align:center; padding:10px 4px 4px;}
-  .dirchoice p{color:var(--ink-soft); font-size:14px; margin-bottom:18px;}
-  .dirbtn{
-    display:block; width:100%; border:1.5px solid var(--line); background:var(--paper);
-    border-radius:6px; padding:16px; margin-bottom:12px; cursor:pointer; text-align:left;
-  }
-  .dirbtn:hover{border-color:var(--red);}
-  .dirbtn b{font-family:'Fraunces', serif; font-size:17px; display:block;}
-  .dirbtn span{color:var(--ink-soft); font-size:13px;}
-  .backlink{background:transparent; border:none; color:var(--ink-soft); font-family:'IBM Plex Mono',monospace;
-    font-size:12px; cursor:pointer; margin-top:6px;}
-  .backlink:hover{color:var(--red);}
-
-  footer{text-align:center; color:var(--ink-soft); font-size:12.5px; margin-top:22px; font-family:'IBM Plex Mono', monospace;}
-
-  /* ===== Quiz module (fusionne) ===== */
-  .partpos{color:var(--ink-soft); font-size:11.5px;}
-  .restart-inline{
-    border:1px solid var(--line); background:transparent; color:var(--ink-soft);
-    font-family:'IBM Plex Mono', monospace; font-size:12px; padding:4px 9px;
-    border-radius:4px; cursor:pointer;
-  }
-  .restart-inline:hover{border-color:var(--red); color:var(--red);}
-
-  .modeSelect{display:flex; flex-direction:column; gap:12px; margin-bottom:24px;}
-  .modeCard{
-    text-align:left; border:1.5px solid var(--line); background:#FFFDF7;
-    border-radius:6px; padding:18px 20px; cursor:pointer; transition:.15s ease;
-  }
-  .modeCard:hover{border-color:var(--red);}
-  .modeCard.hard{border-color:#8a2d27; background:#2A1E1E;}
-  .modeCard.hard:hover{border-color:var(--red);}
-  .modeCard .modeTitle{display:block; font-family:'Fraunces', serif; font-weight:700; font-size:19px; margin-bottom:5px;}
-  .modeCard.hard .modeTitle{color:#F2C4C0;}
-  .modeCard .modeDesc{display:block; font-size:13px; color:var(--ink-soft); line-height:1.5;}
-  .modeCard.hard .modeDesc{color:#D9B8B5;}
-  .partCard{position:relative;}
-  .partCard.partDone{border-color:var(--green); background:#F3F8F0;}
-  .partCard.partDone .modeTitle{color:var(--green);}
-
-  .rail{display:flex; gap:6px; margin:20px 0 26px; flex-wrap:wrap;}
-  .partbtn{
-    border:1.5px solid var(--line); background:var(--paper); color:var(--ink-soft);
-    font-family:'IBM Plex Mono', monospace; font-size:12px; font-weight:600;
-    padding:7px 12px; border-radius:5px; cursor:pointer; transition:.15s ease;
-  }
-  .partbtn:hover{border-color:var(--ink-soft); color:var(--ink);}
-  .partbtn.done{background:var(--mustard); border-color:var(--mustard); color:var(--ink);}
-  .partbtn.now{background:var(--red); border-color:var(--red); color:#fff; transform:translateY(-2px);}
-
-  .qnum{color:var(--ink-soft); font-size:13px; font-family:'IBM Plex Mono',monospace; margin-left:8px;}
-  .prevbtn{
-    float:right; border:1px solid var(--line); background:transparent; color:var(--ink-soft);
-    font-family:'IBM Plex Mono', monospace; font-size:11.5px; padding:4px 9px;
-    border-radius:4px; cursor:pointer;
-  }
-  .prevbtn:hover{border-color:var(--ink); color:var(--ink);}
-  .question{font-family:'Fraunces', serif; font-size:22px; line-height:1.35; font-weight:600; margin:0 0 20px;}
-
-  .qoptions{display:flex; flex-direction:column; gap:9px; margin-bottom:6px;}
-  .qopt{
-    text-align:left; border:1.5px solid var(--line); background:var(--paper);
-    border-radius:5px; padding:12px 14px; font-size:15.5px; font-family:'Work Sans';
-    cursor:pointer; transition:.15s ease; color:var(--ink); width:100%;
-  }
-  .qopt:hover{border-color:var(--ink-soft);}
-  .qopt.correct{background:#E7EFE2; border-color:var(--green); color:var(--green); font-weight:600;}
-  .qopt.incorrect{background:#F5E4E1; border-color:var(--red); color:var(--red); font-weight:600;}
-  .qopt:disabled{cursor:default;}
-
-  .textrow{display:flex; gap:8px;}
-  input.textin{
-    flex:1; border:1.5px solid var(--line); border-radius:5px; padding:12px 14px;
-    font-size:15.5px; font-family:'Work Sans'; background:var(--paper); color:var(--ink);
-  }
-  input.textin:focus{outline:2px solid var(--red); outline-offset:1px;}
-  .langhint{font-family:'IBM Plex Mono', monospace; font-size:11px; color:var(--ink-soft); margin:6px 0 0; font-style:italic;}
-  .feedback .meaning{display:inline-block; margin-top:6px; font-size:13px; font-style:italic; color:var(--ink-soft);}
-
-  .dropdown{margin-bottom:12px; border:1.5px solid var(--line); border-radius:6px; overflow:hidden; background:#FFFDF7;}
-  .dropdown-header{
-    width:100%; display:flex; align-items:center; justify-content:space-between;
-    border:none; background:transparent; padding:15px 16px; cursor:pointer;
-    font-family:'IBM Plex Mono', monospace; font-size:12.5px; letter-spacing:.1em;
-    text-transform:uppercase; color:var(--ink-soft);
-  }
-  .dropdown-header:hover{color:var(--red);}
-  .dropdown-arrow{font-size:14px; color:var(--red);}
-  .dropdown-body{padding:0 14px 14px;}
-  .dropdown-body .modgrid{display:flex; flex-direction:column; gap:10px;}
-</style>
+    @media (max-width: 480px) {
+      .header-title { font-size: 24px; }
+      .section-button { padding: 12px; }
+      .bg-ink { flex-wrap: wrap; justify-content: center; text-align: center; }
+      .bg-ink .label { width: 100%; }
+      .lesson-tabs { justify-content: center; }
+    }
+  </style>
 </head>
 <body>
-<div class="wrap">
-  <p class="eyebrow">Lernwortschatz · Kapitel 1–2</p>
-  <h1>Wörter & Artikel</h1>
-  <p class="sub" id="subtitle">Choisis un module de 10 mots ou d'articles à réviser.</p>
-
-  <div class="scorebar" id="scorebarTop" style="display:none;">
-    <span>Mot <b id="qpos">1</b> / <b id="qtotal"></b></span>
-    <span>Score module : <b id="scorenow">0</b></span>
-    <button class="topbtn" id="menuBtnTop">☰ Menu des modules</button>
-  </div>
-  <div class="progressbg" id="progressbg" style="display:none;"><div class="progressfg" id="progressfg"></div></div>
-
-  <div class="scorebar" id="qzScorebarWrap" style="display:none;">
-    <span>Question <b id="qzQpos">1</b> / <b id="qzQtotal">100</b> <span id="qzPartpos" class="partpos"></span></span>
-    <span>Score : <b id="qzScorenow">0</b></span>
-    <button class="restart-inline" id="qzRestartInlineBtn">Recommencer</button>
-    <button class="restart-inline" id="qzPartMenuBtn">Parties</button>
-    <button class="restart-inline" id="qzHomeBtn">Accueil</button>
-  </div>
-  <div class="rail" id="qzRail" style="display:none;"></div>
-
-  <div class="card" id="card"></div>
-  <footer>Lernwortschatz · vocabulaire tiré des pages Menschen A1 · by Ange TNT</footer>
-</div>
-
-<script>
-/* ---------- Vocabulaire : mot, catégorie, sens en français ---------- */
-const allWords = [
-  ["Hallo","Begrüßung",["salut (bonjour familier)","salut","bonjour"]],
-  ["Guten Morgen","Begrüßung",["bonjour (le matin)","bonjour"]],
-  ["Guten Tag","Begrüßung",["bonjour (dans la journée)","bonjour"]],
-  ["Guten Abend","Begrüßung",["bonsoir"]],
-  ["Gute Nacht","Begrüßung",["bonne nuit"]],
-  ["Auf Wiedersehen","Begrüßung",["au revoir (formel)","au revoir"]],
-  ["Tschüss","Begrüßung",["salut (au revoir familier)","salut","au revoir"]],
-  ["Ich heiße","Name",["je m'appelle"]],
-  ["Ich bin","Name",["je suis"]],
-  ["Mein Name ist","Name",["mon nom est"]],
-  ["Das ist","Name",["c'est"]],
-
-  ["Wer","Name",["qui"]],
-  ["Wie","Name",["comment"]],
-  ["Frau","Personalien",["madame","femme"]],
-  ["Herr","Personalien",["monsieur","homme"]],
-  ["Name","Personalien",["nom"]],
-  ["Vorname","Personalien",["prénom"]],
-  ["Familienname","Personalien",["nom de famille"]],
-  ["Woher","Herkunft",["d'où"]],
-  ["kommen aus","Herkunft",["venir de"]],
-  ["aus","Herkunft",["de","depuis"]],
-
-  ["Land","Länder",["pays"]],
-  ["Deutschland","Länder",["allemagne"]],
-  ["Österreich","Länder",["autriche"]],
-  ["Schweiz","Länder",["suisse"]],
-  ["Wie geht's?","Befinden",["comment ça va"]],
-  ["sehr gut","Befinden",["très bien"]],
-  ["gut","Befinden",["bien"]],
-  ["es geht","Befinden",["ça va"]],
-  ["nicht so gut","Befinden",["pas très bien"]],
-  ["Alphabet","Weitere Wörter",["alphabet"]],
-
-  ["buchstabieren","Weitere Wörter",["épeler"]],
-  ["auch","Weitere Wörter",["aussi"]],
-  ["danke","Weitere Wörter",["merci"]],
-  ["ja","Weitere Wörter",["oui"]],
-  ["nein","Weitere Wörter",["non"]],
-  ["sehr","Weitere Wörter",["très"]],
-  ["und","Weitere Wörter",["et"]],
-  ["Arbeitgeber","Arbeit",["employeur"]],
-  ["Ausbildung","Arbeit",["formation"]],
-  ["Beruf","Arbeit",["métier","profession"]],
-
-  ["Hochschule","Arbeit",["grande école","université"]],
-  ["Universität","Arbeit",["université (académique)","université"]],
-  ["Job","Arbeit",["emploi","job"]],
-  ["Praktikum","Arbeit",["stage"]],
-  ["Schule","Arbeit",["école"]],
-  ["Stelle","Arbeit",["poste"]],
-  ["arbeiten als","Arbeit",["travailler comme"]],
-  ["arbeiten bei","Arbeit",["travailler chez"]],
-  ["studieren","Arbeit",["étudier"]],
-  ["arbeitslos","Arbeit",["au chômage"]],
-  ["von Beruf","Arbeit",["de profession"]],
-  ["Was...?","Arbeit",["quoi"]],
-
-  ["Alter","Persönliches",["âge"]],
-  ["Familienstand","Persönliches",["état civil"]],
-  ["Jahr","Persönliches",["année","an"]],
-  ["...Jahre alt sein","Persönliches",["avoir ... ans"]],
-  ["Kind","Persönliches",["enfant"]],
-  ["leben","Persönliches",["vivre"]],
-  ["allein leben","Persönliches",["vivre seul"]],
-  ["zusammenleben","Persönliches",["vivre ensemble"]],
-  ["wohnen in","Persönliches",["habiter à"]],
-  ["geschieden","Persönliches",["divorcé"]],
-
-  ["verheiratet","Persönliches",["marié"]],
-  ["in","Persönliches",["dans","à"]],
-  ["Wo...?","Persönliches",["où"]],
-  ["Architekt","Berufe",["architecte"]],
-  ["Arzt","Berufe",["médecin"]],
-  ["Friseur","Berufe",["coiffeur"]],
-  ["Ingenieur","Berufe",["ingénieur"]],
-  ["Journalist","Berufe",["journaliste"]],
-  ["Kellner","Berufe",["serveur"]],
-  ["Krankenschwester","Berufe",["infirmière"]],
-
-  ["Lehrer","Berufe",["enseignant","professeur"]],
-  ["Mechatroniker","Berufe",["mécatronicien"]],
-  ["Student","Berufe",["étudiant"]],
-  ["Schauspieler","Berufe",["acteur"]],
-  ["Schüler","Berufe",["élève"]],
-  ["Sekretär","Berufe",["secrétaire"]],
-  ["Verkäufer","Berufe",["vendeur"]],
-  ["glauben","Weitere Wörter",["croire","penser"]],
-  ["haben","Weitere Wörter",["avoir"]],
-  ["machen","Weitere Wörter",["faire"]],
-
-  ["richtig","Weitere Wörter",["correct","juste"]],
-  ["falsch","Weitere Wörter",["faux"]],
-  ["super","Weitere Wörter",["super"]],
-  ["aber","Weitere Wörter",["mais"]],
-  ["kein-","Weitere Wörter",["aucun","pas de"]],
-  ["nicht","Weitere Wörter",["ne...pas"]],
-];
-
-/* ---------- Articles : article, mot (singulier), pluriel, sens en français ---------- */
-const articleWords = [
-  ["der","Arbeitgeber","Arbeitgeber","employeur"],
-  ["die","Ausbildung","Ausbildungen","formation"],
-  ["der","Beruf","Berufe","métier"],
-  ["die","Hochschule","Hochschulen","université / grande école"],
-  ["der","Job","Jobs","emploi"],
-  ["das","Praktikum","Praktika","stage"],
-  ["die","Schule","Schulen","école"],
-  ["die","Stelle","Stellen","poste"],
-  ["das","Alter","—","âge"],
-  ["der","Familienstand","—","état civil"],
-
-  ["das","Jahr","Jahre","année"],
-  ["das","Kind","Kinder","enfant"],
-  ["der","Architekt","Architekten","architecte"],
-  ["der","Arzt","Ärzte","médecin"],
-  ["der","Friseur","Friseure","coiffeur"],
-  ["der","Ingenieur","Ingenieure","ingénieur"],
-  ["der","Journalist","Journalisten","journaliste"],
-  ["der","Kellner","Kellner","serveur"],
-  ["die","Krankenschwester","Krankenschwestern","infirmière"],
-  ["der","Lehrer","Lehrer","enseignant"],
-
-  ["der","Mechatroniker","Mechatroniker","mécatronicien"],
-  ["der","Student","Studenten","étudiant"],
-  ["der","Schauspieler","Schauspieler","acteur"],
-  ["der","Schüler","Schüler","élève"],
-  ["der","Sekretär","Sekretäre","secrétaire"],
-  ["der","Verkäufer","Verkäufer","vendeur"],
-  ["die","Frau","Frauen","madame / femme"],
-  ["der","Herr","Herren","monsieur"],
-  ["der","Name","Namen","nom"],
-  ["der","Vorname","Vornamen","prénom"],
-
-  ["das","Land","Länder","pays"],
-  ["die","Schweiz","—","Suisse"],
-  ["das","Alphabet","Alphabete","alphabet"],
-];
-
-const MOD_SIZE = 10;
-
-function chunk(arr){
-  const out=[];
-  for(let i=0;i<arr.length;i+=MOD_SIZE) out.push(arr.slice(i,i+MOD_SIZE));
-  return out;
-}
-
-/* module list: {type:'vocab'|'artikel', items:[...], label} */
-const modules = [
-  ...chunk(allWords).map(items=>({type:'vocab', items})),
-  ...chunk(articleWords).map(items=>({type:'artikel', items})),
-];
-const moduleScores = modules.map(()=>null);
-
-let currentMod = 0;
-let direction = 'de-fr'; // for vocab modules: 'de-fr' or 'fr-de'
-let modItems = [];
-let idx=0, score=0, answered=false, autoTimer=null, countdownTimer=null;
-const DELAY = 4;
-
-const cardEl = document.getElementById('card');
-const scorebarTopEl = document.getElementById('scorebarTop');
-const progressbgEl = document.getElementById('progressbg');
-const progressfgEl = document.getElementById('progressfg');
-const qposEl = document.getElementById('qpos');
-const qtotalEl = document.getElementById('qtotal');
-const scoreEl = document.getElementById('scorenow');
-const subtitleEl = document.getElementById('subtitle');
-
-document.getElementById('menuBtnTop').addEventListener('click', ()=>{ clearAutoAdvance(); showMenu(); });
-
-function norm(s){
-  return s.trim().toLowerCase()
-    .replace(/['’]/g,"'").replace(/[.!?]/g,'')
-    .replace(/ß/g,"ss")
-    .normalize("NFD").replace(/[\u0300-\u036f]/g,"");
-}
-function normKeepUmlaut(s){
-  return s.trim().toLowerCase().replace(/[.!?]/g,'').replace(/ß/g,"ss");
-}
-function matches(input, accepted, keepUmlaut){
-  const n = keepUmlaut ? normKeepUmlaut(input) : norm(input);
-  if(!n) return false;
-  return accepted.some(a=>{
-    const na = keepUmlaut ? normKeepUmlaut(a) : norm(a);
-    return n===na;
-  });
-}
-
-/* ---------------- MENU ---------------- */
-function showMenu(){
-  scorebarTopEl.style.display='none';
-  progressbgEl.style.display='none';
-  const qzBar = document.getElementById('qzScorebarWrap');
-  const qzRailEl = document.getElementById('qzRail');
-  if(qzBar) qzBar.style.display='none';
-  if(qzRailEl) qzRailEl.style.display='none';
-  subtitleEl.textContent = "Choisis un module de 10 mots, d'articles, ou un quiz complet à réviser.";
-
-  let vocabCards = '';
-  let artikelCards = '';
-  modules.forEach((mod,i)=>{
-    const first = mod.items[0][mod.type==='vocab'?0:1];
-    const last = mod.items[mod.items.length-1][mod.type==='vocab'?0:1];
-    const done = moduleScores[i];
-    const label = mod.type==='vocab' ? `Module ${i+1}` : `Artikel ${i - chunk(allWords).length + 1}`;
-    const cardHtml = `<button class="modcard ${done?'completed':''}" data-mod="${i}">
-      <div class="modleft">
-        <span class="modtitle">${label}</span>
-        <span class="modrange">${first} → ${last} · ${mod.items.length} ${mod.type==='vocab'?'mots':'articles'}</span>
-      </div>
-      ${done ? `<span class="modscore">${done.score}/${done.total} ✓</span>` : `<span class="modarrow">→</span>`}
-    </button>`;
-    if(mod.type==='vocab') vocabCards += cardHtml; else artikelCards += cardHtml;
-  });
-
-  const quizCards = `<button class="modcard" id="quizStdCard">
-      <div class="modleft">
-        <span class="modtitle">Quiz standard</span>
-        <span class="modrange">100 questions — Begrüßung, Fragen, Berufe, Verben, Zahlen, textes</span>
-      </div>
-      <span class="modarrow">→</span>
-    </button>
-    <button class="modcard" id="quizHardCard">
-      <div class="modleft">
-        <span class="modtitle">Quiz difficile · Conjugaison</span>
-        <span class="modrange">50 questions — formes proches, corrections, mein-/dein-, ja/nein/doch</span>
-      </div>
-      <span class="modarrow">→</span>
-    </button>`;
-
-  function dropdown(id, title, bodyHtml){
-    return `<div class="dropdown">
-      <button class="dropdown-header" data-drop="${id}">
-        <span>${title}</span>
-        <span class="dropdown-arrow" id="arrow-${id}">▾</span>
-      </button>
-      <div class="dropdown-body" id="body-${id}" style="display:none;">
-        <div class="modgrid">${bodyHtml}</div>
-      </div>
-    </div>`;
-  }
-
-  let html = dropdown('vocab', 'Vocabulaire', vocabCards);
-  html += dropdown('artikel', 'Articles — der / die / das', artikelCards);
-  html += dropdown('quiz', 'Quiz', quizCards);
-
-  cardEl.innerHTML = html;
-
-  cardEl.querySelectorAll('.dropdown-header').forEach(hdr=>{
-    hdr.addEventListener('click', ()=>{
-      const id = hdr.dataset.drop;
-      const body = document.getElementById('body-'+id);
-      const arrow = document.getElementById('arrow-'+id);
-      const open = body.style.display !== 'none';
-      body.style.display = open ? 'none' : 'block';
-      arrow.textContent = open ? '▾' : '▴';
-    });
-  });
-
-  document.getElementById('quizStdCard').addEventListener('click', ()=> window.QuizApp.start('standard'));
-  document.getElementById('quizHardCard').addEventListener('click', ()=> window.QuizApp.start('hard'));
-  cardEl.querySelectorAll('.modcard[data-mod]').forEach(btn=>{
-    btn.addEventListener('click', ()=> openModule(parseInt(btn.dataset.mod)));
-
-  });
-}
-
-/* ---------------- DIRECTION CHOICE (vocab modules only) ---------------- */
-function openModule(i){
-  const mod = modules[i];
-  if(mod.type==='artikel'){
-    startModule(i);
-    return;
-  }
-  currentMod = i;
-  scorebarTopEl.style.display='none';
-  progressbgEl.style.display='none';
-  subtitleEl.textContent = `Module ${i+1} — choisis le sens de la révision.`;
-  cardEl.innerHTML = `
-    <div class="dirchoice">
-      <p>Comment veux-tu réviser ce module ?</p>
-      <button class="dirbtn" id="deFrBtn">
-        <b>Allemand → Français</b>
-        <span>Le mot allemand est donné, tu écris le sens en français.</span>
-      </button>
-      <button class="dirbtn" id="frDeBtn">
-        <b>Français → Allemand</b>
-        <span>Le sens en français est donné, tu écris le mot en allemand.</span>
-      </button>
-      <button class="backlink" id="backBtn">← Retour au menu</button>
-    </div>
-  `;
-  document.getElementById('deFrBtn').addEventListener('click', ()=>{ direction='de-fr'; startModule(i); });
-  document.getElementById('frDeBtn').addEventListener('click', ()=>{ direction='fr-de'; startModule(i); });
-  document.getElementById('backBtn').addEventListener('click', showMenu);
-}
-
-/* ---------------- QUIZ ---------------- */
-function startModule(i){
-  currentMod = i;
-  modItems = modules[i].items.slice();
-  idx=0; score=0; answered=false;
-  scorebarTopEl.style.display='flex';
-  progressbgEl.style.display='block';
-  qtotalEl.textContent = modItems.length;
-  const mod = modules[i];
-  const dirLabel = mod.type==='vocab' ? (direction==='de-fr' ? ' · Allemand → Français' : ' · Français → Allemand') : '';
-  subtitleEl.textContent = (mod.type==='vocab' ? `Module ${i+1}` : `Articles ${i+1}`) + dirLabel;
-  render();
-}
-
-function updateProgress(){
-  progressfgEl.style.width = Math.round((idx/modItems.length)*100)+"%";
-}
-
-function render(){
-  answered=false;
-  const mod = modules[currentMod];
-  qposEl.textContent = idx+1;
-  scoreEl.textContent = score;
-  updateProgress();
-
-  if(mod.type==='vocab'){
-    renderVocab();
-  } else {
-    renderArtikel();
-  }
-}
-
-function renderVocab(){
-  const [word, cat, fr] = modItems[idx];
-  const promptText = direction==='de-fr' ? word : fr[0];
-  const label = direction==='de-fr' ? 'Français' : 'Deutsch';
-
-  cardEl.innerHTML = `
-    <span class="cat">${cat}</span>
-    <p class="word">${promptText}</p>
-    <p class="hint">${direction==='de-fr' ? 'Donne le sens en français.' : 'Écris le mot en allemand.'}</p>
-    <div class="field" id="fieldAns">
-      <label>${label}</label>
-      <input type="text" id="inAns" autocomplete="off" placeholder="…">
-    </div>
-    <button class="checkbtn" id="checkbtn">Vérifier</button>
-    <div class="feedback" id="fb"></div>
-    <button class="nextbtn" id="nextbtn">${idx===modItems.length-1 ? 'Voir le résultat du module →' : 'Suivant maintenant →'}</button>
-    <p class="countdown" id="countdown"></p>
-  `;
-
-  const inAns = document.getElementById('inAns');
-  const submit = ()=>checkVocab(word, fr);
-  document.getElementById('checkbtn').addEventListener('click', submit);
-  inAns.addEventListener('keydown', e=>{ if(e.key==='Enter') submit(); });
-  document.getElementById('nextbtn').addEventListener('click', next);
-  inAns.focus();
-}
-
-function checkVocab(word, fr){
-  if(answered) return;
-  answered=true;
-  const inAns = document.getElementById('inAns');
-  const target = direction==='de-fr' ? fr : [word];
-  const keepUmlaut = direction==='fr-de';
-  const ok = matches(inAns.value, target, keepUmlaut);
-  inAns.disabled = true;
-  document.getElementById('checkbtn').disabled = true;
-  document.getElementById('fieldAns').classList.add(ok?'ok':'bad');
-  if(ok) score++;
-
-  const translation = direction==='de-fr' ? fr[0] : word;
-  const fb = document.getElementById('fb');
-  fb.className = 'feedback show '+(ok?'ok':'bad');
-  fb.innerHTML = (ok ? `<b>✓ Richtig!</b>` : `<b>✗ Presque.</b> Réponse correcte : <b>${translation}</b>`)
-    + `<span class="transline">${word} = ${fr[0]}</span>`;
-  scoreEl.textContent = score;
-  document.getElementById('nextbtn').classList.add('show');
-  startAutoAdvance();
-}
-
-function renderArtikel(){
-  const [article, noun, plural, trans] = modItems[idx];
-  cardEl.innerHTML = `
-    <span class="cat">Artikel</span>
-    <p class="word">${noun}</p>
-    <p class="hint">Quel article correspond à ce mot ?</p>
-    <div class="options">
-      <button class="opt" data-a="der">der</button>
-      <button class="opt" data-a="die">die</button>
-      <button class="opt" data-a="das">das</button>
-    </div>
-    <div class="feedback" id="fb"></div>
-    <button class="nextbtn" id="nextbtn">${idx===modItems.length-1 ? 'Voir le résultat du module →' : 'Suivant maintenant →'}</button>
-    <p class="countdown" id="countdown"></p>
-  `;
-  cardEl.querySelectorAll('.opt').forEach(btn=>{
-    btn.addEventListener('click', ()=>checkArtikel(btn, article, noun, plural, trans));
-  });
-  document.getElementById('nextbtn').addEventListener('click', next);
-}
-
-function checkArtikel(btn, article, noun, plural, trans){
-  if(answered) return;
-  answered=true;
-  const chosen = btn.dataset.a;
-  const ok = chosen === article;
-  if(ok) score++;
-  cardEl.querySelectorAll('.opt').forEach(o=>{
-    o.disabled = true;
-    if(o.dataset.a === article) o.classList.add('correct');
-    else if(o===btn) o.classList.add('incorrect');
-  });
-  const pluralLine = plural==='—' ? 'pas de pluriel courant' : `die ${plural}`;
-  const fb = document.getElementById('fb');
-  fb.className = 'feedback show '+(ok?'ok':'bad');
-  fb.innerHTML = (ok ? `<b>✓ Richtig!</b> ${article} ${noun}` : `<b>✗ Presque.</b> Réponse correcte : <b>${article} ${noun}</b>`)
-    + `<span class="transline">Pluriel : ${pluralLine} · Traduction : ${trans}</span>`;
-  scoreEl.textContent = score;
-  document.getElementById('nextbtn').classList.add('show');
-  startAutoAdvance();
-}
-
-/* ---------------- FLOW CONTROL ---------------- */
-function startAutoAdvance(){
-  let remaining = DELAY;
-  const cd = document.getElementById('countdown');
-  cd.textContent = `Suite dans ${remaining}s…`;
-  clearInterval(countdownTimer); clearTimeout(autoTimer);
-  countdownTimer = setInterval(()=>{
-    remaining--;
-    if(remaining>0 && cd) cd.textContent = `Suite dans ${remaining}s…`;
-  }, 1000);
-  autoTimer = setTimeout(()=>{ clearInterval(countdownTimer); next(); }, DELAY*1000);
-}
-function clearAutoAdvance(){ clearTimeout(autoTimer); clearInterval(countdownTimer); }
-
-function next(){
-  clearAutoAdvance();
-  if(idx < modItems.length-1){ idx++; render(); }
-  else finishModule();
-}
-
-function finishModule(){
-  progressfgEl.style.width="100%";
-  moduleScores[currentMod] = {score, total: modItems.length};
-  const pct = Math.round((score/modItems.length)*100);
-  let msg = "Repasse sur ce module pour consolider.";
-  if(pct>=90) msg="Module maîtrisé, bravo !";
-  else if(pct>=70) msg="Très solide.";
-  else if(pct>=50) msg="Bonne base, encore un peu d'entraînement.";
-
-  const isLast = currentMod === modules.length-1;
-  const doneCount = moduleScores.filter(Boolean).length;
-
-  cardEl.innerHTML = `<div class="done-screen">
-    <div class="big">${score}/${modItems.length}</div>
-    <p>Module terminé — ${pct}% — ${msg}</p>
-    <p style="font-family:'IBM Plex Mono',monospace; font-size:12.5px;">${doneCount}/${modules.length} modules complétés au total</p>
-    <button class="restart" id="retryBtn">Refaire ce module</button>
-    ${!isLast ? `<button class="menubtn" id="nextModBtn">Module suivant →</button>` : ``}
-    <button class="menubtn" id="menuBtn2">☰ Retour au menu</button>
-  </div>`;
-  document.getElementById('retryBtn').addEventListener('click', ()=>{
-    if(modules[currentMod].type==='vocab') openModule(currentMod); else startModule(currentMod);
-  });
-  document.getElementById('menuBtn2').addEventListener('click', showMenu);
-  if(!isLast){
-    document.getElementById('nextModBtn').addEventListener('click', ()=>{
-      const ni = currentMod+1;
-      if(modules[ni].type==='vocab') openModule(ni); else startModule(ni);
-    });
-  }
-}
-
-(function(){
-const bank = [
-  // Begrüßung / Abschied
-  {cat:"Begrüßung", type:"mcq", q:"Comment dit-on « Bonjour » (le matin) en allemand ?", opts:["Guten Abend","Guten Morgen","Gute Nacht","Tschüss"], answer:"Guten Morgen"},
-  {cat:"Begrüßung", type:"mcq", q:"Que dit-on pour se dire au revoir de façon formelle ?", opts:["Hallo","Auf Wiedersehen","Guten Tag","Wie geht's"], answer:"Auf Wiedersehen"},
-  {cat:"Begrüßung", type:"mcq", q:"« Tschüss » veut dire :", opts:["Bonsoir","Salut / Au revoir (familier)","Bonne nuit","Bonjour"], answer:"Salut / Au revoir (familier)"},
-  {cat:"Begrüßung", type:"mcq", q:"Comment salue-t-on le soir avant de dormir ?", opts:["Guten Abend","Gute Nacht","Guten Morgen","Guten Tag"], answer:"Gute Nacht"},
-  {cat:"Begrüßung", type:"mcq", q:"En Autriche, on dit souvent « Grüß Gott » à la place de :", opts:["Guten Tag","Tschüss","Gute Nacht","Wie geht's"], answer:"Guten Tag"},
-  {cat:"Begrüßung", type:"mcq", q:"En Suisse (CH), « Grüezi » remplace :", opts:["Guten Tag","Gute Nacht","Auf Wiedersehen","Guten Morgen"], answer:"Guten Tag"},
-  {cat:"Begrüßung", type:"mcq", q:"Quelle réponse correspond à « Wie geht's? »", opts:["Ich heiße Paco.","Gut, danke. Und dir?","Aus Spanien.","Guten Morgen."], answer:"Gut, danke. Und dir?"},
-  {cat:"Begrüßung", type:"text", q:"Complète : « ___ Tag! » (Bonjour, formule courante)", answer:"guten", tr:"Bonjour !"},
-  {cat:"Begrüßung", type:"mcq", q:"« Servus » est une salutation typique de :", opts:["l'Allemagne standard","l'Autriche","la Suisse","aucune"], answer:"l'Autriche"},
-  {cat:"Begrüßung", type:"mcq", q:"Quelle expression n'est PAS une salutation ?", opts:["Hallo","Servus","Familienname","Guten Abend"], answer:"Familienname"},
-
-  // W-Fragen
-  {cat:"W-Fragen", type:"text", q:"« ___ heißt du? » — question pour demander le nom.", answer:"wie", tr:"Comment t'appelles-tu ?"},
-  {cat:"W-Fragen", type:"text", q:"« ___ kommst du? » — question pour demander l'origine.", answer:"woher", tr:"D'où viens-tu ?"},
-  {cat:"W-Fragen", type:"text", q:"« Und ___ ist das? » (demander qui c'est)", answer:"wer", tr:"Et qui est-ce ?"},
-  {cat:"W-Fragen", type:"mcq", q:"Pour demander une provenance (d'où), on utilise :", opts:["Wie","Wer","Woher","Was"], answer:"Woher"},
-  {cat:"W-Fragen", type:"mcq", q:"« Wer bist du? » signifie :", opts:["Comment vas-tu ?","Qui es-tu ?","D'où viens-tu ?","Que fais-tu ?"], answer:"Qui es-tu ?"},
-  {cat:"W-Fragen", type:"mcq", q:"Pour demander le métier de quelqu'un, on dit :", opts:["Wie heißt du?","Was machst du beruflich?","Woher kommst du?","Wer ist das?"], answer:"Was machst du beruflich?"},
-  {cat:"W-Fragen", type:"mcq", q:"Réponse correcte à « Woher kommst du? »", opts:["Ich heiße Miguel.","Aus Spanien.","Das ist Anna.","Gut, danke."], answer:"Aus Spanien."},
-  {cat:"W-Fragen", type:"text", q:"« ___ alt sind Sie? » (demander l'âge, formel)", answer:"wie", tr:"Quel âge avez-vous ?"},
-  {cat:"W-Fragen", type:"mcq", q:"« Wie ist die Telefonnummer? » demande :", opts:["l'âge","le numéro de téléphone","le nom de famille","la nationalité"], answer:"le numéro de téléphone"},
-  {cat:"W-Fragen", type:"mcq", q:"Quelle question correspond à la réponse « Sie ist zehn. » ?", opts:["Wie alt sind Sie?","Wie alt sind die Kinder?","Woher kommen Sie?","Wer ist das?"], answer:"Wie alt sind die Kinder?"},
-
-  // Conjugaison — sein/haben
-  {cat:"Verben: sein", type:"mcq", q:"Ich ___ Nicole. (sein)", opts:["bin","bist","ist","sind"], answer:"bin", tr:"Je suis Nicole."},
-  {cat:"Verben: sein", type:"mcq", q:"Wer ___ das? (sein)", opts:["bin","bist","ist","sind"], answer:"ist", tr:"Qui est-ce ?"},
-  {cat:"Verben: sein", type:"mcq", q:"Wie alt ___ Sie? (sein)", opts:["bin","bist","sind","ist"], answer:"sind", tr:"Quel âge avez-vous ?"},
-  {cat:"Verben: sein", type:"mcq", q:"Du ___ Studentin. (sein)", opts:["bin","bist","ist","seid"], answer:"bist", tr:"Tu es étudiante."},
-  {cat:"Verben: haben", type:"mcq", q:"Ich ___ zwei Kinder. (haben)", opts:["habe","hast","hat","haben"], answer:"habe", tr:"J'ai deux enfants."},
-  {cat:"Verben: haben", type:"mcq", q:"Wir ___ ein Kind. (haben)", opts:["habe","hast","haben","hat"], answer:"haben", tr:"Nous avons un enfant."},
-  {cat:"Verben: haben", type:"mcq", q:"Sie (elle) ___ einen Job als Verkäuferin. (haben)", opts:["habe","hast","hat","haben"], answer:"hat", tr:"Elle a un travail de vendeuse."},
-
-  // Berufe
-  {cat:"Berufe", type:"mcq", q:"Quel article correspond à « Verkäufer » (vendeur) ?", opts:["der","die","das"], answer:"der"},
-  {cat:"Berufe", type:"mcq", q:"Une femme vendeuse se dit :", opts:["Verkäuferin","Verkäufer","Verkäuferer","Verkäuf"], answer:"Verkäuferin"},
-  {cat:"Berufe", type:"mcq", q:"« Krankenschwester » désigne :", opts:["un professeur","une infirmière","un architecte","un serveur"], answer:"une infirmière"},
-  {cat:"Berufe", type:"mcq", q:"« Kellner » signifie :", opts:["serveur","cuisinier","comptable","chauffeur"], answer:"serveur"},
-  {cat:"Berufe", type:"mcq", q:"Traduis « Ingenieur » :", opts:["ingénieur","journaliste","secrétaire","enseignant"], answer:"ingénieur"},
-  {cat:"Berufe", type:"mcq", q:"« Schauspieler » veut dire :", opts:["acteur","élève","médecin","architecte"], answer:"acteur"},
-  {cat:"Berufe", type:"mcq", q:"« Arzt » signifie :", opts:["médecin","avocat","artiste","ouvrier"], answer:"médecin"},
-  {cat:"Berufe", type:"mcq", q:"« Friseur » désigne :", opts:["coiffeur","fleuriste","boulanger","cuisinier"], answer:"coiffeur"},
-  {cat:"Berufe", type:"mcq", q:"« Sekretärin » est le féminin de :", opts:["Sekretär","Sekretärer","Sekret","Sekretärin selbst"], answer:"Sekretär"},
-  {cat:"Berufe", type:"mcq", q:"Complète : « Ich arbeite ___ Kellnerin. »", opts:["als","bei","in","von"], answer:"als", tr:"Je travaille comme serveuse."},
-  {cat:"Berufe", type:"mcq", q:"Complète : « Frau Stern arbeitet ___ Siemens. »", opts:["als","bei","von","in"], answer:"bei", tr:"Madame Stern travaille chez Siemens."},
-  {cat:"Berufe", type:"mcq", q:"« Ich bin Ingenieur ___ Beruf. »", opts:["von","als","bei","in"], answer:"von", tr:"Je suis ingénieur de métier."},
-  {cat:"Berufe", type:"mcq", q:"« Mechatroniker » correspond à quel domaine ?", opts:["automatique/mécatronique","droit","médecine","journalisme"], answer:"automatique/mécatronique"},
-  {cat:"Berufe", type:"mcq", q:"« Ich mache eine Ausbildung als Mechatroniker bei Airbus. » — que fait la personne ?", opts:["un stage payant","une formation professionnelle","des études universitaires","un travail bénévole"], answer:"une formation professionnelle"},
-  {cat:"Berufe", type:"mcq", q:"« arbeitslos » signifie :", opts:["au chômage","à la retraite","étudiant","en formation"], answer:"au chômage"},
-
-  // Familienstand
-  {cat:"Familienstand", type:"mcq", q:"« verheiratet » signifie :", opts:["marié(e)","divorcé(e)","célibataire","fiancé(e)"], answer:"marié(e)"},
-  {cat:"Familienstand", type:"mcq", q:"« geschieden » signifie :", opts:["divorcé(e)","marié(e)","veuf/veuve","célibataire"], answer:"divorcé(e)"},
-  {cat:"Familienstand", type:"mcq", q:"« Single » (en allemand) désigne :", opts:["une personne célibataire","une personne mariée","un enfant unique","un veuf"], answer:"une personne célibataire"},
-  {cat:"Familienstand", type:"mcq", q:"« Sie leben zusammen » signifie :", opts:["ils vivent ensemble","ils sont divorcés","ils vivent séparément","ils travaillent ensemble"], answer:"ils vivent ensemble"},
-  {cat:"Familienstand", type:"mcq", q:"« Ich lebe allein » signifie :", opts:["je vis seul(e)","je vis en couple","j'ai deux enfants","je suis marié(e)"], answer:"je vis seul(e)"},
-  {cat:"Familienstand", type:"mcq", q:"« Sie sind nicht verheiratet, aber sie leben zusammen. » décrit :", opts:["un couple pacsé/en concubinage","un couple marié","un couple divorcé","deux collègues"], answer:"un couple pacsé/en concubinage"},
-  {cat:"Familienstand", type:"text", q:"Traduis en allemand : « les enfants » (das Kind au pluriel) → die ___", answer:"kinder"},
-  {cat:"Familienstand", type:"mcq", q:"« Wir haben zwei Kinder. » signifie :", opts:["Nous avons deux enfants.","Nous avons deux emplois.","Nous vivons à deux.","Nous sommes divorcés."], answer:"Nous avons deux enfants."},
-
-  // Zahlen
-  {cat:"Zahlen", type:"text", q:"Écris le chiffre : « neunundneunzig »", answer:"99"},
-  {cat:"Zahlen", type:"text", q:"Écris le chiffre : « vierundfünfzig »", answer:"54"},
-  {cat:"Zahlen", type:"text", q:"Écris le chiffre : « fünfundvierzig »", answer:"45"},
-  {cat:"Zahlen", type:"text", q:"Écris le chiffre : « siebenundsiebzig »", answer:"77"},
-  {cat:"Zahlen", type:"text", q:"Écris le chiffre : « sechsundzwanzig »", answer:"26"},
-  {cat:"Zahlen", type:"text", q:"Calcule et écris en chiffre : fünfzehn + siebenunddreißig", answer:"52"},
-  {cat:"Zahlen", type:"text", q:"Calcule et écris en chiffre : sechsundfünfzig + acht", answer:"64"},
-  {cat:"Zahlen", type:"text", q:"Calcule et écris en chiffre : dreiunddreißig + neun", answer:"42"},
-  {cat:"Zahlen", type:"text", q:"Calcule et écris en chiffre : fünfundzwanzig + siebenundsechzig", answer:"92"},
-  {cat:"Zahlen", type:"mcq", q:"Comment écrit-on « 33 » en toutes lettres ?", opts:["dreiunddreißig","dreißigdrei","dreidreißig","dreiunddreizig"], answer:"dreiunddreißig"},
-
-  // Vocabulaire général
-  {cat:"Wortschatz", type:"mcq", q:"« Alter » signifie :", opts:["âge","métier","adresse","nom"], answer:"âge"},
-  {cat:"Wortschatz", type:"mcq", q:"« Arbeitgeber » signifie :", opts:["employeur","employé","stagiaire","collègue"], answer:"employeur"},
-  {cat:"Wortschatz", type:"mcq", q:"« Herkunft » signifie :", opts:["l'origine / provenance","le métier","l'âge","la nationalité"], answer:"l'origine / provenance"},
-  {cat:"Wortschatz", type:"mcq", q:"« Praktikum » signifie :", opts:["un stage","un salaire","un diplôme","une formation longue"], answer:"un stage"},
-  {cat:"Wortschatz", type:"mcq", q:"« Hochschule » signifie :", opts:["une université / grande école","une école primaire","une entreprise","une bibliothèque"], answer:"une université / grande école"},
-  {cat:"Wortschatz", type:"mcq", q:"« Wohnort » signifie :", opts:["lieu de résidence","lieu de travail","pays d'origine","numéro de téléphone"], answer:"lieu de résidence"},
-  {cat:"Wortschatz", type:"mcq", q:"« Land » signifie :", opts:["pays","ville","langue","région"], answer:"pays"},
-  {cat:"Wortschatz", type:"mcq", q:"« buchstabieren » signifie :", opts:["épeler","écrire","lire à voix haute","traduire"], answer:"épeler"},
-  {cat:"Wortschatz", type:"mcq", q:"« richtig » veut dire :", opts:["correct/juste","faux","peut-être","toujours"], answer:"correct/juste"},
-  {cat:"Wortschatz", type:"mcq", q:"« falsch » veut dire :", opts:["faux","correct","facile","difficile"], answer:"faux"},
-  {cat:"Wortschatz", type:"mcq", q:"« glauben » signifie :", opts:["croire / penser","savoir","vouloir","devoir"], answer:"croire / penser"},
-  {cat:"Wortschatz", type:"mcq", q:"« zurzeit » signifie :", opts:["actuellement","autrefois","jamais","toujours"], answer:"actuellement"},
-  {cat:"Wortschatz", type:"mcq", q:"« momentan » signifie :", opts:["en ce moment","le mois dernier","rarement","exactement"], answer:"en ce moment"},
-  {cat:"Wortschatz", type:"mcq", q:"« kein- / nicht » servent tous les deux à :", opts:["exprimer la négation","poser une question","exprimer le futur","comparer"], answer:"exprimer la négation"},
-  {cat:"Wortschatz", type:"mcq", q:"« Familienname » signifie :", opts:["nom de famille","prénom","surnom","pays d'origine"], answer:"nom de famille"},
-  {cat:"Wortschatz", type:"mcq", q:"« Vorname » signifie :", opts:["prénom","nom de famille","surnom","titre"], answer:"prénom"},
-
-  // Compréhension (texte Marie Durant / Julia)
-  {cat:"Familie: Stammbaum", type:"mcq", q:"Comment dit-on « le grand-père » en allemand ?", opts:["der Großvater","die Großmutter","der Enkel","der Onkel"], answer:"der Großvater"},
-  {cat:"Familie: Stammbaum", type:"mcq", q:"Der Bruder meiner Mutter ist mein ___.", opts:["Onkel","Cousin","Neffe","Schwager"], answer:"Onkel", tr:"Le frère de ma mère est mon oncle."},
-  {cat:"Familie: Stammbaum", type:"mcq", q:"Que signifie « die Enkelin » ?", opts:["la petite-fille","la nièce","la cousine","la belle-fille"], answer:"la petite-fille"},
-  {cat:"Familie: Stammbaum", type:"mcq", q:"Die Schwester meines Vaters ist meine ___.", opts:["Tante","Nichte","Cousine","Schwägerin"], answer:"Tante", tr:"La sœur de mon père est ma tante."},
-  {cat:"Familie: Stammbaum", type:"mcq", q:"Comment dit-on « le neveu » en allemand ?", opts:["der Neffe","die Nichte","der Cousin","der Enkel"], answer:"der Neffe"},
-  {cat:"Familie: Stammbaum", type:"mcq", q:"Der Sohn meines Onkels ist mein ___.", opts:["Cousin","Neffe","Bruder","Schwager"], answer:"Cousin", tr:"Le fils de mon oncle est mon cousin."},
-  {cat:"Familie: Stammbaum", type:"mcq", q:"Que signifie « die Schwiegermutter » ?", opts:["la belle-mère","la grand-mère","la marraine","la tante"], answer:"la belle-mère"},
-  {cat:"Familie: Stammbaum", type:"mcq", q:"Die Tochter meiner Schwester ist meine ___.", opts:["Nichte","Cousine","Enkelin","Schwägerin"], answer:"Nichte", tr:"La fille de ma sœur est ma nièce."},
-  {cat:"Familie: Stammbaum", type:"mcq", q:"Comment dit-on « les jumeaux » en allemand ?", opts:["die Zwillinge","die Geschwister","die Enkelkinder","die Cousins"], answer:"die Zwillinge"},
-  {cat:"Familie: Stammbaum", type:"mcq", q:"Der Vater meines Vaters ist mein ___.", opts:["Großvater","Onkel","Schwiegervater","Stiefvater"], answer:"Großvater", tr:"Le père de mon père est mon grand-père."},
-];
-
-/* ---------- Banque difficile (50 questions) — extraite des photos Familie & Sprachen ---------- */
-const hardBank = [
-  // Artikel Familie — sans indice, réponse = article + mot complet (10)
-  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « petit-fils »", answer:"der enkel"},
-  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « grand-mère »", answer:"die großmutter"},
-  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « les enfants » (pluriel)", answer:"die kinder"},
-  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « frères et sœurs »", answer:"die geschwister"},
-  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « les parents » (pluriel)", answer:"die eltern"},
-  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « les grands-parents » (pluriel)", answer:"die großeltern"},
-  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « le fils »", answer:"der sohn"},
-  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « la fille » (progéniture)", answer:"die tochter"},
-  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « le mari »", answer:"der mann"},
-  {cat:"Schwer: Artikel", type:"text", q:"Donne l'article et le mot : « l'épouse »", answer:"die ehefrau", alt:["die frau"]},
-
-  // Konjugation extrême — sans infinitif visible, contexte riche (10)
-  {cat:"Schwer: Konjugation", type:"text", q:"Meine Oma und mein Opa ___ noch zusammen in Österreich. (leben)", answer:"leben", tr:"Ma grand-mère et mon grand-père vivent encore ensemble en Autriche."},
-  {cat:"Schwer: Konjugation", type:"text", q:"___ deine Kollegen auch Deutsch? (sprechen)", answer:"sprechen", tr:"Tes collègues parlent-ils aussi allemand ?"},
-  {cat:"Schwer: Konjugation", type:"text", q:"Mein Bruder ___ nicht verheiratet, er ist Single. (sein)", answer:"ist", tr:"Mon frère n'est pas marié, il est célibataire."},
-  {cat:"Schwer: Konjugation", type:"text", q:"Wie viele Sprachen ___ deine Partnerin? (sprechen)", answer:"spricht", tr:"Combien de langues parle ta partenaire ?"},
-  {cat:"Schwer: Konjugation", type:"text", q:"Meine Enkelkinder ___ aus Frankreich. (kommen)", answer:"kommen", tr:"Mes petits-enfants viennent de France."},
-  {cat:"Schwer: Konjugation", type:"text", q:"___ ihr Geschwister oder seid ihr Einzelkinder? (haben)", answer:"habt", tr:"Avez-vous des frères et sœurs, ou êtes-vous enfants uniques ?"},
-  {cat:"Schwer: Konjugation", type:"text", q:"Mein Freund und ich ___ zusammen in Berlin. (wohnen)", answer:"wohnen", tr:"Mon ami et moi habitons ensemble à Berlin."},
-  {cat:"Schwer: Konjugation", type:"text", q:"___ du auch Russisch? (sprechen)", answer:"sprichst", tr:"Parles-tu aussi russe ?"},
-  {cat:"Schwer: Konjugation", type:"text", q:"Meine Tante ___ als Ärztin. (arbeiten)", answer:"arbeitet", tr:"Ma tante travaille comme médecin."},
-  {cat:"Schwer: Konjugation", type:"text", q:"Meine Großeltern ___ vier Enkelkinder. (haben)", answer:"haben", tr:"Mes grands-parents ont quatre petits-enfants."},
-
-  // mein-/dein- — accord avec des noms de famille piégeux (10)
-  {cat:"Schwer: mein-/dein-", type:"text", q:"Wie heißt ___ Großmutter? (dein)", answer:"deine", tr:"Comment s'appelle ta grand-mère ?"},
-  {cat:"Schwer: mein-/dein-", type:"text", q:"___ Enkel wohnt in Kamerun. (mein)", answer:"mein", tr:"Mon petit-fils habite au Cameroun."},
-  {cat:"Schwer: mein-/dein-", type:"text", q:"Sind das ___ Enkelkinder? (dein)", answer:"deine", tr:"Ce sont tes petits-enfants ?"},
-  {cat:"Schwer: mein-/dein-", type:"text", q:"___ Geschwister leben in Bafoussam. (mein)", answer:"meine", tr:"Mes frères et sœurs vivent à Bafoussam."},
-  {cat:"Schwer: mein-/dein-", type:"text", q:"Ist das ___ Partner? (dein)", answer:"dein", tr:"C'est ton partenaire ?"},
-  {cat:"Schwer: mein-/dein-", type:"text", q:"___ Großeltern sind schon 80 Jahre alt. (mein)", answer:"meine", tr:"Mes grands-parents ont déjà 80 ans."},
-  {cat:"Schwer: mein-/dein-", type:"text", q:"___ Kollege ist auch Ingenieur. (mein)", answer:"mein", tr:"Mon collègue est aussi ingénieur."},
-  {cat:"Schwer: mein-/dein-", type:"text", q:"Ist ___ Schwester auch Studentin? (dein)", answer:"deine", tr:"Ta sœur est-elle aussi étudiante ?"},
-  {cat:"Schwer: mein-/dein-", type:"text", q:"___ Bild ist sehr schön. (mein)", answer:"mein", tr:"Ma photo est très belle."},
-  {cat:"Schwer: mein-/dein-", type:"text", q:"___ Freundin kommt aus Spanien. (dein)", answer:"deine", tr:"Ta copine vient d'Espagne."},
-
-  // Ja / Nein / Doch (10)
-  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds négativement (un mot) : « Bist du Single? »", answer:"nein", tr:"Es-tu célibataire ? — Non."},
-  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds en contredisant (un mot) : « Du hast keine Geschwister, oder? » — mais tu as un frère.", answer:"doch", tr:"Tu n'as pas de frères et sœurs, n'est-ce pas ? — Si, j'ai un frère.", doch:true},
-  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds positivement (un mot) : « Sprichst du Deutsch? »", answer:"ja", tr:"Parles-tu allemand ? — Oui."},
-  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds en contredisant (un mot) : « Deine Eltern leben nicht mehr zusammen, oder? » — mais si, ils vivent ensemble.", answer:"doch", tr:"Tes parents ne vivent plus ensemble, n'est-ce pas ? — Si, ils vivent ensemble.", doch:true},
-  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds négativement (un mot) : « Ist deine Schwester verheiratet? »", answer:"nein", tr:"Ta sœur est-elle mariée ? — Non."},
-  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds en contredisant (un mot) : « Du bist nicht verheiratet, oder? » — mais tu l'es.", answer:"doch", tr:"Tu n'es pas marié(e), n'est-ce pas ? — Si, je le suis.", doch:true},
-  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds positivement (un mot) : « Hast du Kinder? »", answer:"ja", tr:"As-tu des enfants ? — Oui."},
-  {cat:"Schwer: ja/nein/doch", type:"mcq", q:"Quand utilise-t-on « doch » plutôt que « ja » ?", opts:["Pour contredire une question négative","Pour répondre à une question positive","Pour poser une question","Pour saluer quelqu'un"], answer:"Pour contredire une question négative"},
-  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds négativement (un mot) : « Kommst du aus Frankreich? »", answer:"nein", tr:"Viens-tu de France ? — Non."},
-  {cat:"Schwer: ja/nein/doch", type:"text", q:"Réponds en contredisant (un mot) : « Deine Großeltern leben nicht in Europa, oder? » — mais si.", answer:"doch", tr:"Tes grands-parents ne vivent pas en Europe, n'est-ce pas ? — Si.", doch:true},
-
-  // Fehlerkorrektur — repère et corrige la faute (10)
-  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Meine Bruder ist Arzt. »", answer:"mein bruder ist arzt", tr:"Mon frère est médecin."},
-  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Dein Schwester wohnt in Berlin. »", answer:"deine schwester wohnt in berlin", tr:"Ta sœur habite à Berlin."},
-  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Meine Eltern ist geschieden. »", answer:"meine eltern sind geschieden", tr:"Mes parents sont divorcés."},
-  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Wir spricht drei Sprachen. »", answer:"wir sprechen drei sprachen", tr:"Nous parlons trois langues."},
-  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Er kommen aus Kamerun. »", answer:"er kommt aus kamerun", tr:"Il vient du Cameroun."},
-  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Meine Geschwister ist noch klein. »", answer:"meine geschwister sind noch klein", tr:"Mes frères et sœurs sont encore petits."},
-  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Dein Opa und dein Oma leben in Spanien. »", answer:"dein opa und deine oma leben in spanien", tr:"Ton grand-père et ta grand-mère vivent en Espagne."},
-  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Ich habt zwei Enkelkinder. »", answer:"ich habe zwei enkelkinder", tr:"J'ai deux petits-enfants."},
-  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Meine Tochter sprichst Englisch. »", answer:"meine tochter spricht englisch", tr:"Ma fille parle anglais."},
-  {cat:"Schwer: Fehlerkorrektur", type:"text", q:"Corrige la faute : « Bist das deine Eltern? »", answer:"sind das deine eltern", tr:"Ce sont tes parents ?"},
-];
-
-/* ---------- Programmatic generation: verb conjugation drills ---------- */
-const conj = {
-  machen:  {ich:"mache",  du:"machst",  er:"macht",  wir:"machen", ihr:"macht",  sie:"machen"},
-  leben:   {ich:"lebe",   du:"lebst",   er:"lebt",   wir:"leben",  ihr:"lebt",   sie:"leben"},
-  wohnen:  {ich:"wohne",  du:"wohnst",  er:"wohnt",  wir:"wohnen", ihr:"wohnt",  sie:"wohnen"},
-  arbeiten:{ich:"arbeite",du:"arbeitest",er:"arbeitet",wir:"arbeiten",ihr:"arbeitet",sie:"arbeiten"},
-  kommen:  {ich:"komme",  du:"kommst",  er:"kommt",  wir:"kommen", ihr:"kommt",  sie:"kommen"},
-  heißen:  {ich:"heiße",  du:"heißt",   er:"heißt",  wir:"heißen", ihr:"heißt",  sie:"heißen"},
-  studieren:{ich:"studiere",du:"studierst",er:"studiert",wir:"studieren",ihr:"studiert",sie:"studieren"},
-};
-const pronounLabel = {ich:"Ich", du:"Du", er:"Er/Sie", wir:"Wir", ihr:"Ihr", sie:"sie/Sie"};
-const persons = ["ich","du","er","wir","ihr","sie"];
-const verbList = Object.keys(conj);
-const filler = { arbeiten:"[im Büro]", wohnen:"[in Berlin]", leben:"[in Malaga]", machen:"[eine Ausbildung]", kommen:"[aus Kamerun]", heißen:"[Ange]", studieren:"[Maschinenbau]" };
-
-/* traductions françaises pour la « signification » affichée après réponse */
-const conjFr = {
-  machen:   {ich:"fais",   du:"fais",    er:"fait",   wir:"faisons",       ihr:"faites",       sie:"font"},
-  leben:    {ich:"vis",    du:"vis",     er:"vit",    wir:"vivons",        ihr:"vivez",        sie:"vivent"},
-  wohnen:   {ich:"habite", du:"habites", er:"habite", wir:"habitons",      ihr:"habitez",      sie:"habitent"},
-  arbeiten: {ich:"travaille", du:"travailles", er:"travaille", wir:"travaillons", ihr:"travaillez", sie:"travaillent"},
-  kommen:   {ich:"viens",  du:"viens",   er:"vient",  wir:"venons",        ihr:"venez",        sie:"viennent"},
-  heißen:   {ich:"m'appelle", du:"t'appelles", er:"s'appelle", wir:"nous appelons", ihr:"vous appelez", sie:"s'appellent"},
-  studieren:{ich:"étudie", du:"étudies", er:"étudie", wir:"étudions",      ihr:"étudiez",      sie:"étudient"},
-};
-const pronounFr = {ich:"Je", du:"Tu", er:"Il/Elle", wir:"Nous", ihr:"Vous", sie:"Ils/Elles"};
-const fillerFr = { arbeiten:"au bureau", wohnen:"à Berlin", leben:"à Malaga", machen:"une formation", kommen:"du Cameroun", heißen:"Ange", studieren:"en mécanique" };
-
-const generated = [];
-verbList.forEach(v=>{
-  persons.forEach(p=>{
-    const correct = conj[v][p];
-    // build distractors from other persons of same verb
-    let distractors = persons.filter(x=>x!==p).map(x=>conj[v][x]).filter(x=>x!==correct);
-    distractors = [...new Set(distractors)].slice(0,3);
-    while(distractors.length<3){ distractors.push(correct+"n"); }
-    const opts = [correct, ...distractors];
-    // shuffle options
-    for(let i=opts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [opts[i],opts[j]]=[opts[j],opts[i]];}
-    const trText = `${pronounFr[p]} ${conjFr[v][p]} ${fillerFr[v]}.`;
-    generated.push({
-      cat:"Verben: "+v,
-      type:"mcq",
-      q:`${pronounLabel[p]} ___ ${filler[v]}. (${v})`,
-      opts, answer: correct, tr: trText
-    });
-  });
-});
-
-// shuffle generated pool, then take just enough to reach 100 total
-for(let i=generated.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [generated[i],generated[j]]=[generated[j],generated[i]];}
-const needed = Math.max(0, 100 - bank.length);
-let standardQuestions = bank.concat(generated.slice(0, needed));
-standardQuestions = standardQuestions.slice(0,100);
-
-function shuffleCopy(arr){
-  const a = arr.slice();
-  for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]];}
-  return a;
-}
-
-/* ---------- Quiz engine ---------- */
-let mode = null; // 'standard' | 'hard'
-let questions = [];
-let idx = 0, score = 0, answered = false, wrongIdx = new Set();
-let partSize = 1; // taille de chaque fragment (10 fragments par quiz)
-let completedParts = new Set();
-const card = document.getElementById('card');
-const rail = document.getElementById('qzRail');
-const qposEl = document.getElementById('qzQpos');
-const scoreEl = document.getElementById('qzScorenow');
-const scorebarWrap = document.getElementById('qzScorebarWrap');
-
-function goHome(){
-  clearAutoAdvance();
-  scorebarWrap.style.display='none';
-  rail.style.display='none';
-  showMenu();
-}
-
-function startMode(chosen){
-  mode = chosen;
-  questions = shuffleCopy(chosen==='standard' ? standardQuestions : hardBank);
-  idx=0; score=0; wrongIdx=new Set(); completedParts=new Set();
-  partSize = Math.max(1, Math.ceil(questions.length/10));
-  document.getElementById('subtitle').textContent = chosen==='standard'
-    ? "Quiz standard — 100 questions de révision — Begrüßung, Fragen, Berufe, Verben, Zahlen."
-    : "Quiz difficile — 50 questions extrêmement difficiles — conjugaison, articles, mein-/dein-, ja/nein/doch, correction de fautes.";
-  buildRail();
-  showPartMenu();
-}
-
-function showPartMenu(){
-  clearAutoAdvance();
-  scorebarWrap.style.display='none';
-  rail.style.display='none';
-  const totalParts = Math.ceil(questions.length/partSize);
-  let html = `<button class="backlink" id="qzBackHome">← Retour à l'accueil</button>
-    <p class="sub">Choisis une partie — ${questions.length} questions réparties en ${totalParts} parties. Score actuel : ${score}/${idx}.</p>
-    <div class="modeSelect">`;
-  for(let p=0; p<totalParts; p++){
-    const start = p*partSize;
-    const end = Math.min(start+partSize, questions.length);
-    const done = completedParts.has(p);
-    html += `<button class="modeCard partCard ${done?'partDone':''}" data-p="${p}">
-      <span class="modeTitle">Partie ${p+1}${done ? ' ✓' : ''}</span>
-      <span class="modeDesc">Questions ${start+1}–${end}</span>
-    </button>`;
-  }
-  html += `</div>`;
-  card.innerHTML = html;
-  document.getElementById('qzBackHome').addEventListener('click', goHome);
-  card.querySelectorAll('[data-p]').forEach(btn=>{
-    btn.addEventListener('click', ()=>{
-      idx = parseInt(btn.dataset.p) * partSize;
-      scorebarWrap.style.display='flex';
-      rail.style.display='flex';
-      document.getElementById('qzQtotal').textContent = questions.length;
-      render();
-    });
-  });
-}
-
-document.getElementById('qzHomeBtn').addEventListener('click', goHome);
-document.getElementById('qzPartMenuBtn').addEventListener('click', ()=>{
-  clearAutoAdvance();
-  showPartMenu();
-});
-
-function buildRail(){
-  rail.innerHTML='';
-  const totalParts = Math.ceil(questions.length/partSize);
-  for(let p=0; p<totalParts; p++){
-    const b=document.createElement('button');
-    b.className='partbtn';
-    b.id='partbtn'+p;
-    b.textContent = 'Partie ' + (p+1);
-    b.addEventListener('click', ()=>jumpToPart(p));
-    rail.appendChild(b);
-  }
-}
-function updateRail(){
-  const totalParts = Math.ceil(questions.length/partSize);
-  const currentPart = Math.floor(idx/partSize);
-  for(let p=0; p<totalParts; p++){
-    const b=document.getElementById('partbtn'+p);
-    if(!b) continue;
-    const partEnd = Math.min((p+1)*partSize, questions.length) - 1;
-    let cls = 'partbtn';
-    if(p===currentPart) cls += ' now';
-    else if(partEnd < idx) cls += ' done';
-    b.className = cls;
-  }
-}
-function jumpToPart(p){
-  clearAutoAdvance();
-  idx = p*partSize;
-  render();
-}
-
-function norm(s){ return s.trim().toLowerCase().replace(/[.!?]/g,''); }
-
-function render(){
-  answered=false;
-  const q = questions[idx];
-  qposEl.textContent = idx+1;
-  scoreEl.textContent = score;
-  const totalParts = Math.ceil(questions.length/partSize);
-  const currentPart = Math.floor(idx/partSize)+1;
-  document.getElementById('qzPartpos').textContent = `· Partie ${currentPart}/${totalParts}`;
-  updateRail();
-
-  let html = `<span class="cat">${q.cat}</span><span class="qnum">#${idx+1}</span>`;
-  if(idx>0){
-    html += `<button class="prevbtn" id="prevbtn">← Précédent</button>`;
-  }
-  html += `<p class="question">${q.q}</p>`;
-
-  if(q.type==='mcq'){
-    html += `<div class="qoptions">` + q.opts.map((o,i)=>
-      `<button class="qopt" data-i="${i}">${o}</button>`).join('') + `</div>`;
-  } else {
-    const langHint = /^[0-9]+$/.test(q.answer) ? "en chiffres" : "en allemand";
-    html += `<div class="textrow">
-      <input type="text" class="textin" id="tin" placeholder="Ta réponse…" autocomplete="off">
-      <button class="checkbtn" id="checkbtn">Vérifier</button>
-    </div>
-    <p class="langhint">Réponds ${langHint}</p>`;
-  }
-  html += `<div class="feedback" id="fb"></div>
-    <button class="nextbtn" id="nextbtn">${idx===questions.length-1 ? 'Voir le résultat maintenant' : 'Suivant maintenant →'}</button>
-    <p class="countdown" id="countdown"></p>`;
-  card.innerHTML = html;
-
-  if(q.type==='mcq'){
-    card.querySelectorAll('.qopt').forEach(btn=>{
-      btn.addEventListener('click', ()=>handleMcq(btn, q));
-    });
-  } else {
-    const input = document.getElementById('tin');
-    const check = document.getElementById('checkbtn');
-    const submit = ()=>handleText(input.value, q);
-    check.addEventListener('click', submit);
-    input.addEventListener('keydown', e=>{ if(e.key==='Enter') submit(); });
-    input.focus();
-  }
-  document.getElementById('nextbtn').addEventListener('click', next);
-  if(idx>0){
-    document.getElementById('prevbtn').addEventListener('click', prev);
-  }
-}
-
-function prev(){
-  if(idx>0){
-    clearAutoAdvance();
-    idx--;
-    render();
-  }
-}
-
-let autoTimer = null, countdownTimer = null;
-const DOCH_RULE = "Règle : on utilise « doch » (et non « ja ») pour contredire une question ou une affirmation formulée à la négative.";
-
-function showFeedback(ok, correctText, q){
-  const fb = document.getElementById('fb');
-  fb.className = 'feedback show ' + (ok?'ok':'bad');
-  let html = ok ? `<b>✓ Richtig!</b>` : `<b>✗ Presque.</b> Réponse correcte : <b>${correctText}</b>`;
-  if(q && q.tr){
-    html += `<br><span class="meaning">Signification : ${q.tr}</span>`;
-  }
-  const isDochMiss = !ok && q && norm(q.answer)==="doch";
-  if(isDochMiss){
-    html += `<br><span class="meaning">${DOCH_RULE}</span>`;
-  }
-  fb.innerHTML = html;
-  document.getElementById('nextbtn').classList.add('show');
-  startAutoAdvance(isDochMiss ? 10 : 2);
-}
-
-function startAutoAdvance(DELAY){
-  DELAY = DELAY || 4; // secondes avant la question suivante
-  let remaining = DELAY;
-  const cd = document.getElementById('countdown');
-  cd.textContent = `Suite dans ${remaining}s…`;
-  clearInterval(countdownTimer); clearTimeout(autoTimer);
-  countdownTimer = setInterval(()=>{
-    remaining--;
-    if(remaining>0 && cd) cd.textContent = `Suite dans ${remaining}s…`;
-  }, 1000);
-  autoTimer = setTimeout(()=>{ clearInterval(countdownTimer); next(); }, DELAY*1000);
-}
-function clearAutoAdvance(){ clearTimeout(autoTimer); clearInterval(countdownTimer); }
-
-function handleMcq(btn, q){
-  if(answered) return;
-  answered = true;
-  const chosen = btn.textContent;
-  const ok = chosen === q.answer;
-  if(ok) score++; else wrongIdx.add(idx);
-  card.querySelectorAll('.qopt').forEach(o=>{
-    o.disabled = true;
-    if(o.textContent === q.answer) o.classList.add('correct');
-    else if(o===btn) o.classList.add('incorrect');
-  });
-  scoreEl.textContent = score;
-  showFeedback(ok, q.answer, q);
-}
-
-function handleText(val, q){
-  if(answered) return;
-  answered = true;
-  const ok = norm(val) === norm(q.answer) || (q.alt && q.alt.some(a=>norm(val)===norm(a)));
-  if(ok) score++; else wrongIdx.add(idx);
-  document.getElementById('tin').disabled = true;
-  document.getElementById('checkbtn').disabled = true;
-  scoreEl.textContent = score;
-  showFeedback(ok, q.answer, q);
-}
-
-function next(){
-  clearAutoAdvance();
-  if(idx < questions.length-1){
-    const finishedPart = (idx+1) % partSize === 0;
-    idx++;
-    if(finishedPart){
-      showPartBreak();
-    } else {
+  <div id="root" class="app"></div>
+  <script>
+    // ================================================================
+    //  UTILITAIRES GLOBAUX
+    // ================================================================
+    function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
+
+    function pickOther(list, exclude, field, keyField = "de") {
+      const pool = list.filter(x => x[keyField] !== exclude[keyField]);
+      return pool[Math.floor(Math.random() * pool.length)][field];
+    }
+
+    function pickOthers(list, exclude, field, count, keyField = "de") {
+      const pool = shuffle(list.filter(x => x[keyField] !== exclude[keyField]));
+      const seen = new Set();
+      const result = [];
+      for (const item of pool) {
+        if (result.length >= count) break;
+        if (!seen.has(item[field])) { seen.add(item[field]);
+          result.push(item[field]); }
+      }
+      return result;
+    }
+
+    function normalize(str) { return (str || "").trim().toLowerCase(); }
+
+    function normalizeEszett(s) { return s.replace(/ß/g, "ss"); }
+
+    function containsWholeKeyword(text, keyword) {
+      const t = normalizeEszett(text);
+      const k = normalizeEszett(keyword.trim());
+      const escaped = k.replace(/[.*+?^${}()|[\]\\]/g, "\\$&").replace(/\s+/g, "\\s+");
+      const re = new RegExp(`(?:^|[^\\p{L}])${escaped}(?:$|[^\\p{L}])`, "iu");
+      return re.test(` ${t} `);
+    }
+
+    function capitalize(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
+
+    function isExerciseCorrect(ex, answer) {
+      if (ex.type === "mcq") return typeof answer === "number" && ex.options[answer]?.correct;
+      if (ex.type === "fill_blank") return ex.accepted.some(a => normalize(a) === normalize(answer || ""));
+      if (ex.type === "true_false") return answer === ex.correct;
+      return false;
+    }
+
+    const COLORS = {
+      paper: "#FAF6EE", card: "#FFFFFF", border: "#E4DECB", ink: "#1F2A24",
+      text: "#26241F", muted: "#6B6552", faint: "#9C9482", gold: "#C9A227",
+      green: "#2F5D50", greenBg: "#E1EEE9", terracotta: "#B4552F",
+      terracottaBg: "#FBE7DD", teal: "#2F5D62", tealBg: "#EEF4F3", cream: "#F5F1E8"
+    };
+
+    // ================================================================
+    //  DONNÉES DES LEÇONS (exactement extraites des fichiers JSX)
+    // ================================================================
+
+    // ----- LEÇON 4 -----
+    const FURNITURE_FR = {
+      Tisch: "la table", Stuhl: "la chaise", Schrank: "l'armoire", Teppich: "le tapis",
+      Spiegel: "le miroir", Fernseher: "le téléviseur", Vorhang: "le rideau", Bett: "le lit",
+      Sofa: "le canapé", Regal: "l'étagère", Fenster: "la fenêtre", Bild: "le tableau",
+      Kissen: "le coussin", Lampe: "la lampe", Kommode: "la commode", Küche: "la cuisine",
+      Tür: "la porte", Wand: "le mur", Decke: "la couverture / le plafond", Uhr: "l'horloge",
+    };
+    const FURNITURE_GENDER = [
+      { noun: "Tisch", article: "der", plural: "Tische" }, { noun: "Stuhl", article: "der", plural: "Stühle" },
+      { noun: "Schrank", article: "der", plural: "Schränke" }, { noun: "Teppich", article: "der", plural: "Teppiche" },
+      { noun: "Spiegel", article: "der", plural: "Spiegel" }, { noun: "Fernseher", article: "der", plural: "Fernseher" },
+      { noun: "Vorhang", article: "der", plural: "Vorhänge" }, { noun: "Bett", article: "das", plural: "Betten" },
+      { noun: "Sofa", article: "das", plural: "Sofas" }, { noun: "Regal", article: "das", plural: "Regale" },
+      { noun: "Fenster", article: "das", plural: "Fenster" }, { noun: "Bild", article: "das", plural: "Bilder" },
+      { noun: "Kissen", article: "das", plural: "Kissen" }, { noun: "Lampe", article: "die", plural: "Lampen" },
+      { noun: "Kommode", article: "die", plural: "Kommoden" }, { noun: "Küche", article: "die", plural: "Küchen" },
+      { noun: "Tür", article: "die", plural: "Türen" }, { noun: "Wand", article: "die", plural: "Wände" },
+      { noun: "Decke", article: "die", plural: "Decken" }, { noun: "Uhr", article: "die", plural: "Uhren" },
+    ];
+    const CONTEXT_ADJ = ["neu", "schön", "groß", "praktisch", "modern", "bequem"];
+    const ADJ_FR = { neu: "neuve/neuf", schön: "belle/beau", groß: "grande/grand", praktisch: "pratique", modern: "moderne",
+      bequem: "confortable" };
+    const SHOPPING_WORDS = [
+      { de: "kaufen", fr: "acheter" }, { de: "verkaufen", fr: "vendre" }, { de: "das Geschäft", fr: "le magasin" },
+      { de: "der Preis", fr: "le prix" }, { de: "das Geld", fr: "l'argent" }, { de: "bezahlen", fr: "payer" },
+      { de: "die Kasse", fr: "la caisse" }, { de: "der Kunde / die Kundin", fr: "le/la client(e)" },
+      { de: "das Angebot", fr: "l'offre / la promotion" }, { de: "die Rechnung", fr: "la facture" },
+    ];
+    const SHOPPING_ADJ = [
+      { de: "billig", fr: "bon marché" }, { de: "teuer", fr: "cher(ère)" }, { de: "neu", fr: "neuf(ve)" },
+      { de: "alt", fr: "vieux(vieille)" }, { de: "schön", fr: "beau(belle)" }, { de: "praktisch", fr: "pratique" },
+      { de: "modern", fr: "moderne" }, { de: "klein", fr: "petit(e)" }, { de: "groß", fr: "grand(e)" },
+      { de: "bequem", fr: "confortable" },
+    ];
+    const NUMBERS_TENS = [
+      { de: "einundzwanzig", fr: "21" }, { de: "dreiunddreißig", fr: "33" }, { de: "fünfundvierzig", fr: "45" },
+      { de: "sechsundfünfzig", fr: "56" }, { de: "siebenundsechzig", fr: "67" }, { de: "achtundsiebzig", fr: "78" },
+      { de: "neunundachtzig", fr: "89" }, { de: "einundneunzig", fr: "91" }, { de: "hundert", fr: "100" },
+      { de: "tausend", fr: "1000" },
+    ];
+    const DIALOGUES_4 = [{
+      text: "Verkäufer: Guten Tag! Suchen Sie etwas Bestimmtes?\nAnna: Ja, ich suche einen Tisch für die Küche.\nVerkäufer: Dieser Tisch hier ist sehr praktisch und nicht teuer.\nAnna: Wie viel kostet er?\nVerkäufer: Er kostet 150 Euro.",
+      qs: [
+        { type: "true_false", prompt: "Anna sucht einen Tisch.", correct: true, tr: "Anna cherche une table." },
+        { type: "true_false", prompt: "Der Tisch kostet 200 Euro.", correct: false, tr: "La table coûte 200 euros." },
+        { type: "mcq", prompt: "Wie viel kostet der Tisch?", tr: "Combien coûte la table ?", options: [{ text: "150 Euro",
+            correct: true }, { text: "100 Euro", correct: false }, { text: "250 Euro", correct: false }] },
+        { type: "true_false", prompt: "Der Verkäufer sagt, der Tisch ist teuer.", correct: false,
+          tr: "Le vendeur dit que la table est chère." },
+        { type: "mcq", prompt: "Wofür sucht Anna den Tisch?", tr: "Pour quoi Anna cherche-t-elle la table ?",
+          options: [{ text: "Für die Küche", correct: true }, { text: "Für das Schlafzimmer", correct: false },
+          { text: "Für das Büro", correct: false }] },
+        { type: "true_false", prompt: "Der Verkäufer findet den Tisch praktisch.", correct: true,
+          tr: "Le vendeur trouve la table pratique." },
+        { type: "mcq", prompt: "Was fragt Anna?", tr: "Que demande Anna ?", options: [{ text: "Wie viel kostet er?",
+            correct: true }, { text: "Wo ist die Kasse?", correct: false }, { text: "Ist er neu?",
+            correct: false }] },
+        { type: "true_false", prompt: "Anna kauft nichts.", correct: false, tr: "Anna n'achète rien." },
+        { type: "mcq", prompt: "Wer fragt zuerst « Suchen Sie etwas Bestimmtes? »?", tr: "Qui demande en premier « Cherchez-vous quelque chose de précis ? » ?",
+          options: [{ text: "Der Verkäufer", correct: true }, { text: "Anna", correct: false }, { text: "Niemand",
+              correct: false }] },
+        { type: "true_false", prompt: "Der Dialog spielt in einem Möbelgeschäft.", correct: true,
+          tr: "Le dialogue se déroule dans un magasin de meubles." },
+      ],
+    }, {
+      text: "Lukas: Ich brauche eine Lampe für mein Zimmer.\nVerkäuferin: Diese Lampe hier ist modern und nicht teuer. Sie kostet nur 25 Euro.\nLukas: Perfekt! Und haben Sie auch Teppiche?\nVerkäuferin: Ja, die Teppiche sind dort links.",
+      qs: [
+        { type: "true_false", prompt: "Lukas braucht eine Lampe.", correct: true, tr: "Lukas a besoin d'une lampe." },
+        { type: "mcq", prompt: "Wie viel kostet die Lampe?", tr: "Combien coûte la lampe ?", options: [{ text: "25 Euro",
+            correct: true }, { text: "50 Euro", correct: false }, { text: "15 Euro", correct: false }] },
+        { type: "true_false", prompt: "Die Lampe ist teuer.", correct: false, tr: "La lampe est chère." },
+        { type: "mcq", prompt: "Was fragt Lukas noch?", tr: "Que demande encore Lukas ?", options: [
+            { text: "Ob es Teppiche gibt", correct: true }, { text: "Ob es Stühle gibt", correct: false },
+            { text: "Wo die Kasse ist", correct: false }] },
+        { type: "true_false", prompt: "Die Teppiche sind rechts.", correct: false, tr: "Les tapis sont à droite." },
+        { type: "mcq", prompt: "Wie beschreibt die Verkäuferin die Lampe?", tr: "Comment la vendeuse décrit-elle la lampe ?",
+          options: [{ text: "Modern", correct: true }, { text: "Alt", correct: false }, { text: "Groß",
+            correct: false }] },
+        { type: "true_false", prompt: "Lukas braucht die Lampe für die Küche.", correct: false,
+          tr: "Lukas a besoin de la lampe pour la cuisine." },
+        { type: "mcq", prompt: "Wo sind die Teppiche laut Verkäuferin?", tr: "Où sont les tapis selon la vendeuse ?",
+          options: [{ text: "Links", correct: true }, { text: "Rechts", correct: false }, { text: "Oben",
+              correct: false }] },
+        { type: "true_false", prompt: "Lukas sucht eine Lampe für sein Zimmer.", correct: true,
+          tr: "Lukas cherche une lampe pour sa chambre." },
+        { type: "mcq", prompt: "Was sagt Lukas, nachdem er den Preis hört?", tr: "Que dit Lukas après avoir entendu le prix ?",
+          options: [{ text: "Perfekt!", correct: true }, { text: "Zu teuer!", correct: false }, { text: "Nein danke.",
+              correct: false }] },
+      ],
+    }, {
+      text: "Sofia: Wir brauchen ein neues Sofa und einen Schrank.\nJonas: Das Sofa hier ist sehr bequem, aber teuer: 600 Euro.\nSofia: Und der Schrank?\nJonas: Der Schrank kostet 300 Euro. Zusammen sind das 900 Euro.",
+      qs: [
+        { type: "true_false", prompt: "Sofia und Jonas brauchen ein Sofa und einen Schrank.", correct: true,
+          tr: "Sofia et Jonas ont besoin d'un canapé et d'une armoire." },
+        { type: "mcq", prompt: "Wie viel kostet das Sofa?", tr: "Combien coûte le canapé ?", options: [{ text: "600 Euro",
+            correct: true }, { text: "300 Euro", correct: false }, { text: "900 Euro", correct: false }] },
+        { type: "true_false", prompt: "Der Schrank kostet 300 Euro.", correct: true, tr: "L'armoire coûte 300 euros." },
+        { type: "mcq", prompt: "Wie viel kosten Sofa und Schrank zusammen?", tr: "Combien coûtent le canapé et l'armoire ensemble ?",
+          options: [{ text: "900 Euro", correct: true }, { text: "600 Euro", correct: false }, { text: "1000 Euro",
+              correct: false }] },
+        { type: "true_false", prompt: "Das Sofa ist billig.", correct: false, tr: "Le canapé est bon marché." },
+        { type: "mcq", prompt: "Wie ist das Sofa laut Jonas?", tr: "Comment est le canapé selon Jonas ?", options: [
+            { text: "Bequem, aber teuer", correct: true }, { text: "Billig und klein", correct: false },
+            { text: "Alt und hässlich", correct: false }] },
+        { type: "true_false", prompt: "Der Schrank ist teurer als das Sofa.", correct: false,
+          tr: "L'armoire est plus chère que le canapé." },
+        { type: "mcq", prompt: "Was fragt Sofia nach dem Sofa?", tr: "Que demande Sofia après le canapé ?", options: [
+            { text: "Und der Schrank?", correct: true }, { text: "Und der Tisch?", correct: false },
+            { text: "Und die Lampe?", correct: false }] },
+        { type: "true_false", prompt: "Sofia und Jonas kaufen nur ein Sofa.", correct: false,
+          tr: "Sofia et Jonas n'achètent qu'un canapé." },
+        { type: "mcq", prompt: "Welches Möbelstück ist am teuersten?", tr: "Quel meuble est le plus cher ?", options: [
+            { text: "Das Sofa", correct: true }, { text: "Der Schrank", correct: false }, { text: "Beide gleich",
+              correct: false }] },
+      ],
+    }, {
+      text: "Kundin: Entschuldigung, wo finde ich Spiegel?\nVerkäufer: Die Spiegel sind neben den Bildern, dort hinten.\nKundin: Danke. Und was kostet dieser große Spiegel?\nVerkäufer: Dieser hier kostet 45 Euro.",
+      qs: [
+        { type: "true_false", prompt: "Die Kundin sucht Spiegel.", correct: true, tr: "La cliente cherche des miroirs." },
+        { type: "mcq", prompt: "Wo sind die Spiegel?", tr: "Où sont les miroirs ?", options: [{ text: "Neben den Bildern",
+            correct: true }, { text: "Neben den Lampen", correct: false }, { text: "An der Kasse",
+            correct: false }] },
+        { type: "true_false", prompt: "Der große Spiegel kostet 45 Euro.", correct: true,
+          tr: "Le grand miroir coûte 45 euros." },
+        { type: "mcq", prompt: "Was fragt die Kundin zuerst?", tr: "Que demande la cliente en premier ?", options: [
+            { text: "Wo finde ich Spiegel?", correct: true }, { text: "Was kostet das Sofa?", correct: false },
+            { text: "Haben Sie Teppiche?", correct: false }] },
+        { type: "true_false", prompt: "Die Spiegel sind vorne im Geschäft.", correct: false,
+          tr: "Les miroirs sont à l'avant du magasin." },
+        { type: "mcq", prompt: "Wie reagiert die Kundin auf die Antwort?", tr: "Comment réagit la cliente à la réponse ?",
+          options: [{ text: "Sie sagt « Danke »", correct: true }, { text: "Sie geht weg", correct: false },
+          { text: "Sie fragt nochmal", correct: false }] },
+        { type: "true_false", prompt: "Der Verkäufer weiß nicht, wo die Spiegel sind.", correct: false,
+          tr: "Le vendeur ne sait pas où sont les miroirs." },
+        { type: "mcq", prompt: "Was möchte die Kundin nach dem Standort wissen?", tr: "Que veut savoir la cliente après l'emplacement ?",
+          options: [{ text: "Den Preis", correct: true }, { text: "Die Farbe", correct: false }, { text: "Das Material",
+          correct: false }] },
+        { type: "true_false", prompt: "Der Spiegel ist klein.", correct: false, tr: "Le miroir est petit." },
+        { type: "mcq", prompt: "Wie viel kostet der Spiegel?", tr: "Combien coûte le miroir ?", options: [{ text: "45 Euro",
+            correct: true }, { text: "54 Euro", correct: false }, { text: "40 Euro", correct: false }] },
+      ],
+    }, {
+      text: "Paul: Ich möchte ein Bett und ein Regal kaufen. Haben Sie ein Angebot?\nVerkäuferin: Ja! Heute kostet das Bett nur 200 Euro statt 250 Euro.\nPaul: Und das Regal?\nVerkäuferin: Das Regal kostet normal 80 Euro, heute 60 Euro.",
+      qs: [
+        { type: "true_false", prompt: "Paul möchte ein Bett und ein Regal kaufen.", correct: true,
+          tr: "Paul veut acheter un lit et une étagère." },
+        { type: "mcq", prompt: "Wie viel kostet das Bett heute?", tr: "Combien coûte le lit aujourd'hui ?", options: [
+            { text: "200 Euro", correct: true }, { text: "250 Euro", correct: false }, { text: "150 Euro",
+              correct: false }] },
+        { type: "true_false", prompt: "Das Regal kostet normalerweise 80 Euro.", correct: true,
+          tr: "L'étagère coûte normalement 80 euros." },
+        { type: "mcq", prompt: "Wie viel kostet das Regal heute?", tr: "Combien coûte l'étagère aujourd'hui ?", options: [
+            { text: "60 Euro", correct: true }, { text: "80 Euro", correct: false }, { text: "40 Euro",
+              correct: false }] },
+        { type: "true_false", prompt: "Es gibt heute kein Angebot.", correct: false,
+          tr: "Il n'y a pas de promotion aujourd'hui." },
+        { type: "mcq", prompt: "Was fragt Paul zuerst?", tr: "Que demande Paul en premier ?", options: [
+            { text: "Ob es ein Angebot gibt", correct: true }, { text: "Wo die Kasse ist", correct: false },
+            { text: "Ob das Bett bequem ist", correct: false }] },
+        { type: "true_false", prompt: "Das Bett ist heute teurer als normal.", correct: false,
+          tr: "Le lit est aujourd'hui plus cher que d'habitude." },
+        { type: "mcq", prompt: "Was kauft Paul laut Dialog?", tr: "Qu'achète Paul selon le dialogue ?", options: [
+            { text: "Ein Bett und ein Regal", correct: true }, { text: "Nur ein Bett", correct: false },
+            { text: "Ein Sofa", correct: false }] },
+        { type: "true_false", prompt: "Der Preis des Regals sinkt um 20 Euro.", correct: true,
+          tr: "Le prix de l'étagère baisse de 20 euros." },
+        { type: "mcq", prompt: "Wie viel spart Paul beim Bett?", tr: "Combien Paul économise-t-il sur le lit ?",
+          options: [{ text: "50 Euro", correct: true }, { text: "20 Euro", correct: false }, { text: "100 Euro",
+              correct: false }] },
+      ],
+    }];
+    const WRITING_TASKS_4 = [
+      { prompt: "Dis quel meuble tu cherches, avec le bon article (der/das/die).", keywords: ["Ich suche"], minWords: 3 },
+      { prompt: "Demande le prix d'un meuble (« Was kostet... » ou « Wie viel kostet... »).", keywords: ["kostet"],
+        minWords: 3 },
+      { prompt: "Décris un meuble avec un adjectif (billig, teuer, modern...).", keywords: ["ist"], minWords: 3 },
+      { prompt: "Dis que tu as besoin d'un meuble pour une pièce précise (Küche, Zimmer...).", keywords: ["brauche"],
+        minWords: 4 },
+      { prompt: "Écris une phrase avec un nom au pluriel et son article « die ».", keywords: ["die"], minWords: 3 },
+      { prompt: "Dis si un meuble te semble cher ou bon marché.", keywords: ["teuer", "billig"], minWords: 3 },
+      { prompt: "Demande à un vendeur où se trouve un meuble.", keywords: ["Wo finde ich", "Wo sind"], minWords: 3 },
+      { prompt: "Décris ta chambre en citant 2 meubles avec leur article.", keywords: ["der", "das"], minWords: 5 },
+      { prompt: "Dis combien coûtent deux meubles ensemble (« zusammen »).", keywords: ["zusammen", "Euro"],
+      minWords: 5 },
+      { prompt: "Écris 3 phrases : ce que tu cherches, où tu le cherches, et son prix.", keywords: ["Ich suche",
+          "kostet"
+        ], minWords: 15 },
+    ];
+
+    // ----- LEÇON 5 -----
+    const OBJECTS_GENDER = [
+      { noun: "Stift", article: "der", frDef: "le stylo", frIndef: "un stylo", frBare: "stylo" },
+      { noun: "Rucksack", article: "der", frDef: "le sac à dos", frIndef: "un sac à dos", frBare: "sac à dos" },
+      { noun: "Regenschirm", article: "der", frDef: "le parapluie", frIndef: "un parapluie", frBare: "parapluie" },
+      { noun: "Schlüssel", article: "der", frDef: "la clé", frIndef: "une clé", frBare: "clé" },
+      { noun: "Computer", article: "der", frDef: "l'ordinateur", frIndef: "un ordinateur", frBare: "ordinateur" },
+      { noun: "Löffel", article: "der", frDef: "la cuillère", frIndef: "une cuillère", frBare: "cuillère" },
+      { noun: "Teller", article: "der", frDef: "l'assiette", frIndef: "une assiette", frBare: "assiette" },
+      { noun: "Handy", article: "das", frDef: "le téléphone portable", frIndef: "un téléphone portable",
+        frBare: "téléphone portable" },
+      { noun: "Buch", article: "das", frDef: "le livre", frIndef: "un livre", frBare: "livre" },
+      { noun: "Heft", article: "das", frDef: "le cahier", frIndef: "un cahier", frBare: "cahier" },
+      { noun: "Messer", article: "das", frDef: "le couteau", frIndef: "un couteau", frBare: "couteau" },
+      { noun: "Portemonnaie", article: "das", frDef: "le portefeuille", frIndef: "un portefeuille", frBare: "portefeuille" },
+      { noun: "Foto", article: "das", frDef: "la photo", frIndef: "une photo", frBare: "photo" },
+      { noun: "Tasche", article: "die", frDef: "le sac", frIndef: "un sac", frBare: "sac" },
+      { noun: "Kamera", article: "die", frDef: "l'appareil photo", frIndef: "un appareil photo", frBare: "appareil photo" },
+      { noun: "Uhr", article: "die", frDef: "la montre", frIndef: "une montre", frBare: "montre" },
+      { noun: "Brille", article: "die", frDef: "les lunettes", frIndef: "des lunettes", frBare: "lunettes" },
+      { noun: "Zeitung", article: "die", frDef: "le journal", frIndef: "un journal", frBare: "journal" },
+      { noun: "Flasche", article: "die", frDef: "la bouteille", frIndef: "une bouteille", frBare: "bouteille" },
+      { noun: "Tasse", article: "die", frDef: "la tasse", frIndef: "une tasse", frBare: "tasse" },
+    ];
+    const VERBS_OBJECTS = [
+      { de: "haben", fr: "avoir" }, { de: "brauchen", fr: "avoir besoin de" }, { de: "suchen", fr: "chercher" },
+      { de: "finden", fr: "trouver" }, { de: "verlieren", fr: "perdre" }, { de: "benutzen", fr: "utiliser" },
+      { de: "leihen", fr: "prêter / emprunter" }, { de: "zeigen", fr: "montrer" }, { de: "mitnehmen", fr: "emporter" },
+      { de: "schenken", fr: "offrir (un cadeau)" },
+    ];
+    const OBJECT_ADJ = [
+      { de: "kaputt", fr: "cassé(e) / en panne" }, { de: "wichtig", fr: "important(e)" }, { de: "nützlich", fr: "utile" },
+      { de: "leicht", fr: "léger(ère)" }, { de: "schwer", fr: "lourd(e)" }, { de: "voll", fr: "plein(e)" },
+      { de: "leer", fr: "vide" }, { de: "bunt", fr: "coloré(e)" }, { de: "einfach", fr: "simple" },
+      { de: "günstig", fr: "avantageux(se) / bon marché" },
+    ];
+    const OBJECT_DESCRIPTION = [
+      { de: "rot", fr: "rouge" }, { de: "blau", fr: "bleu(e)" }, { de: "schwarz", fr: "noir(e)" },
+      { de: "braun", fr: "marron" }, { de: "weiß", fr: "blanc(he)" }, { de: "rund", fr: "rond(e)" },
+      { de: "eckig", fr: "anguleux(se) / carré(e)" }, { de: "aus Kunststoff", fr: "en plastique" },
+      { de: "Wie heißt das auf Deutsch?", fr: "Comment dit-on ça en allemand ?" },
+      { de: "Noch einmal, bitte.", fr: "Encore une fois, s'il vous plaît." },
+    ];
+    const DIALOGUES_5 = [{
+      text: "Lisa: Ich finde meinen Schlüssel nicht! Hast du ihn gesehen?\nTom: Nein, ich habe keinen Schlüssel gesehen. Ist er nicht in deiner Tasche?\nLisa: Nein, die Tasche ist nicht leer, aber da sind nur ein Buch und ein Heft.\nTom: Vielleicht ist er noch im Auto.",
+      qs: [
+        { type: "true_false", prompt: "Lisa findet ihren Schlüssel nicht.", correct: true,
+        tr: "Lisa ne trouve pas sa clé." },
+        { type: "mcq", prompt: "Was hat Tom gesehen?", tr: "Qu'est-ce que Tom a vu ?", options: [{ text: "Keinen Schlüssel",
+            correct: true }, { text: "Einen Schlüssel", correct: false }, { text: "Eine Tasche", correct: false }] },
+        { type: "true_false", prompt: "Der Schlüssel ist sicher in der Tasche.", correct: false,
+          tr: "La clé est sûrement dans le sac." },
+        { type: "mcq", prompt: "Was ist in der Tasche?", tr: "Qu'y a-t-il dans le sac ?", options: [{ text: "Ein Buch und ein Heft",
+            correct: true }, { text: "Ein Handy", correct: false }, { text: "Eine Kamera", correct: false }] },
+        { type: "true_false", prompt: "Die Tasche ist komplett leer.", correct: false, tr: "Le sac est complètement vide." },
+        { type: "mcq", prompt: "Wo ist der Schlüssel vielleicht?", tr: "Où est la clé peut-être ?", options: [
+            { text: "Im Auto", correct: true }, { text: "In der Küche", correct: false }, { text: "Im Büro",
+              correct: false }] },
+        { type: "true_false", prompt: "Tom hat den Schlüssel.", correct: false, tr: "Tom a la clé." },
+        { type: "mcq", prompt: "Wer fragt zuerst « Hast du ihn gesehen? »?", tr: "Qui demande en premier « L'as-tu vue ? » ?",
+          options: [{ text: "Lisa", correct: true }, { text: "Tom", correct: false }, { text: "Niemand",
+              correct: false }] },
+        { type: "true_false", prompt: "Lisa hat kein Buch in der Tasche.", correct: false,
+          tr: "Lisa n'a pas de livre dans le sac." },
+        { type: "mcq", prompt: "Was sucht Lisa?", tr: "Que cherche Lisa ?", options: [{ text: "Ihren Schlüssel",
+            correct: true }, { text: "Ihr Handy", correct: false }, { text: "Ihre Brille", correct: false }] },
+      ],
+    }, {
+      text: "Verkäuferin: Guten Tag! Suchen Sie einen Rucksack?\nBen: Ja, ich brauche einen Rucksack für die Schule. Haben Sie einen in Blau?\nVerkäuferin: Ja, hier ist einer. Er kostet 35 Euro.\nBen: Perfekt, ich nehme ihn. Haben Sie auch Hefte?\nVerkäuferin: Nein, tut mir leid, wir haben keine Hefte.",
+      qs: [
+        { type: "true_false", prompt: "Ben sucht einen Rucksack.", correct: true, tr: "Ben cherche un sac à dos." },
+        { type: "mcq", prompt: "Wofür braucht Ben den Rucksack?", tr: "Pour quoi Ben a-t-il besoin du sac à dos ?",
+          options: [{ text: "Für die Schule", correct: true }, { text: "Für die Arbeit", correct: false },
+          { text: "Für den Urlaub", correct: false }] },
+        { type: "true_false", prompt: "Der Rucksack kostet 35 Euro.", correct: true, tr: "Le sac à dos coûte 35 euros." },
+        { type: "mcq", prompt: "Welche Farbe möchte Ben?", tr: "Quelle couleur Ben veut-il ?", options: [{ text: "Blau",
+            correct: true }, { text: "Rot", correct: false }, { text: "Schwarz", correct: false }] },
+        { type: "true_false", prompt: "Die Verkäuferin hat keinen blauen Rucksack.", correct: false,
+          tr: "La vendeuse n'a pas de sac à dos bleu." },
+        { type: "mcq", prompt: "Was sagt Ben, nachdem er den Rucksack sieht?", tr: "Que dit Ben après avoir vu le sac à dos ?",
+          options: [{ text: "Ich nehme ihn.", correct: true }, { text: "Zu teuer!", correct: false },
+          { text: "Nein danke.", correct: false }] },
+        { type: "true_false", prompt: "Der Laden hat Hefte.", correct: false, tr: "Le magasin a des cahiers." },
+        { type: "mcq", prompt: "Was fragt Ben zusätzlich?", tr: "Que demande Ben en plus ?", options: [
+            { text: "Ob es Hefte gibt", correct: true }, { text: "Ob es Stifte gibt", correct: false },
+            { text: "Ob es Bücher gibt", correct: false }] },
+        { type: "true_false", prompt: "Ben kauft nichts.", correct: false, tr: "Ben n'achète rien." },
+        { type: "mcq", prompt: "Wie antwortet die Verkäuferin auf die Frage nach Heften?",
+          tr: "Comment la vendeuse répond-elle à la question sur les cahiers ?", options: [{ text: "Nein, tut mir leid.",
+            correct: true }, { text: "Ja, natürlich.", correct: false }, { text: "Vielleicht später.",
+              correct: false }] },
+      ],
+    }, {
+      text: "Mia: Was schenkst du Paul zum Geburtstag?\nNoah: Ich habe keine Idee. Vielleicht ein Buch?\nMia: Er hat schon viele Bücher. Wie wäre es mit einer Uhr?\nNoah: Gute Idee! Eine Uhr ist praktisch und nicht zu teuer.",
+      qs: [
+        { type: "true_false", prompt: "Mia fragt Noah nach einem Geschenk für Paul.", correct: true,
+          tr: "Mia demande à Noah un cadeau pour Paul." },
+        { type: "mcq", prompt: "Was schlägt Noah zuerst vor?", tr: "Que propose Noah en premier ?", options: [
+            { text: "Ein Buch", correct: true }, { text: "Eine Uhr", correct: false }, { text: "Ein Handy",
+              correct: false }] },
+        { type: "true_false", prompt: "Paul hat schon viele Bücher.", correct: true, tr: "Paul a déjà beaucoup de livres." },
+        { type: "mcq", prompt: "Was schlägt Mia vor?", tr: "Que propose Mia ?", options: [{ text: "Eine Uhr",
+            correct: true }, { text: "Einen Rucksack", correct: false }, { text: "Eine Brille", correct: false }] },
+        { type: "true_false", prompt: "Noah findet die Idee mit der Uhr schlecht.", correct: false,
+          tr: "Noah trouve l'idée de la montre mauvaise." },
+        { type: "mcq", prompt: "Wie beschreibt Noah die Uhr?", tr: "Comment Noah décrit-il la montre ?", options: [
+            { text: "Praktisch und nicht zu teuer", correct: true }, { text: "Teuer und schön", correct: false },
+            { text: "Alt und klein", correct: false }] },
+        { type: "true_false", prompt: "Das Geschenk ist für Mia.", correct: false, tr: "Le cadeau est pour Mia." },
+        { type: "mcq", prompt: "Wer hat zuerst keine Idee?", tr: "Qui n'a d'abord aucune idée ?", options: [
+            { text: "Noah", correct: true }, { text: "Mia", correct: false }, { text: "Paul", correct: false }] },
+        { type: "true_false", prompt: "Die Uhr ist laut Noah zu teuer.", correct: false,
+          tr: "La montre est, selon Noah, trop chère." },
+        { type: "mcq", prompt: "Was ist das Thema des Dialogs?", tr: "Quel est le thème du dialogue ?", options: [
+            { text: "Ein Geburtstagsgeschenk", correct: true }, { text: "Ein Einkauf im Supermarkt",
+              correct: false },
+            { text: "Ein verlorener Schlüssel", correct: false }] },
+      ],
+    }, {
+      text: "Frau Klein: Entschuldigung, ich suche meine Brille. Ich habe sie hier verloren.\nHerr Weiss: Wie bitte? Eine Brille?\nFrau Klein: Ja, genau. Meine Brille ist rund, schwarz und aus Kunststoff.\nHerr Weiss: Einen Moment... Nein, hier ist keine Brille. Aber wir haben eine Kamera gefunden.\nFrau Klein: Das ist nicht meine Kamera. Wie gesagt, meine Brille ist rund und schwarz.\nHerr Weiss: Tut mir leid, wir haben keine runde schwarze Brille.\nFrau Klein: Kein Problem, ich suche noch weiter. Danke!\nHerr Weiss: Bitte schön!",
+      qs: [
+        { type: "true_false", prompt: "Frau Klein sucht ihre Brille.", correct: true,
+          tr: "Madame Klein cherche ses lunettes." },
+        { type: "mcq", prompt: "Wie reagiert Herr Weiss zuerst, als er « Brille » hört?",
+          tr: "Comment réagit Monsieur Weiss quand il entend « lunettes » ?", options: [{ text: "Er fragt: Wie bitte?",
+            correct: true }, { text: "Er sagt: Kein Problem.", correct: false }, { text: "Er zeigt die Brille.",
+              correct: false }] },
+        { type: "true_false", prompt: "Die Brille von Frau Klein ist eckig.", correct: false,
+          tr: "Les lunettes de Madame Klein sont carrées." },
+        { type: "mcq", prompt: "Woraus ist die Brille von Frau Klein?", tr: "En quoi sont les lunettes de Madame Klein ?",
+          options: [{ text: "Aus Kunststoff", correct: true }, { text: "Aus Metall", correct: false },
+          { text: "Aus Holz", correct: false }] },
+        { type: "true_false", prompt: "Herr Weiss hat eine Kamera gefunden.", correct: true,
+          tr: "Monsieur Weiss a trouvé un appareil photo." },
+        { type: "mcq", prompt: "Welche Farbe hat die Brille?", tr: "Quelle couleur ont les lunettes ?", options: [
+            { text: "Schwarz", correct: true }, { text: "Blau", correct: false }, { text: "Braun", correct: false }] },
+        { type: "true_false", prompt: "Herr Weiss findet die Brille von Frau Klein.", correct: false,
+          tr: "Monsieur Weiss trouve les lunettes de Madame Klein." },
+        { type: "mcq", prompt: "Was sagt Frau Klein, nachdem Herr Weiss ihr nicht helfen kann?",
+          tr: "Que dit Madame Klein quand Monsieur Weiss ne peut pas l'aider ?", options: [
+            { text: "Kein Problem, ich suche noch weiter.", correct: true },
+            { text: "Das ist nicht möglich!", correct: false }, { text: "Ich brauche eine neue Brille.",
+              correct: false }] },
+        { type: "true_false", prompt: "Frau Klein bedankt sich am Ende bei Herrn Weiss.", correct: true,
+          tr: "Madame Klein remercie Monsieur Weiss à la fin." },
+        { type: "mcq", prompt: "Wie antwortet Herr Weiss auf « Danke »?", tr: "Comment Monsieur Weiss répond-il à « Danke » ?",
+          options: [{ text: "Bitte schön!", correct: true }, { text: "Wie bitte?", correct: false },
+          { text: "Kein Problem.", correct: false }] },
+      ],
+    }, {
+      text: "Papa: Hast du alles für die Reise? Ein Buch, eine Flasche Wasser?\nLena: Ja, ich habe ein Buch und eine Flasche. Aber ich habe keinen Regenschirm.\nPapa: Kein Problem, ich habe einen Regenschirm für uns beide.\nLena: Super! Dann haben wir alles.",
+      qs: [
+        { type: "true_false", prompt: "Papa fragt, ob Lena alles für die Reise hat.", correct: true,
+          tr: "Papa demande si Lena a tout pour le voyage." },
+        { type: "mcq", prompt: "Was hat Lena in ihrer Tasche?", tr: "Qu'est-ce que Lena a dans son sac ?", options: [
+            { text: "Ein Buch und eine Flasche", correct: true }, { text: "Ein Handy und ein Buch",
+              correct: false },
+            { text: "Eine Kamera und ein Heft", correct: false }] },
+        { type: "true_false", prompt: "Lena hat einen Regenschirm.", correct: false, tr: "Lena a un parapluie." },
+        { type: "mcq", prompt: "Wer hat einen Regenschirm?", tr: "Qui a un parapluie ?", options: [{ text: "Papa",
+            correct: true }, { text: "Lena", correct: false }, { text: "Niemand", correct: false }] },
+        { type: "true_false", prompt: "Papa hat keinen Regenschirm.", correct: false, tr: "Papa n'a pas de parapluie." },
+        { type: "mcq", prompt: "Was sagt Lena am Ende?", tr: "Que dit Lena à la fin ?", options: [
+            { text: "Dann haben wir alles.", correct: true }, { text: "Das ist zu viel.", correct: false },
+            { text: "Ich brauche mehr Zeit.", correct: false }] },
+        { type: "true_false", prompt: "Lena hat kein Buch dabei.", correct: false, tr: "Lena n'a pas de livre avec elle." },
+        { type: "mcq", prompt: "Für wen ist der Regenschirm gedacht?", tr: "Pour qui le parapluie est-il prévu ?",
+          options: [{ text: "Für beide", correct: true }, { text: "Nur für Papa", correct: false },
+          { text: "Nur für Lena", correct: false }] },
+        { type: "true_false", prompt: "Der fehlende Regenschirm ist am Ende kein Problem.", correct: true,
+          tr: "Le parapluie manquant n'est finalement pas un problème." },
+        { type: "mcq", prompt: "Was ist das Thema des Dialogs?", tr: "Quel est le thème du dialogue ?", options: [
+            { text: "Die Vorbereitung auf eine Reise", correct: true }, { text: "Ein Einkauf im Geschäft",
+              correct: false },
+            { text: "Ein Geburtstagsgeschenk", correct: false }] },
+      ],
+    }];
+    const WRITING_TASKS_5 = [
+      { prompt: "Dis que tu as un objet précis, avec « ein » ou « eine ».", keywords: ["Ich habe"], minWords: 3 },
+      { prompt: "Dis que tu n'as PAS un objet, avec « kein » ou « keine ».", keywords: ["kein"], minWords: 3 },
+      { prompt: "Demande si quelqu'un a vu un objet que tu cherches (« Hast du ... gesehen? »).", keywords: ["gesehen"],
+        minWords: 3 },
+      { prompt: "Dis que tu cherches un objet précis.", keywords: ["Ich suche"], minWords: 3 },
+      { prompt: "Dis que tu as besoin d'un objet, avec « ein » ou « eine ».", keywords: ["brauche"], minWords: 3 },
+      { prompt: "Décris un objet avec sa forme, sa couleur et sa matière (ex : rund, schwarz, aus Kunststoff).",
+        keywords: ["ist"], minWords: 5 },
+      { prompt: "Dis que tu n'as aucune idée pour un cadeau (« keine Idee »).", keywords: ["keine Idee"], minWords: 2 },
+      { prompt: "Demande comment un mot se dit en allemand, ou demande de répéter.", keywords: ["Wie heißt",
+          "Noch einmal", "Wie bitte"
+        ], minWords: 3 },
+      { prompt: "Dis que tu as trouvé ou perdu un objet.", keywords: ["gefunden", "verloren"], minWords: 3 },
+      { prompt: "Écris 3 phrases : un objet que tu as, un objet que tu n'as pas, et un objet que tu cherches.",
+        keywords: ["Ich habe", "kein", "Ich suche"], minWords: 15 },
+    ];
+
+    // ----- LEÇON 6 -----
+    const NOUNS_L6 = [
+      { noun: "Apfel", gender: "der", plural: "Äpfel", frDef: "la pomme", frIndef: "une pomme", frBare: "pomme",
+        category: "food" },
+      { noun: "Tisch", gender: "der", plural: "Tische", frDef: "la table", frIndef: "une table", frBare: "table",
+        category: "other" },
+      { noun: "Brot", gender: "das", plural: "Brote", frDef: "le pain", frIndef: "un pain", frBare: "pain",
+        category: "food" },
+      { noun: "Ei", gender: "das", plural: "Eier", frDef: "l'œuf", frIndef: "un œuf", frBare: "œuf", category: "food" },
+      { noun: "Hemd", gender: "das", plural: "Hemden", frDef: "la chemise", frIndef: "une chemise", frBare: "chemise",
+        category: "clothing" },
+      { noun: "Kleid", gender: "das", plural: "Kleider", frDef: "la robe", frIndef: "une robe", frBare: "robe",
+        category: "clothing" },
+      { noun: "Hose", gender: "die", plural: "Hosen", frDef: "le pantalon", frIndef: "un pantalon", frBare: "pantalon",
+        category: "clothing" },
+      { noun: "Jacke", gender: "die", plural: "Jacken", frDef: "la veste", frIndef: "une veste", frBare: "veste",
+        category: "clothing" },
+      { noun: "Wurst", gender: "die", plural: "Würste", frDef: "la saucisse", frIndef: "une saucisse", frBare: "saucisse",
+        category: "food" },
+      { noun: "Kartoffel", gender: "die", plural: "Kartoffeln", frDef: "la pomme de terre", frIndef: "une pomme de terre",
+        frBare: "pomme de terre", category: "food" },
+      { noun: "Schuh", gender: "der", plural: "Schuhe", frDef: "la chaussure", frIndef: "une chaussure",
+        frBare: "chaussure", category: "clothing" },
+      { noun: "Rock", gender: "der", plural: "Röcke", frDef: "la jupe", frIndef: "une jupe", frBare: "jupe",
+        category: "clothing" },
+      { noun: "Restaurant", gender: "das", plural: "Restaurants", frDef: "le restaurant", frIndef: "un restaurant",
+        frBare: "restaurant", category: "other" },
+      { noun: "Kellner", gender: "der", plural: "Kellner", frDef: "le serveur", frIndef: "un serveur", frBare: "serveur",
+        category: "other" },
+      { noun: "Salat", gender: "der", plural: "Salate", frDef: "la salade", frIndef: "une salade", frBare: "salade",
+        category: "food" },
+      { noun: "Suppe", gender: "die", plural: "Suppen", frDef: "la soupe", frIndef: "une soupe", frBare: "soupe",
+        category: "food" },
+      { noun: "Fisch", gender: "der", plural: "Fische", frDef: "le poisson", frIndef: "un poisson", frBare: "poisson",
+        category: "food" },
+      { noun: "Getränk", gender: "das", plural: "Getränke", frDef: "la boisson", frIndef: "une boisson", frBare: "boisson",
+        category: "food" },
+      { noun: "Mantel", gender: "der", plural: "Mäntel", frDef: "le manteau", frIndef: "un manteau", frBare: "manteau",
+        category: "clothing" },
+      { noun: "Pullover", gender: "der", plural: "Pullover", frDef: "le pull", frIndef: "un pull", frBare: "pull",
+        category: "clothing" },
+    ];
+    const VERBS_BY_CATEGORY = { food: ["esse", "bestelle", "möchte"], clothing: ["kaufe", "trage", "probiere"],
+      other: ["sehe", "habe", "nehme"] };
+    const VERB_FR = { esse: "mange", bestelle: "commande", möchte: "voudrais", kaufe: "achète", trage: "porte",
+      probiere: "essaie", sehe: "vois", habe: "ai", nehme: "prends" };
+    const FOOD_VOCAB = [
+      { de: "der Apfel", fr: "la pomme" }, { de: "das Brot", fr: "le pain" }, { de: "das Ei", fr: "l'œuf" },
+      { de: "die Wurst", fr: "la saucisse" }, { de: "die Kartoffel", fr: "la pomme de terre" }, { de: "der Salat",
+        fr: "la salade" },
+      { de: "die Suppe", fr: "la soupe" }, { de: "der Fisch", fr: "le poisson" }, { de: "das Getränk",
+        fr: "la boisson" },
+      { de: "der Käse", fr: "le fromage" }, { de: "der Reis", fr: "le riz" }, { de: "das Fleisch", fr: "la viande" },
+      { de: "das Gemüse", fr: "les légumes" }, { de: "das Obst", fr: "les fruits" }, { de: "der Kuchen",
+        fr: "le gâteau" },
+    ];
+    const CLOTHING_VOCAB = [
+      { de: "das Hemd", fr: "la chemise" }, { de: "das Kleid", fr: "la robe" }, { de: "die Hose", fr: "le pantalon" },
+      { de: "die Jacke", fr: "la veste" }, { de: "der Schuh", fr: "la chaussure" }, { de: "der Rock", fr: "la jupe" },
+      { de: "der Mantel", fr: "le manteau" }, { de: "der Pullover", fr: "le pull" }, { de: "das T-Shirt",
+        fr: "le t-shirt" },
+      { de: "die Mütze", fr: "le bonnet" }, { de: "die Socke", fr: "la chaussette" }, { de: "der Handschuh",
+        fr: "le gant" },
+      { de: "der Gürtel", fr: "la ceinture" }, { de: "die Krawatte", fr: "la cravate" }, { de: "der Anzug",
+        fr: "le costume" },
+    ];
+    const VERBS_L6 = [
+      { de: "essen", fr: "manger" }, { de: "trinken", fr: "boire" }, { de: "bestellen", fr: "commander" },
+      { de: "bezahlen", fr: "payer" }, { de: "kosten", fr: "coûter" }, { de: "tragen", fr: "porter" },
+      { de: "probieren", fr: "essayer / goûter" }, { de: "mögen", fr: "aimer" }, { de: "schmecken",
+        fr: "avoir bon goût" },
+      { de: "passen", fr: "aller / convenir (taille)" },
+    ];
+    const ADJ_L6 = [
+      { de: "lecker", fr: "délicieux(se)" }, { de: "süß", fr: "sucré(e)" }, { de: "sauer", fr: "aigre / acide" },
+      { de: "eng", fr: "étroit(e) / serré(e)" }, { de: "weit", fr: "large / ample" }, { de: "frisch",
+        fr: "frais / fraîche" },
+      { de: "scharf", fr: "épicé(e) / piquant(e)" }, { de: "warm", fr: "chaud(e)" }, { de: "kalt", fr: "froid(e)" },
+      { de: "elegant", fr: "élégant(e)" },
+    ];
+    const DIALOGUES_6 = [{
+      text: "Kellner: Guten Tag! Was möchten Sie bestellen?\nAnna: Ich hätte gern einen Salat und einen Fisch, bitte.\nKellner: Und zum Trinken?\nAnna: Ein Wasser, bitte. Und mein Mann möchte eine Suppe und ein Bier.\nKellner: Sehr gern. Kommt sofort!",
+      qs: [
+        { type: "true_false", prompt: "Anna bestellt einen Salat.", correct: true, tr: "Anna commande une salade." },
+        { type: "mcq", prompt: "Was bestellt Anna noch?", tr: "Que commande Anna d'autre ?", options: [{ text: "Einen Fisch",
+            correct: true }, { text: "Eine Suppe", correct: false }, { text: "Ein Brot", correct: false }] },
+        { type: "true_false", prompt: "Anna bestellt eine Suppe.", correct: false, tr: "Anna commande une soupe." },
+        { type: "mcq", prompt: "Was möchte Annas Mann essen?", tr: "Que veut manger le mari d'Anna ?", options: [
+            { text: "Eine Suppe", correct: true }, { text: "Einen Salat", correct: false }, { text: "Einen Fisch",
+              correct: false }] },
+        { type: "true_false", prompt: "Anna trinkt ein Bier.", correct: false, tr: "Anna boit une bière." },
+        { type: "mcq", prompt: "Was trinkt Anna?", tr: "Que boit Anna ?", options: [{ text: "Ein Wasser",
+            correct: true }, { text: "Ein Bier", correct: false }, { text: "Einen Kaffee", correct: false }] },
+        { type: "true_false", prompt: "Der Kellner fragt nach dem Getränk.", correct: true,
+          tr: "Le serveur demande la boisson." },
+        { type: "mcq", prompt: "Wer bestellt das Bier?", tr: "Qui commande la bière ?", options: [{ text: "Annas Mann",
+            correct: true }, { text: "Anna", correct: false }, { text: "Der Kellner", correct: false }] },
+        { type: "true_false", prompt: "Der Kellner bringt das Essen sofort.", correct: true,
+          tr: "Le serveur apporte le repas tout de suite." },
+        { type: "mcq", prompt: "Was ist das Thema des Dialogs?", tr: "Quel est le thème du dialogue ?", options: [
+            { text: "Eine Bestellung im Restaurant", correct: true },
+            { text: "Ein Einkauf im Kleidergeschäft", correct: false },
+            { text: "Eine verlorene Tasche", correct: false }] },
+      ],
+    }, {
+      text: "Verkäuferin: Kann ich Ihnen helfen?\nTom: Ja, ich suche einen Pullover und eine Jacke.\nVerkäuferin: Welche Größe brauchen Sie?\nTom: Größe M, glaube ich. Kann ich den Pullover anprobieren?\nVerkäuferin: Natürlich, die Kabine ist dort.\nTom: Er passt gut, aber die Jacke ist zu eng.",
+      qs: [
+        { type: "true_false", prompt: "Tom sucht einen Pullover und eine Jacke.", correct: true,
+          tr: "Tom cherche un pull et une veste." },
+        { type: "mcq", prompt: "Welche Größe braucht Tom?", tr: "Quelle taille faut-il à Tom ?", options: [{ text: "M",
+            correct: true }, { text: "L", correct: false }, { text: "S", correct: false }] },
+        { type: "true_false", prompt: "Tom probiert den Pullover an.", correct: true, tr: "Tom essaie le pull." },
+        { type: "mcq", prompt: "Wie passt der Pullover?", tr: "Comment le pull lui va-t-il ?", options: [{ text: "Gut",
+            correct: true }, { text: "Zu eng", correct: false }, { text: "Zu groß", correct: false }] },
+        { type: "true_false", prompt: "Die Jacke ist zu eng.", correct: true, tr: "La veste est trop serrée." },
+        { type: "mcq", prompt: "Wo ist die Umkleidekabine?", tr: "Où est la cabine d'essayage ?", options: [
+            { text: "Dort", correct: true }, { text: "Hier", correct: false }, { text: "Oben", correct: false }] },
+        { type: "true_false", prompt: "Die Verkäuferin hilft Tom.", correct: true, tr: "La vendeuse aide Tom." },
+        { type: "mcq", prompt: "Was probiert Tom an?", tr: "Qu'est-ce que Tom essaie ?", options: [{ text: "Den Pullover",
+            correct: true }, { text: "Die Jacke", correct: false }, { text: "Die Hose", correct: false }] },
+        { type: "true_false", prompt: "Tom kauft die Jacke.", correct: false, tr: "Tom achète la veste." },
+        { type: "mcq", prompt: "Was ist das Problem mit der Jacke?", tr: "Quel est le problème avec la veste ?",
+          options: [{ text: "Sie ist zu eng", correct: true }, { text: "Sie ist zu teuer", correct: false },
+          { text: "Sie ist kaputt", correct: false }] },
+      ],
+    }, {
+      text: "Lisa: Wer ist die Frau dort drüben?\nMax: Das ist meine Kollegin, Frau Berger.\nLisa: Und wen triffst du heute Abend?\nMax: Ich treffe meinen Bruder. Wir gehen ins Restaurant.\nLisa: Wer bezahlt die Rechnung?\nMax: Ich bezahle, glaube ich.",
+      qs: [
+        { type: "true_false", prompt: "Lisa fragt, wer die Frau ist.", correct: true,
+          tr: "Lisa demande qui est la femme." },
+        { type: "mcq", prompt: "Wer ist Frau Berger?", tr: "Qui est Madame Berger ?", options: [{ text: "Max' Kollegin",
+            correct: true }, { text: "Max' Schwester", correct: false }, { text: "Lisas Freundin",
+            correct: false }] },
+        { type: "true_false", prompt: "Max trifft heute Abend seine Schwester.", correct: false,
+          tr: "Max rencontre sa sœur ce soir." },
+        { type: "mcq", prompt: "Wen trifft Max heute Abend?", tr: "Qui Max rencontre-t-il ce soir ?", options: [
+            { text: "Seinen Bruder", correct: true }, { text: "Seine Kollegin", correct: false }, { text: "Lisa",
+              correct: false }] },
+        { type: "true_false", prompt: "Max und sein Bruder gehen ins Restaurant.", correct: true,
+          tr: "Max et son frère vont au restaurant." },
+        { type: "mcq", prompt: "Wer bezahlt die Rechnung?", tr: "Qui paie l'addition ?", options: [{ text: "Max",
+            correct: true }, { text: "Sein Bruder", correct: false }, { text: "Lisa", correct: false }] },
+        { type: "true_false", prompt: "Lisa bezahlt die Rechnung.", correct: false, tr: "Lisa paie l'addition." },
+        { type: "mcq", prompt: "Was fragt Lisa zuerst?", tr: "Que demande Lisa en premier ?", options: [
+            { text: "Wer die Frau ist", correct: true }, { text: "Was Max isst", correct: false },
+            { text: "Wo das Restaurant ist", correct: false }] },
+        { type: "true_false", prompt: "Max ist sich ganz sicher, wer bezahlt.", correct: false,
+          tr: "Max est tout à fait certain de qui paie." },
+        { type: "mcq", prompt: "Was ist das Thema des Dialogs?", tr: "Quel est le thème du dialogue ?", options: [
+            { text: "Bekannte und ein Treffen am Abend", correct: true },
+            { text: "Ein Einkauf im Geschäft", correct: false },
+            { text: "Eine Bestellung im Restaurant", correct: false }] },
+      ],
+    }, {
+      text: "Verkäufer: Guten Tag! Was brauchen Sie heute?\nFrau Meier: Ich brauche zwei Äpfel, drei Kartoffeln und ein Brot.\nVerkäufer: Sonst noch etwas?\nFrau Meier: Ja, haben Sie auch frische Eier?\nVerkäufer: Ja, wir haben sechs Eier heute.\nFrau Meier: Perfekt, ich nehme sechs Eier auch.",
+      qs: [
+        { type: "true_false", prompt: "Frau Meier kauft zwei Äpfel.", correct: true,
+          tr: "Madame Meier achète deux pommes." },
+        { type: "mcq", prompt: "Wie viele Kartoffeln kauft Frau Meier?", tr: "Combien de pommes de terre achète-t-elle ?",
+          options: [{ text: "Drei", correct: true }, { text: "Zwei", correct: false }, { text: "Vier",
+            correct: false }] },
+        { type: "true_false", prompt: "Frau Meier kauft kein Brot.", correct: false,
+          tr: "Madame Meier n'achète pas de pain." },
+        { type: "mcq", prompt: "Was fragt Frau Meier zusätzlich?", tr: "Que demande-t-elle en plus ?", options: [
+            { text: "Ob es frische Eier gibt", correct: true }, { text: "Ob es Fisch gibt", correct: false },
+            { text: "Ob es Käse gibt", correct: false }] },
+        { type: "true_false", prompt: "Der Verkäufer hat keine Eier.", correct: false, tr: "Le vendeur n'a pas d'œufs." },
+        { type: "mcq", prompt: "Wie viele Eier hat der Verkäufer?", tr: "Combien d'œufs le vendeur a-t-il ?", options: [
+            { text: "Sechs", correct: true }, { text: "Fünf", correct: false }, { text: "Zehn", correct: false }] },
+        { type: "true_false", prompt: "Frau Meier nimmt sechs Eier.", correct: true,
+          tr: "Madame Meier prend six œufs." },
+        { type: "mcq", prompt: "Was kauft Frau Meier zuerst?", tr: "Qu'achète-t-elle en premier ?", options: [
+            { text: "Äpfel, Kartoffeln und Brot", correct: true }, { text: "Nur Eier", correct: false },
+            { text: "Nur Äpfel", correct: false }] },
+        { type: "true_false", prompt: "Frau Meier kauft nichts.", correct: false, tr: "Madame Meier n'achète rien." },
+        { type: "mcq", prompt: "Was ist das Thema des Dialogs?", tr: "Quel est le thème du dialogue ?", options: [
+            { text: "Ein Einkauf auf dem Markt", correct: true },
+            { text: "Eine Bestellung im Restaurant", correct: false },
+            { text: "Ein Kleiderkauf", correct: false }] },
+      ],
+    }, {
+        text: "Kellner: Hat es Ihnen geschmeckt?\nPaul: Ja, der Fisch war sehr lecker! Aber die Suppe war ein bisschen zu sauer.\nKellner: Das tut mir leid. Möchten Sie noch einen Kaffee?\nPaul: Nein danke, nur die Rechnung, bitte.\nKellner: Natürlich, das macht 32 Euro.",
+      qs: [
+        { type: "true_false", prompt: "Paul fand den Fisch lecker.", correct: true,
+          tr: "Paul a trouvé le poisson délicieux." },
+        { type: "mcq", prompt: "Wie war die Suppe laut Paul?", tr: "Comment était la soupe selon Paul ?", options: [
+            { text: "Ein bisschen zu sauer", correct: true }, { text: "Perfekt", correct: false }, { text: "Zu süß",
+              correct: false }] },
+        { type: "true_false", prompt: "Paul möchte noch einen Kaffee.", correct: false, tr: "Paul veut encore un café." },
+        { type: "mcq", prompt: "Was möchte Paul stattdessen?", tr: "Que veut Paul à la place ?", options: [
+            { text: "Die Rechnung", correct: true }, { text: "Noch einen Fisch", correct: false },
+            { text: "Ein Wasser", correct: false }] },
+        { type: "true_false", prompt: "Die Rechnung beträgt 32 Euro.", correct: true,
+          tr: "L'addition s'élève à 32 euros." },
+        { type: "mcq", prompt: "Was fragt der Kellner zuerst?", tr: "Que demande le serveur en premier ?", options: [
+            { text: "Ob es geschmeckt hat", correct: true }, { text: "Ob er zahlen möchte", correct: false },
+            { text: "Ob er noch Hunger hat", correct: false }] },
+        { type: "true_false", prompt: "Dem Kellner tut es leid, dass die Suppe sauer war.", correct: true,
+          tr: "Le serveur est désolé que la soupe était acide." },
+        { type: "mcq", prompt: "Was fand Paul an der Suppe nicht gut?", tr: "Qu'est-ce que Paul n'a pas aimé dans la soupe ?",
+          options: [{ text: "Sie war zu sauer", correct: true }, { text: "Sie war zu kalt", correct: false },
+          { text: "Sie war zu teuer", correct: false }] },
+        { type: "true_false", prompt: "Paul bestellt noch etwas.", correct: false,
+          tr: "Paul commande encore quelque chose." },
+        { type: "mcq", prompt: "Was ist das Thema des Dialogs?", tr: "Quel est le thème du dialogue ?", options: [
+            { text: "Das Ende eines Restaurantbesuchs", correct: true },
+            { text: "Ein Einkauf im Kleidergeschäft", correct: false },
+            { text: "Ein Treffen mit Freunden", correct: false }] },
+      ],
+    }];
+    const WRITING_TASKS_6 = [
+      { prompt: "Commande quelque chose au restaurant, à l'accusatif (« Ich möchte/bestelle einen/eine/ein... »).",
+        keywords: ["möchte", "bestelle"], minWords: 4 },
+      { prompt: "Dis que tu ne veux PAS quelque chose, avec « kein » à l'accusatif.", keywords: ["kein"], minWords: 3 },
+      { prompt: "Pose une question avec « Wer » ou « Wen » selon le contexte.", keywords: ["Wer", "Wen"],
+        minWords: 2 },
+      { prompt: "Dis que tu achètes ou portes un vêtement masculin à l'accusatif (« einen »/« den »).",
+        keywords: ["Ich kaufe", "Ich trage"], minWords: 3 },
+      { prompt: "Dis combien de choses tu achètes, avec un nombre et un pluriel (ex : drei Äpfel).",
+        keywords: ["Äpfel", "Kartoffeln", "Eier", "Brote"], minWords: 4 },
+      { prompt: "Décris un plat avec un adjectif (lecker, sauer, frisch...).", keywords: ["ist"], minWords: 4 },
+      { prompt: "Demande combien coûte quelque chose.", keywords: ["kostet"], minWords: 3 },
+      { prompt: "Dis que quelque chose te va bien, ou est trop étroit/large.", keywords: ["passt", "eng", "weit"],
+        minWords: 3 },
+      { prompt: "Demande l'addition au restaurant.", keywords: ["Rechnung"], minWords: 2 },
+      { prompt: "Écris 3 phrases : une commande au restaurant, un vêtement que tu achètes, et une question avec « wer » ou « wen ».",
+        keywords: ["möchte", "kaufe", "Wer"], minWords: 15 },
+    ];
+
+    // ================================================================
+    //  FABRICATION DES LEÇONS COMPLÈTES
+    // ================================================================
+
+    function buildLesson4() {
+      const articleMcqExercises = FURNITURE_GENDER.map(f => ({
+        type: "mcq",
+        prompt: `Quel article correspond à « ${f.noun} » ?`,
+        options: shuffle([
+          { text: f.article, correct: true },
+          ...["der", "das", "die"].filter(a => a !== f.article).map(a => ({ text: a, correct: false })),
+        ]),
+        explanation: `« ${f.noun} » est ${f.article === "die" ? "féminin" : f.article === "das" ? "neutre" : "masculin"} : « ${f.article} ${f.noun} ».`,
+      }));
+
+      const contextFillExercises = shuffle(FURNITURE_GENDER).slice(0, 15).map(f => {
+        const adj = CONTEXT_ADJ[Math.floor(Math.random() * CONTEXT_ADJ.length)];
+        return {
+          type: "fill_blank",
+          prompt: `___ ${f.noun} ist ${adj}.`,
+          accepted: [f.article],
+          translation: `${capitalize(FURNITURE_FR[f.noun])} est ${ADJ_FR[adj]}.`,
+          explanation: `« ${f.noun} » se combine avec l'article « ${f.article} » : ${f.article} ${f.noun} ist ${adj}.`,
+        };
+      });
+
+      const pluralExercises = shuffle(FURNITURE_GENDER).slice(0, 10).map(f => ({
+        type: "mcq",
+        prompt: `Quel article utilise-t-on au pluriel pour « ${f.plural} » (pluriel de « ${f.noun} ») ?`,
+        options: shuffle([{ text: "die", correct: true }, { text: "der", correct: false }, { text: "das",
+            correct: false }]),
+        explanation: `Au pluriel, l'article est toujours « die », quel que soit le genre au singulier : die ${f.plural}.`,
+      }));
+
+      const priceExercises = shuffle(FURNITURE_GENDER).slice(0, 5).map(f => ({
+        type: "fill_blank",
+        prompt: `Wie viel kostet ___ ${f.noun}?`,
+        accepted: [f.article],
+        translation: `Combien coûte ${FURNITURE_FR[f.noun]} ?`,
+        explanation: `On utilise l'article défini du nom : Wie viel kostet ${f.article} ${f.noun}?`,
+      }));
+
+      const grammarExercises = shuffle([...articleMcqExercises, ...contextFillExercises, ...pluralExercises,
+        ...priceExercises
+      ]);
+
+      const FURNITURE_VOCAB = FURNITURE_GENDER.map(f => ({ de: `${f.article} ${f.noun}`, fr: FURNITURE_FR[f.noun] }));
+      const furnitureExercises = FURNITURE_VOCAB.map(f => ({
+        type: "mcq",
+        prompt: `Comment dit-on « ${f.fr} » en allemand ?`,
+        options: shuffle([{ text: f.de, correct: true }, { text: pickOther(FURNITURE_VOCAB, f, "de"), correct: false },
+        { text: pickOther(FURNITURE_VOCAB, f, "de"), correct: false }]),
+        explanation: `${f.fr} se dit « ${f.de} » en allemand.`,
+      }));
+
+      const shoppingExercises = SHOPPING_WORDS.map(s => ({
+        type: "mcq",
+        prompt: `Que signifie « ${s.de} » ?`,
+        options: shuffle([{ text: s.fr, correct: true }, { text: pickOther(SHOPPING_WORDS, s, "fr"), correct: false },
+        { text: pickOther(SHOPPING_WORDS, s, "fr"), correct: false }]),
+        explanation: `« ${s.de} » = ${s.fr}`,
+      }));
+
+      const adjectiveExercises = SHOPPING_ADJ.map(a => ({
+        type: "mcq",
+        prompt: `Que signifie « ${a.de} » ?`,
+        options: shuffle([{ text: a.fr, correct: true }, { text: pickOther(SHOPPING_ADJ, a, "fr"), correct: false },
+        { text: pickOther(SHOPPING_ADJ, a, "fr"), correct: false }]),
+        explanation: `« ${a.de} » = ${a.fr}`,
+      }));
+
+      const numberExercises = NUMBERS_TENS.map(n => ({
+        type: "mcq",
+        prompt: `Comment dit-on « ${n.fr} » en allemand ?`,
+        options: shuffle([{ text: n.de, correct: true }, { text: pickOther(NUMBERS_TENS, n, "de"), correct: false },
+        { text: pickOther(NUMBERS_TENS, n, "de"), correct: false }]),
+        explanation: `« ${n.fr} » se dit « ${n.de} » en allemand.`,
+      }));
+
+      const vocabExercises = shuffle([...furnitureExercises, ...shoppingExercises, ...adjectiveExercises,
+        ...numberExercises
+      ]);
+
+      const comprehensionExercises = DIALOGUES_4.flatMap((d, di) => d.qs.map(q => ({ ...q, translation: q.tr,
+        dialogueIndex: di, dialogueText: d.text })));
+
+      return {
+        number: 4,
+        title: "Achats, meubles",
+        theme: "Meubles, magasin, prix",
+        grammarFocus: "Article défini der/das/die",
+        sections: {
+          grammar: {
+            label: "Grammaire",
+            intro: `20 meubles répartis entre der/das/die + usage en contexte (phrase, pluriel toujours « die », prix). ${grammarExercises.length} questions, réparties en ${Math.ceil(grammarExercises.length / 10)} lots de 10.`,
+            tip: "Retiens surtout la règle sans exception : au pluriel, c'est TOUJOURS « die », quel que soit le genre au singulier (der Tisch → die Tische, das Bett → die Betten). C'est le raccourci le plus rentable de cette leçon.",
+            exercises: grammarExercises,
+          },
+          vocab: {
+            label: "Vocabulaire",
+            intro: `Vocabulaire enrichi au-delà de Menschen : 20 meubles, 10 mots liés aux achats, 10 adjectifs descriptifs, et des nombres composés de 20 à 1000. ${vocabExercises.length} questions, réparties en ${Math.ceil(vocabExercises.length / 10)} lots de 10.`,
+            tip: "Regroupe mentalement les meubles par pièce (cuisine, salon, chambre) plutôt que dans l'ordre de la liste : ça crée des images mentales beaucoup plus faciles à retenir qu'une liste brute.",
+            exercises: vocabExercises,
+          },
+          comprehension: {
+            label: "Compréhension",
+            intro: "5 dialogues originaux en magasin de meubles, avec des prix à comprendre. 10 questions par dialogue, 50 au total.",
+            tip: "Les prix sont presque toujours la clé des questions : dès que tu vois un chiffre suivi de « Euro » dans le dialogue, note-le mentalement, il y a de fortes chances qu'on te le redemande.",
+            exercises: comprehensionExercises,
+          },
+          writing: {
+            label: "Production écrite",
+            intro: "10 mini-tâches guidées, avec un focus sur les articles définis et le vocabulaire des achats.",
+            tip: "Pour demander un prix, la structure est toujours la même : « Wie viel kostet + article + nom ? ». Apprends cette phrase par cœur, elle marche pour n'importe quel objet.",
+            tasks: WRITING_TASKS_4,
+          },
+        },
+      };
+    }
+
+    function buildLesson5() {
+      function einEineForm(o) { return o.article === "die" ? "eine" : "ein"; }
+
+      function otherEinEine(o) { return o.article === "die" ? "ein" : "eine"; }
+
+      function keinKeineForm(o) { return o.article === "die" ? "keine" : "kein"; }
+
+      function otherKeinKeine(o) { return o.article === "die" ? "kein" : "keine"; }
+
+      function genderLabel(o) { return o.article === "die" ? "féminin" : o.article === "das" ? "neutre" : "masculin"; }
+
+      const einEineMcqExercises = OBJECTS_GENDER.map(o => ({
+        type: "mcq",
+        prompt: `Quel article indéfini correspond à « ${o.noun} » ?`,
+        options: shuffle([{ text: einEineForm(o), correct: true }, { text: otherEinEine(o), correct: false }]),
+        explanation: `« ${o.noun} » est ${genderLabel(o)} (${o.article} ${o.noun}) → on utilise « ${einEineForm(o)} ».`,
+      }));
+
+      const keinKeineMcqExercises = shuffle(OBJECTS_GENDER).slice(0, 10).map(o => ({
+        type: "mcq",
+        prompt: `Quelle est la forme négative de « ${einEineForm(o)} ${o.noun} » ?`,
+        options: shuffle([{ text: `${keinKeineForm(o)} ${o.noun}`, correct: true }, { text: `${otherKeinKeine(o)} ${o.noun}`,
+            correct: false }]),
+        explanation: `« ${o.noun} » est ${genderLabel(o)} → la négation de « ${einEineForm(o)} ${o.noun} » est « ${keinKeineForm(o)} ${o.noun} ».`,
+      }));
+
+      const contextFillEinEine = shuffle(OBJECTS_GENDER).slice(0, 10).map(o => ({
+        type: "fill_blank",
+        prompt: `Ich habe ___ ${o.noun}.`,
+        accepted: [einEineForm(o)],
+        translation: `J'ai ${o.frIndef}.`,
+        explanation: `« ${o.noun} » est ${genderLabel(o)} → « ${einEineForm(o)} ${o.noun} ».`,
+      }));
+
+      const KEIN_NICHT_ITEMS = [
+        { prompt: "Ich habe ___ Buch.", answer: "kein",
+          explanation: "On nie ici le nom « Buch », sans article défini ni possessif → « kein », pas « nicht »." },
+        { prompt: "Das Buch ist ___ neu, es ist alt.", answer: "nicht",
+          explanation: "On ne nie pas un nom mais l'adjectif « neu » → « nicht », pas « kein/keine »." },
+        { prompt: "Ich habe ___ Uhr.", answer: "keine",
+          explanation: "« Uhr » est féminin et sans article défini → « keine », pas « nicht »." },
+        { prompt: "Er kommt heute ___.", answer: "nicht",
+          explanation: "On nie ici le verbe « kommen » (toute la phrase), pas un nom → « nicht »." },
+        { prompt: "Wir haben ___ Rucksack.", answer: "kein",
+          explanation: "« Rucksack » est un nom sans article défini ni possessif → « kein », pas « nicht »." },
+        { prompt: "Das ist ___ meine Tasche, sondern seine.", answer: "nicht",
+          explanation: "Devant un nom précédé d'un possessif (« meine Tasche »), on utilise « nicht », jamais « kein/keine »." },
+        { prompt: "Ich habe heute ___ Zeit.", answer: "keine",
+          explanation: "« Zeit » est féminin et sans article défini → « keine », pas « nicht »." },
+        { prompt: "Der Rucksack ist ___ teuer, er ist billig.", answer: "nicht",
+          explanation: "On nie ici l'adjectif « teuer », pas un nom → « nicht »." },
+        { prompt: "Ich sehe hier ___ Computer.", answer: "kein",
+          explanation: "« Computer » est un nom sans article défini ni possessif → « kein », pas « nicht »." },
+        { prompt: "Ich verstehe das ___.", answer: "nicht",
+          explanation: "On nie ici le verbe « verstehen », pas un nom → « nicht »." },
+      ];
+      const keinVsNichtExercises = KEIN_NICHT_ITEMS.map(item => ({
+        type: "mcq",
+        prompt: `Complète : « ${item.prompt} »`,
+        options: shuffle([{ text: item.answer, correct: true }, { text: item.answer === "nicht" ? "kein/keine" :
+            "nicht", correct: false }]),
+        explanation: item.explanation,
+      }));
+      
+      const grammarExercises = shuffle([...einEineMcqExercises, ...keinKeineMcqExercises, ...contextFillEinEine,
+        ...keinVsNichtExercises
+      ]);
+
+      const OBJECTS_VOCAB = OBJECTS_GENDER.map(o => ({ de: `${o.article} ${o.noun}`, fr: o.frDef }));
+      const objectsExercises = OBJECTS_VOCAB.map(o => ({
+        type: "mcq",
+        prompt: `Comment dit-on « ${o.fr} » en allemand ?`,
+        options: shuffle([{ text: o.de, correct: true }, ...pickOthers(OBJECTS_VOCAB, o, "de", 2).map(t => ({ text: t,
+            correct: false }))]),
+        explanation: `${o.fr} se dit « ${o.de} » en allemand.`,
+      }));
+
+      const verbsExercises = VERBS_OBJECTS.map(v => ({
+        type: "mcq",
+        prompt: `Que signifie « ${v.de} » ?`,
+        options: shuffle([{ text: v.fr, correct: true }, ...pickOthers(VERBS_OBJECTS, v, "fr", 2).map(t => ({ text: t,
+            correct: false }))]),
+        explanation: `« ${v.de} » = ${v.fr}`,
+      }));
+
+      const adjectivesExercises = OBJECT_ADJ.map(a => ({
+        type: "mcq",
+        prompt: `Que signifie « ${a.de} » ?`,
+        options: shuffle([{ text: a.fr, correct: true }, ...pickOthers(OBJECT_ADJ, a, "fr", 2).map(t => ({ text: t,
+            correct: false }))]),
+        explanation: `« ${a.de} » = ${a.fr}`,
+      }));
+
+      const descriptionExercises = OBJECT_DESCRIPTION.map(d => ({
+        type: "mcq",
+        prompt: `Que signifie « ${d.de} » ?`,
+        options: shuffle([{ text: d.fr, correct: true }, ...pickOthers(OBJECT_DESCRIPTION, d, "fr", 2).map(t => ({ text: t,
+            correct: false }))]),
+        explanation: `« ${d.de} » = ${d.fr}`,
+      }));
+
+      const vocabExercises = shuffle([...objectsExercises, ...verbsExercises, ...adjectivesExercises,
+        ...descriptionExercises
+      ]);
+
+      const comprehensionExercises = DIALOGUES_5.flatMap((d, di) => d.qs.map(q => ({ ...q, translation: q.tr,
+        dialogueIndex: di, dialogueText: d.text })));
+
+      return {
+        number: 5,
+        title: "Objets, produits",
+        theme: "Objets du quotidien, produits, cadeaux",
+        grammarFocus: "Article indéfini ein/eine, négation kein/keine",
+        sections: {
+          grammar: {
+            label: "Grammaire",
+            intro: `20 objets du quotidien avec ein/eine + négation kein/keine en contexte, et la distinction essentielle entre kein/keine et nicht. ${grammarExercises.length} questions, réparties en ${Math.ceil(grammarExercises.length / 10)} lots de 10.`,
+            tip: "ein et kein suivent le même accord de genre (masculin/neutre → ein/kein, féminin → eine/keine). Et pour choisir entre kein et nicht : kein/keine nie un nom seul (sans article défini ni possessif) ; nicht nie tout le reste — un verbe, un adjectif, un adverbe, ou un nom déjà précédé d'un article défini ou d'un possessif.",
+            exercises: grammarExercises,
+          },
+          vocab: {
+            label: "Vocabulaire",
+            intro: `Vocabulaire enrichi au-delà de Menschen : 20 objets du quotidien, 10 verbes usuels, 10 adjectifs d'état, et 10 mots/phrases pour décrire un objet (couleur, forme, matière) et communiquer en classe (demander un mot, demander de répéter, remercier). ${vocabExercises.length} questions, réparties en ${Math.ceil(vocabExercises.length / 10)} lots de 10.`,
+            tip: "Associe chaque objet à l'endroit où tu le ranges habituellement (sac, bureau, cuisine) : ça crée des images mentales bien plus solides qu'une liste apprise dans l'ordre.",
+            exercises: vocabExercises,
+          },
+          comprehension: {
+            label: "Compréhension",
+            intro: "5 dialogues originaux autour d'objets qu'on a, qu'on cherche, qu'on perd ou qu'on offre — et qui mettent en scène les objectifs de communication du manuel (décrire un objet, demander un mot, demander de répéter, remercier). 10 questions par dialogue, 50 au total.",
+            tip: "Repère bien QUI a quoi, et QUI n'a PAS quoi : les dialogues jouent beaucoup sur l'opposition ein/kein entre les personnages.",
+            exercises: comprehensionExercises,
+          },
+          writing: {
+            label: "Production écrite",
+            intro: "10 mini-tâches guidées, avec un focus sur l'article indéfini et la négation kein/keine.",
+            tip: "Pense ein/kein comme une paire d'opposés : pour chaque phrase avec « ein/eine », essaie aussi de la reformuler avec « kein/keine ».",
+            tasks: WRITING_TASKS_5,
+          },
+        },
+      };
+    }
+
+    function buildLesson6() {
+      function randomVerb(n) { const list = VERBS_BY_CATEGORY[n.category]; return list[Math.floor(Math.random() * list
+          .length)]; }
+
+      function frSentence(verb, n) {
+        const vfr = VERB_FR[verb];
+        const subject = /^[aeiouéèêh]/i.test(vfr) ? "J'" : "Je ";
+        return `${subject}${vfr} ${n.frIndef}.`;
+      }
+
+      function akkArticle(n, kind) {
+        if (n.gender === "der") return kind === "def" ? "den" : kind === "indef" ? "einen" : "keinen";
+        if (n.gender === "das") return kind === "def" ? "das" : kind === "indef" ? "ein" : "kein";
+        return kind === "def" ? "die" : kind === "indef" ? "eine" : "keine";
+      }
+
+      function nomArticle(n, kind) {
+        if (kind === "def") return n.gender;
+        if (kind === "indef") return n.gender === "die" ? "eine" : "ein";
+        return n.gender === "die" ? "keine" : "kein";
+      }
+
+      function genderLabel(n) { return n.gender === "die" ? "féminin" : n.gender === "das" ? "neutre" : "masculin"; }
+
+      function genderLabelUpper(n) { return n.gender === "die" ? "FÉMININ" : n.gender === "das" ? "NEUTRE" : "MASCULIN"; }
+
+      const akkusativDefiniteMcq = shuffle(NOUNS_L6).map(n => {
+        const verb = randomVerb(n);
+        const correct = akkArticle(n, "def");
+        const wrong = nomArticle(n, "def") === correct ? "den" : nomArticle(n, "def");
+        return {
+          type: "mcq",
+          prompt: `Complète : « Ich ${verb} ___ ${n.noun}. » (${n.noun} est ${genderLabelUpper(n)})`,
+          options: shuffle([{ text: correct, correct: true }, { text: wrong, correct: false }]),
+          translation: frSentence(verb, n),
+          explanation: n.gender === "der" ?
+            `« ${n.noun} » est masculin et complément d'objet direct → « der » devient « den ».` :
+            `« ${n.noun} » est ${genderLabel(n)} → à l'accusatif, l'article ne change PAS (seul le masculin change).`,
+        };
+      });
+
+      const akkusativIndefiniteMcq = shuffle(NOUNS_L6).slice(0, 15).map(n => {
+        const verb = randomVerb(n);
+        const correct = akkArticle(n, "indef");
+        const wrong = nomArticle(n, "indef") === correct ? "einen" : nomArticle(n, "indef");
+        return {
+          type: "mcq",
+          prompt: `Complète : « Ich ${verb} ___ ${n.noun}. » (${n.noun} est ${genderLabelUpper(n)})`,
+          options: shuffle([{ text: correct, correct: true }, { text: wrong, correct: false }]),
+          translation: frSentence(verb, n),
+          explanation: n.gender === "der" ?
+            `« ${n.noun} » est masculin et complément d'objet direct → « ein » devient « einen ».` :
+            `« ${n.noun} » est ${genderLabel(n)} → « ${correct} » ne change pas à l'accusatif.`,
+        };
+      });
+
+      const akkusativKeinMcq = shuffle(NOUNS_L6).slice(0, 10).map(n => {
+        const correct = akkArticle(n, "kein");
+        const wrong = nomArticle(n, "kein") === correct ? "keinen" : nomArticle(n, "kein");
+        return {
+          type: "mcq",
+          prompt: `Complète : « Ich möchte ___ ${n.noun}. » (${n.noun} est ${genderLabelUpper(n)})`,
+          options: shuffle([{ text: correct, correct: true }, { text: wrong, correct: false }]),
+          translation: `Je ne voudrais pas de ${n.frBare}.`,
+          explanation: n.gender === "der" ?
+            `« ${n.noun} » est masculin et complément d'objet direct → « kein » devient « keinen ».` :
+            `« ${n.noun} » est ${genderLabel(n)} → « ${correct} » ne change pas à l'accusatif.`,
+        };
+      });
+
+      const WER_WEN_ITEMS = [
+        { prompt: "___ siehst du dort?", answer: "Wen", tr: "Qui vois-tu là-bas ?" },
+        { prompt: "___ kommt heute Abend?", answer: "Wer", tr: "Qui vient ce soir ?" },
+        { prompt: "___ hast du im Restaurant getroffen?", answer: "Wen", tr: "Qui as-tu rencontré au restaurant ?" },
+        { prompt: "___ ist das?", answer: "Wer", tr: "Qui est-ce ?" },
+        { prompt: "___ fragst du?", answer: "Wen", tr: "À qui poses-tu la question ?" },
+        { prompt: "___ arbeitet hier?", answer: "Wer", tr: "Qui travaille ici ?" },
+        { prompt: "___ liebst du?", answer: "Wen", tr: "Qui aimes-tu ?" },
+        { prompt: "___ hat den Kuchen gemacht?", answer: "Wer", tr: "Qui a fait le gâteau ?" },
+        { prompt: "___ besuchst du morgen?", answer: "Wen", tr: "Qui rends-tu visite demain ?" },
+        { prompt: "___ wohnt in Berlin?", answer: "Wer", tr: "Qui habite à Berlin ?" },
+        { prompt: "___ bedient dich im Restaurant?", answer: "Wer", tr: "Qui te sert au restaurant ?" },
+        { prompt: "___ fragst du nach der Rechnung?", answer: "Wen", tr: "À qui demandes-tu l'addition ?" },
+        { prompt: "___ kauft die Jacke?", answer: "Wer", tr: "Qui achète la veste ?" },
+        { prompt: "___ siehst du im Geschäft?", answer: "Wen", tr: "Qui vois-tu dans le magasin ?" },
+        { prompt: "___ übernimmt die Rechnung?", answer: "Wer", tr: "Qui prend en charge l'addition ?" },
+      ];
+      const werWenMcq = WER_WEN_ITEMS.map(item => ({
+        type: "mcq",
+        prompt: `Complète : « ${item.prompt} »`,
+        options: shuffle([{ text: item.answer, correct: true }, { text: item.answer === "Wer" ? "Wen" : "Wer",
+            correct: false }]),
+        translation: item.tr,
+        explanation: item.answer === "Wer" ?
+          "« Wer » interroge sur le SUJET de la phrase (celui qui fait l'action)." :
+          "« Wen » interroge sur le COMPLÉMENT D'OBJET DIRECT (celui qui subit l'action).",
+      }));
+
+      const pluralFillBlank = shuffle(NOUNS_L6).slice(0, 10).map(n => ({
+        type: "fill_blank",
+        prompt: `Quel est le pluriel de « ${n.gender} ${n.noun} » (${genderLabelUpper(n)}) ? Complète : die ___.`,
+        accepted: [n.plural],
+        translation: `Pluriel de « ${n.frDef} ».`,
+        explanation: `Le pluriel de « ${n.gender} ${n.noun} » est « die ${n.plural} ».`,
+      }));
+
+      const grammarExercises = shuffle([...akkusativDefiniteMcq, ...akkusativIndefiniteMcq, ...akkusativKeinMcq,
+        ...werWenMcq, ...pluralFillBlank
+      ]);
+
+      const foodExercises = FOOD_VOCAB.map(f => ({
+        type: "mcq",
+        prompt: `Comment dit-on « ${f.fr} » en allemand ?`,
+        options: shuffle([{ text: f.de, correct: true }, ...pickOthers(FOOD_VOCAB, f, "de", 2).map(t => ({ text: t,
+            correct: false }))]),
+        explanation: `${f.fr} se dit « ${f.de} » en allemand.`,
+      }));
+
+      const clothingExercises = CLOTHING_VOCAB.map(c => ({
+        type: "mcq",
+        prompt: `Comment dit-on « ${c.fr} » en allemand ?`,
+        options: shuffle([{ text: c.de, correct: true }, ...pickOthers(CLOTHING_VOCAB, c, "de", 2).map(t => ({ text: t,
+            correct: false }))]),
+        explanation: `${c.fr} se dit « ${c.de} » en allemand.`,
+      }));
+
+      const verbsExercises = VERBS_L6.map(v => ({
+        type: "mcq",
+        prompt: `Que signifie « ${v.de} » ?`,
+        options: shuffle([{ text: v.fr, correct: true }, ...pickOthers(VERBS_L6, v, "fr", 2).map(t => ({ text: t,
+            correct: false }))]),
+        explanation: `« ${v.de} » = ${v.fr}`,
+      }));
+
+      const adjectivesExercises = ADJ_L6.map(a => ({
+        type: "mcq",
+        prompt: `Que signifie « ${a.de} » ?`,
+        options: shuffle([{ text: a.fr, correct: true }, ...pickOthers(ADJ_L6, a, "fr", 2).map(t => ({ text: t,
+            correct: false }))]),
+        explanation: `« ${a.de} » = ${a.fr}`,
+      }));
+
+      const vocabExercises = shuffle([...foodExercises, ...clothingExercises, ...verbsExercises, ...adjectivesExercises]);
+
+      const comprehensionExercises = DIALOGUES_6.flatMap((d, di) => d.qs.map(q => ({ ...q, translation: q.tr,
+        dialogueIndex: di, dialogueText: d.text })));
+
+      return {
+        number: 6,
+        title: "Au restaurant, les vêtements",
+        theme: "Nourriture, restaurant, vêtements, achats",
+        grammarFocus: "Accusatif (der→den, ein→einen, kein→keinen), wer/wen, pluriel des noms",
+        sections: {
+          grammar: {
+            label: "Grammaire",
+            intro: `L'accusatif (COD) : seul le masculin change (der→den, ein→einen, kein→keinen), le neutre et le féminin restent identiques. Plus la distinction wer/wen et le pluriel des noms. ${grammarExercises.length} questions, réparties en ${Math.ceil(grammarExercises.length / 10)} lots de 10.`,
+            tip: "Règle d'or de l'accusatif : SEUL le masculin change (der→den, ein→einen, kein→keinen). Le neutre et le féminin sont identiques au nominatif et à l'accusatif — ne les modifie pas par réflexe !",
+            exercises: grammarExercises,
+          },
+          vocab: {
+            label: "Vocabulaire",
+            intro: `Vocabulaire enrichi au-delà de Menschen : 15 mots de nourriture, 15 vêtements, 10 verbes usuels (essen, bestellen, tragen...) et 10 adjectifs pour décrire un plat ou un vêtement. ${vocabExercises.length} questions, réparties en ${Math.ceil(vocabExercises.length / 10)} lots de 10.`,
+            tip: "Associe chaque mot à une scène concrète : un plat que tu commanderais au restaurant, ou un vêtement que tu porterais. Les images mentales concrètes s'ancrent mieux que les listes.",
+            exercises: vocabExercises,
+          },
+          comprehension: {
+            label: "Compréhension",
+            intro: "5 dialogues originaux : commander au restaurant, essayer des vêtements, une question wer/wen, des achats au marché, et payer l'addition. 10 questions par dialogue, 50 au total.",
+            tip: "Repère bien qui fait l'action (sujet, wer) et qui la subit (complément, wen) : c'est la clé pour comprendre ces dialogues comme pour répondre aux questions grammaticales.",
+            exercises: comprehensionExercises,
+          },
+          writing: {
+            label: "Production écrite",
+            intro: "10 mini-tâches guidées, avec un focus sur l'accusatif et le pluriel en contexte de restaurant et de shopping.",
+            tip: "Avant d'écrire, demande-toi : est-ce que le mot que j'utilise est complément d'objet direct ? Si oui, et s'il est masculin, n'oublie pas le « -en » (der→den, ein→einen).",
+            tasks: WRITING_TASKS_6,
+          },
+        },
+      };
+    }
+
+    // ================================================================
+    //  MOTEUR DE L'APPLICATION
+    // ================================================================
+    const LESSON_BUILDERS = { 4: buildLesson4, 5: buildLesson5, 6: buildLesson6 };
+    const SECTION_ORDER = ["grammar", "vocab", "comprehension", "writing"];
+    const ICONS = { grammar: "📚", vocab: "📖", comprehension: "💬", writing: "✍️" };
+    const BATCH_SIZE = 10;
+    
+    let currentLessonKey = 4;
+    let lessonData = LESSON_BUILDERS[4]();
+
+    let state = {
+      view: "menu",
+      activeSection: null,
+      progress: {
+        grammar: { answeredCount: 0, correctCount: 0 },
+        vocab: { answeredCount: 0, correctCount: 0 },
+        comprehension: { answeredCount: 0, correctCount: 0 },
+        writing: { answeredCount: 0, correctCount: 0 },
+      },
+      quiz: { index: 0, answer: null, validated: false, stage: "question", batchCorrect: 0, batchAnswered: 0 },
+      writing: { index: 0, text: "", validated: false, finished: false },
+    };
+
+    function sectionTotal(key) {
+      if (key === "writing") return lessonData.sections[key].tasks.length;
+      return lessonData.sections[key].exercises.length;
+    }
+
+    function sectionStatus(key) {
+      const p = state.progress[key];
+      const total = sectionTotal(key);
+      if (p.answeredCount === 0) return "not_started";
+      if (p.answeredCount >= total) return "completed";
+      return "in_progress";
+    }
+
+    function overallScore() {
+      let sum = 0;
+      SECTION_ORDER.forEach(key => {
+        const total = sectionTotal(key);
+        const p = state.progress[key];
+        let pct = 0;
+        if (key === "writing") pct = total > 0 ? p.correctCount / total : 0;
+        else pct = total > 0 ? (p.correctCount / total) * 100 : 0;
+        sum += pct * 0.3;
+      });
+      return sum;
+    }
+
+    function resetState() {
+      state.view = "menu";
+      state.activeSection = null;
+      state.progress = {
+        grammar: { answeredCount: 0, correctCount: 0 },
+        vocab: { answeredCount: 0, correctCount: 0 },
+        comprehension: { answeredCount: 0, correctCount: 0 },
+        writing: { answeredCount: 0, correctCount: 0 },
+      };
+      state.quiz = { index: 0, answer: null, validated: false, stage: "question", batchCorrect: 0, batchAnswered: 0 };
+      state.writing = { index: 0, text: "", validated: false, finished: false };
+    }
+
+    function switchLesson(key) {
+      currentLessonKey = key;
+      lessonData = LESSON_BUILDERS[key]();
+      resetState();
       render();
     }
-  } else {
-    finish();
-  }
-}
 
-function showPartBreak(){
-  updateRail();
-  const totalParts = Math.ceil(questions.length/partSize);
-  const partDone = idx/partSize; // partie qui vient de se terminer
-  completedParts.add(partDone-1);
-  const pct = Math.round((score/idx)*100);
-  card.innerHTML = `<div class="done-screen">
-    <div class="big">${partDone}/${totalParts}</div>
-    <p>Partie ${partDone} terminée — Score cumulé : ${score}/${idx} (${pct}%)</p>
-    <button class="restart" id="continuePartBtn">Continuer →</button>
-    <button class="restart" id="prevPartBtn">← Précédent</button>
-    <button class="menubtn" id="qzMidHome">☰ Retour à l'accueil</button>
-  </div>`;
-  document.getElementById('continuePartBtn').addEventListener('click', render);
-  document.getElementById('prevPartBtn').addEventListener('click', prev);
-  document.getElementById('qzMidHome').addEventListener('click', goHome);
-}
+    // ================================================================
+    //  RENDU
+    // ================================================================
+    const root = document.getElementById('root');
 
-function restartQuiz(){
-  clearAutoAdvance();
-  idx=0; score=0; wrongIdx.clear(); completedParts=new Set();
-  questions = shuffleCopy(mode==='standard' ? standardQuestions : hardBank);
-  partSize = Math.max(1, Math.ceil(questions.length/10));
-  buildRail(); render();
-}
+    function render() {
+      let html = `<div class="app">`;
 
-function finish(){
-  updateRail();
-  completedParts.add(Math.floor((idx)/partSize));
-  const pct = Math.round((score/questions.length)*100);
-  let msg = "Weiter so! Continue à réviser.";
-  if(pct>=90) msg="Ausgezeichnet! Ces bases sont solides.";
-  else if(pct>=70) msg="Sehr gut! Encore un peu de pratique sur les points ratés.";
-  else if(pct>=50) msg="Gut. Revois les catégories où tu as trébuché.";
-  card.innerHTML = `<div class="done-screen">
-    <div class="big">${score}/${questions.length}</div>
-    <p>${pct}% de bonnes réponses — ${msg}</p>
-    <button class="restart" id="restartbtn">Recommencer</button>
-    <button class="menubtn" id="qzHomeBtn2">☰ Retour à l'accueil</button>
-  </div>`;
-  document.getElementById('restartbtn').addEventListener('click', restartQuiz);
-  document.getElementById('qzHomeBtn2').addEventListener('click', goHome);
-}
+      // En-tête + sélecteur de leçon
+      html += `
+        <div class="mb-4">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="px-2 py-0.5 rounded border-2 text-[11px] font-bold" style="border-color:${COLORS.gold};color:${COLORS.ink};font-family:'Fraunces',serif;">A1</span>
+            <span class="text-[11px] font-semibold uppercase tracking-widest" style="color:${COLORS.gold};font-family:'IBM Plex Sans',sans-serif;">Leçon ${lessonData.number}</span>
+          </div>
+          <h1 class="header-title">${lessonData.title}</h1>
+          <p class="header-sub">${lessonData.theme}, ${lessonData.grammarFocus}</p>
+        </div>
+      `;
 
-document.getElementById('qzRestartInlineBtn').addEventListener('click', ()=>{
-  if(confirm('Recommencer le quiz depuis le début ?')) restartQuiz();
-});
+      // Onglets de sélection
+      html += `<div class="lesson-tabs">`;
+      [4, 5, 6].forEach(num => {
+        const active = num === currentLessonKey ? 'active' : '';
+        const label = `Leçon ${num}`;
+        html += `<button class="lesson-tab ${active}" data-lesson="${num}">${label}</button>`;
+      });
+      html += `</div>`;
 
-scorebarWrap.style.display='none';
-rail.style.display='none';
+      // Score global
+      const score = Math.round(overallScore());
+      html += `
+        <div class="bg-ink">
+          <div class="score-circle">${score}%</div>
+          <div><div class="label">Score de maîtrise global</div></div>
+        </div>
+      `;
 
-window.QuizApp = { start: startMode };
+      html += `<div class="card">`;
 
-})();
+      if (state.view === "menu") html += renderMenu();
+      else if (state.view === "intro") html += renderIntro();
+      else if (state.view === "quiz") {
+        if (state.activeSection === "writing") html += renderWriting();
+        else html += renderQuiz();
+      }
 
-showMenu();
-</script>
+      html += `</div></div>`;
+      root.innerHTML = html;
+      attachEvents();
+    }
+
+    // ----- MENU -----
+    function renderMenu() {
+      let html = `<div class="space-y-3">`;
+      SECTION_ORDER.forEach(key => {
+        const total = sectionTotal(key);
+        const status = sectionStatus(key);
+        let badgeClass = "badge",
+          badgeLabel = "à faire";
+        if (status === "in_progress") { badgeClass += " in-progress";
+          badgeLabel = "en cours"; } else if (status === "completed") { badgeClass += " completed";
+          badgeLabel = "terminé"; }
+        html += `
+          <button class="section-button" data-section="${key}">
+            <div class="icon-circle"><span style="font-size:18px;">${ICONS[key]}</span></div>
+            <div class="info">
+              <div class="title">${lessonData.sections[key].label}</div>
+              <div class="sub">${total} ${key === "writing" ? "tâches" : "questions"} · ${Math.ceil(total / 10)} lot${Math.ceil(total / 10) > 1 ? "s" : ""}</div>
+            </div>
+            <span class="${badgeClass}">${badgeLabel}</span>
+          </button>
+        `;
+      });
+      html += `</div>`;
+      return html;
+    }
+
+    // ----- INTRO -----
+    function renderIntro() {
+      const key = state.activeSection;
+      const section = lessonData.sections[key];
+      const p = state.progress[key];
+      const total = sectionTotal(key);
+      const isStarted = p.answeredCount > 0 && p.answeredCount < total;
+      const btnLabel = isStarted ? "Continuer" : "Commencer";
+      return `
+        <div class="flex items-center gap-2 mb-4">
+          <span style="font-size:20px;">${ICONS[key]}</span>
+          <h2 class="text-[19px] font-semibold" style="color:${COLORS.ink};font-family:'Fraunces',serif;">${section.label}</h2>
+        </div>
+        <div class="p-4 rounded-xl mb-3" style="background:${COLORS.cream};border:1px solid ${COLORS.border};">
+          <p style="font-size:14px;line-height:1.6;color:#44412F;">${section.intro}</p>
+        </div>
+        ${section.tip ? `<div class="tip-box"><span class="icon">💡</span><div><div class="label">Astuce</div><p>${section.tip}</p></div></div>` : ''}
+        <div class="flex gap-2">
+          <button class="btn-secondary" data-action="back-to-menu">Retour</button>
+          <button class="btn-primary flex-1" data-action="start-quiz">${btnLabel} →</button>
+        </div>
+      `;
+    }
+
+    // ----- QUIZ -----
+    function renderQuiz() {
+      const key = state.activeSection;
+      const section = lessonData.sections[key];
+      const exercises = section.exercises;
+      const total = exercises.length;
+      const totalBatches = Math.ceil(total / BATCH_SIZE);
+      const q = state.quiz;
+
+      if (q.stage === "sectionDone") {
+        const scorePct = total > 0 ? Math.round((state.progress[key].correctCount / total) * 100) : 0;
+        return `
+          <div class="text-center py-4">
+            <div class="flex justify-center mb-4">${gaugeHTML(total, total, 96)}</div>
+            <h3 class="text-[20px] font-semibold" style="color:${COLORS.ink};font-family:'Fraunces',serif;">Section terminée</h3>
+            <p class="text-[15px] mb-1">Score : <span class="font-semibold">${scorePct}%</span> (${state.progress[key].correctCount}/${total} bonnes réponses)</p>
+            <div class="flex gap-2 justify-center mt-4 flex-wrap">
+              <button class="btn-primary" data-action="back-to-menu">Retour aux modules</button>
+              <button class="btn-secondary" data-action="restart-section">🔄 Recommencer</button>
+            </div>
+          </div>
+        `;
+      }
+
+      if (q.stage === "batchDone") {
+        const batchStart = Math.floor(q.index / BATCH_SIZE) * BATCH_SIZE;
+        const batchEnd = Math.min(batchStart + BATCH_SIZE, total) - 1;
+        const batchNum = Math.floor(q.index / BATCH_SIZE) + 1;
+        const isLastBatch = batchEnd + 1 >= total;
+        const batchPct = q.batchAnswered > 0 ? Math.round((q.batchCorrect / q.batchAnswered) * 100) : 0;
+        return `
+          <div class="text-center py-4">
+            <div class="flex justify-center mb-4">${gaugeHTML(BATCH_SIZE, batchEnd - batchStart + 1, 96)}</div>
+            <h3 class="text-[20px] font-semibold" style="color:${COLORS.ink};font-family:'Fraunces',serif;">Lot ${batchNum}/${totalBatches} terminé</h3>
+            <p class="text-[15px] mb-1">Score de ce lot : <span class="font-semibold">${batchPct}%</span> (${q.batchCorrect}/${q.batchAnswered} bonnes réponses)</p>
+            <div class="flex flex-wrap gap-2 justify-center mt-4">
+              <button class="btn-secondary" data-action="back-to-menu">Retour aux modules</button>
+              <button class="btn-secondary" data-action="restart-batch">🔄 Recommencer ce lot</button>
+              <button class="btn-primary" data-action="${isLastBatch ? 'finish-section' : 'next-batch'}">${isLastBatch ? "Voir mon score" : "Lot suivant"} →</button>
+            </div>
+          </div>
+        `;
+      }
+
+      const ex = exercises[q.index];
+      const batchStart = Math.floor(q.index / BATCH_SIZE) * BATCH_SIZE;
+      const batchEnd = Math.min(batchStart + BATCH_SIZE, total) - 1;
+      const batchNum = Math.floor(q.index / BATCH_SIZE) + 1;
+      const isComprehension = key === "comprehension";
+      const dialogueText = isComprehension ? ex?.dialogueText : null;
+      const showDialogue = dialogueText && (q.index === batchStart || exercises[q.index - 1]?.dialogueIndex !== ex
+        .dialogueIndex);
+
+      let html = `
+        <div class="flex items-center justify-between mb-4">
+          <button class="text-sm" style="color:${COLORS.muted};background:none;border:none;cursor:pointer;" data-action="back-to-menu">← Modules</button>
+          <span class="text-xs font-semibold uppercase tracking-wide" style="color:${COLORS.gold};">Lot ${batchNum}/${totalBatches}</span>
+          <div>${gaugeHTML(batchEnd - batchStart + 1, q.index - batchStart + (q.validated ? 1 : 0), 52)}</div>
+        </div>
+      `;
+
+      if (showDialogue) html += `<div class="dialogue-box">${dialogueText}</div>`;
+
+      html += `<p class="text-[15.5px] leading-relaxed mb-1">${ex.prompt}</p>`;
+      if (q.validated && ex.translation) html += `<p class="text-sm mb-3" style="color:${COLORS.teal};">${ex.translation}</p>`;
+      html += renderExerciseBody(ex, q.answer, q.validated);
+      if (q.validated && ex.explanation) html +=
+        `<p class="text-sm italic mt-3" style="color:${COLORS.muted};">${ex.explanation}</p>`;
+
+      if (!q.validated) {
+        html += `<button class="btn-primary w-full mt-4" data-action="validate" ${q.answer === null ? 'disabled' : ''}>Valider</button>`;
+      } else {
+        html += `<button class="btn-primary w-full mt-4" style="background:${COLORS.ink};" data-action="next-question">${q.index === batchEnd ? "Terminer ce lot" : "Question suivante"} →</button>`;
+      }
+
+      return html;
+    }
+
+    function renderExerciseBody(ex, answer, validated) {
+      if (ex.type === "mcq") {
+        let html = `<div class="grid-exercises">`;
+        ex.options.forEach((opt, i) => {
+          let cls = "option-btn";
+          const isSelected = answer === i;
+          if (validated) { if (opt.correct) cls += " correct";
+            else if (isSelected) cls += " wrong"; } else if (isSelected) cls += " selected";
+          const icon = (validated && opt.correct) ? '✅' : (validated && isSelected && !opt.correct) ? '❌' : '';
+          html +=
+            `<button class="${cls}" data-opt-index="${i}" ${validated ? 'disabled' : ''}><span>${opt.text}</span>${icon ? `<span>${icon}</span>` : ''}</button>`;
+        });
+        html += `</div>`;
+        return html;
+      }
+      if (ex.type === "fill_blank") {
+        const isCorrect = validated && ex.accepted.some(a => normalize(a) === normalize(answer || ""));
+        let cls = "input-text";
+        if (validated) cls += isCorrect ? " correct" : " wrong";
+        return `<input type="text" class="${cls}" value="${answer || ''}" ${validated ? 'disabled' : ''} placeholder="Ta réponse..." data-fill-input />`;
+      }
+      if (ex.type === "true_false") {
+        let html = `<div class="flex gap-2">`;
+        [true, false].forEach(val => {
+          const label = val ? "Richtig" : "Falsch";
+          const isSelected = answer === val;
+          let cls = "tf-btn";
+          if (validated) { if (val === ex.correct) cls += " correct";
+            else if (isSelected) cls += " wrong"; } else if (isSelected) cls += " selected";
+          html += `<button class="${cls}" data-tf-value="${val}" ${validated ? 'disabled' : ''}>${label}</button>`;
+        });
+        html += `</div>`;
+        return html;
+      }
+      return '';
+    }
+
+    function gaugeHTML(total, completed, size = 68) {
+      const r = (size - 8) / 2;
+      const circ = 2 * Math.PI * r;
+      const frac = total > 0 ? Math.min(1, completed / total) : 0;
+      const offset = circ * (1 - frac);
+      return `
+        <div class="gauge" style="width:${size}px;height:${size}px;">
+          <svg width="${size}" height="${size}">
+            <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="#E4DECB" stroke-width="6" />
+            <circle cx="${size/2}" cy="${size/2}" r="${r}" fill="none" stroke="#C9A227" stroke-width="6" stroke-linecap="round"
+              stroke-dasharray="${circ}" stroke-dashoffset="${offset}" style="transition:stroke-dashoffset 0.4s ease;" />
+          </svg>
+          <div class="center">${completed}/${total}</div>
+        </div>
+      `;
+    }
+
+    // ----- WRITING -----
+    function renderWriting() {
+      const key = "writing";
+      const section = lessonData.sections[key];
+      const tasks = section.tasks;
+      const total = tasks.length;
+      const w = state.writing;
+
+      if (w.finished) {
+        const avgScore = state.progress[key].answeredCount > 0 ? Math.round(state.progress[key].correctCount / total) : 0;
+        return `
+          <div class="text-center py-4">
+            <div class="flex justify-center mb-4">${gaugeHTML(total, total, 96)}</div>
+            <h3 class="text-[20px] font-semibold" style="color:${COLORS.ink};font-family:'Fraunces',serif;">Section terminée</h3>
+            <p class="text-[15px] mb-1">Score moyen : <span class="font-semibold">${avgScore}%</span></p>
+            <div class="flex gap-2 justify-center mt-4 flex-wrap">
+              <button class="btn-primary" data-action="back-to-menu">Retour aux modules</button>
+              <button class="btn-secondary" data-action="restart-writing">🔄 Recommencer</button>
+            </div>
+          </div>
+        `;
+      }
+
+      const task = tasks[w.index];
+      const wc = w.text.trim().split(/\s+/).filter(Boolean).length;
+
+      let html = `
+        <div class="flex items-center justify-between mb-4">
+          <button class="text-sm" style="color:${COLORS.muted};background:none;border:none;cursor:pointer;" data-action="back-to-menu">← Modules</button>
+          <span class="text-xs font-semibold uppercase tracking-wide" style="color:${COLORS.gold};">Tâche ${w.index+1}/${total}</span>
+          <div>${gaugeHTML(total, state.progress[key].answeredCount, 52)}</div>
+        </div>
+        <p class="text-[15.5px] leading-relaxed mb-4">${task.prompt}</p>
+        <textarea class="w-full px-3.5 py-3 rounded-lg border-2 outline-none text-[14.5px] leading-relaxed resize-none" 
+          style="border-color:${COLORS.border};background:${COLORS.card};font-family:inherit;" 
+          rows="3" placeholder="Écris ta réponse..." ${w.validated ? 'disabled' : ''} data-writing-text>${w.text}</textarea>
+        <p class="text-xs mt-1.5" style="color:${COLORS.faint};">${wc} mot${wc > 1 ? "s" : ""} (minimum ${task.minWords})</p>
+      `;
+
+      if (w.validated) {
+        const score = Math.min(100, Math.round(scoreWritingTask(w.text, task)));
+        html += `
+          <div class="p-3 rounded-lg mt-3" style="background:${COLORS.cream};border:1px solid ${COLORS.border};">
+            <p class="text-sm" style="color:${COLORS.muted};">Score : ${score}% — mots-clés attendus : ${task.keywords.join(", ")}</p>
+          </div>
+        `;
+      }
+
+      if (!w.validated) {
+        html += `<button class="btn-primary w-full mt-4" data-action="validate-writing" ${w.text.trim().length === 0 ? 'disabled' : ''}>Valider</button>`;
+      } else {
+        html += `<button class="btn-primary w-full mt-4" style="background:${COLORS.ink};" data-action="next-writing">${w.index + 1 >= total ? "Voir mon score" : "Tâche suivante"} →</button>`;
+      }
+
+      return html;
+    }
+
+    function scoreWritingTask(text, task) {
+      const wc = text.trim().split(/\s+/).filter(Boolean).length;
+      const kwFound = task.keywords.filter(k => containsWholeKeyword(text, k)).length;
+      const kwScore = (kwFound / task.keywords.length) * 70;
+      const lenScore = wc >= task.minWords ? 30 : (wc / task.minWords) * 30;
+      return Math.min(100, kwScore + lenScore);
+    }
+
+    // ================================================================
+    //  ÉVÉNEMENTS
+    // ================================================================
+    function attachEvents() {
+      // Sélecteur de leçon
+      document.querySelectorAll('[data-lesson]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const num = parseInt(this.dataset.lesson);
+          if (num !== currentLessonKey) switchLesson(num);
+        });
+      });
+
+      // Menu sections
+      document.querySelectorAll('[data-section]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          state.activeSection = this.dataset.section;
+          state.view = "intro";
+          resetQuizState();
+          render();
+        });
+      });
+
+      // Back to menu
+      document.querySelectorAll('[data-action="back-to-menu"]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          state.view = "menu";
+          render();
+        });
+      });
+
+      // Start quiz
+      document.querySelectorAll('[data-action="start-quiz"]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          state.view = "quiz";
+          const key = state.activeSection;
+          const p = state.progress[key];
+          const total = sectionTotal(key);
+          if (p.answeredCount >= total) state.quiz.stage = "sectionDone";
+          else {
+            state.quiz.stage = "question";
+            state.quiz.index = Math.min(p.answeredCount, total - 1);
+            state.quiz.answer = null;
+            state.quiz.validated = false;
+            state.quiz.batchCorrect = 0;
+            state.quiz.batchAnswered = 0;
+          }
+          render();
+        });
+      });
+
+      // MCQ options
+      document.querySelectorAll('[data-opt-index]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          if (this.disabled) return;
+          state.quiz.answer = parseInt(this.dataset.optIndex);
+          render();
+        });
+      });
+
+      // Fill input
+      document.querySelectorAll('[data-fill-input]').forEach(inp => {
+        inp.addEventListener('input', function(e) {
+          state.quiz.answer = this.value;
+        });
+      });
+
+      // True/false
+      document.querySelectorAll('[data-tf-value]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          if (this.disabled) return;
+          state.quiz.answer = this.dataset.tfValue === 'true';
+          render();
+        });
+      });
+
+      // Validate
+      document.querySelectorAll('[data-action="validate"]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          if (this.disabled) return;
+          const key = state.activeSection;
+          const ex = lessonData.sections[key].exercises[state.quiz.index];
+          const correct = isExerciseCorrect(ex, state.quiz.answer);
+          state.quiz.batchAnswered += 1;
+          if (correct) state.quiz.batchCorrect += 1;
+          const p = state.progress[key];
+          if (state.quiz.index >= p.answeredCount) {
+            state.progress[key] = {
+              answeredCount: Math.max(p.answeredCount, state.quiz.index + 1),
+              correctCount: p.correctCount + (correct ? 1 : 0),
+            };
+          }
+          state.quiz.validated = true;
+          render();
+        });
+      });
+
+      // Next question
+      document.querySelectorAll('[data-action="next-question"]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const key = state.activeSection;
+          const total = lessonData.sections[key].exercises.length;
+          const batchStart = Math.floor(state.quiz.index / BATCH_SIZE) * BATCH_SIZE;
+          const batchEnd = Math.min(batchStart + BATCH_SIZE, total) - 1;
+          if (state.quiz.index === batchEnd) state.quiz.stage = "batchDone";
+          else { state.quiz.index += 1;
+            state.quiz.answer = null;
+            state.quiz.validated = false; }
+          render();
+        });
+      });
+
+      // Restart batch
+      document.querySelectorAll('[data-action="restart-batch"]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const key = state.activeSection;
+          const total = lessonData.sections[key].exercises.length;
+          const batchStart = Math.floor(state.quiz.index / BATCH_SIZE) * BATCH_SIZE;
+          state.quiz.index = batchStart;
+          state.quiz.answer = null;
+          state.quiz.validated = false;
+          state.quiz.batchCorrect = 0;
+          state.quiz.batchAnswered = 0;
+          state.quiz.stage = "question";
+          render();
+        });
+      });
+
+      // Next batch
+      document.querySelectorAll('[data-action="next-batch"]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const key = state.activeSection;
+          const total = lessonData.sections[key].exercises.length;
+          const batchStart = Math.floor(state.quiz.index / BATCH_SIZE) * BATCH_SIZE;
+          const nextStart = Math.min(batchStart + BATCH_SIZE, total);
+          if (nextStart >= total) state.quiz.stage = "sectionDone";
+          else { state.quiz.index = nextStart;
+            state.quiz.answer = null;
+            state.quiz.validated = false;
+            state.quiz.batchCorrect = 0;
+            state.quiz.batchAnswered = 0;
+            state.quiz.stage = "question"; }
+          render();
+        });
+      });
+
+      // Finish section
+      document.querySelectorAll('[data-action="finish-section"]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          state.quiz.stage = "sectionDone";
+          render();
+        });
+      });
+
+      // Restart section
+      document.querySelectorAll('[data-action="restart-section"]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const key = state.activeSection;
+          state.progress[key] = { answeredCount: 0, correctCount: 0 };
+          resetQuizState();
+          state.quiz.stage = "question";
+          state.quiz.index = 0;
+          render();
+        });
+      });
+
+      // Writing input
+      document.querySelectorAll('[data-writing-text]').forEach(el => {
+        el.addEventListener('input', function(e) {
+          state.writing.text = this.value;
+        });
+      });
+
+      // Validate writing
+      document.querySelectorAll('[data-action="validate-writing"]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          if (this.disabled) return;
+          const task = lessonData.sections.writing.tasks[state.writing.index];
+          const score = scoreWritingTask(state.writing.text, task);
+          const p = state.progress.writing;
+          state.progress.writing = {
+            answeredCount: Math.max(p.answeredCount, state.writing.index + 1),
+            correctCount: p.correctCount + score,
+          };
+          state.writing.validated = true;
+          render();
+        });
+      });
+
+      // Next writing
+      document.querySelectorAll('[data-action="next-writing"]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          const total = lessonData.sections.writing.tasks.length;
+          if (state.writing.index + 1 >= total) state.writing.finished = true;
+          else { state.writing.index += 1;
+            state.writing.text = "";
+            state.writing.validated = false; }
+          render();
+        });
+      });
+
+      // Restart writing
+      document.querySelectorAll('[data-action="restart-writing"]').forEach(btn => {
+        btn.addEventListener('click', function(e) {
+          state.progress.writing = { answeredCount: 0, correctCount: 0 };
+          state.writing.index = 0;
+          state.writing.text = "";
+          state.writing.validated = false;
+          state.writing.finished = false;
+          render();
+        });
+      });
+    }
+
+    function resetQuizState() {
+      state.quiz = { index: 0, answer: null, validated: false, stage: "question", batchCorrect: 0, batchAnswered: 0 };
+      state.writing = { index: 0, text: "", validated: false, finished: false };
+    }
+
+    // ================================================================
+    //  LANCEMENT
+    // ================================================================
+    render();
+  </script>
 </body>
 </html>
+``
