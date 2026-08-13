@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="fr">
 <head>
@@ -1639,6 +1640,10 @@
       document.querySelectorAll('[data-fill-input]').forEach(inp => {
         inp.addEventListener('input', function(e) {
           state.quiz.answer = this.value;
+          const validateBtn = document.querySelector('[data-action="validate"]');
+          if (validateBtn) {
+            validateBtn.disabled = state.quiz.answer === null || state.quiz.answer.trim().length === 0;
+          }
         });
       });
 
@@ -1745,6 +1750,10 @@
       document.querySelectorAll('[data-writing-text]').forEach(el => {
         el.addEventListener('input', function(e) {
           state.writing.text = this.value;
+          const validateBtn = document.querySelector('[data-action="validate-writing"]');
+          if (validateBtn) {
+            validateBtn.disabled = state.writing.text.trim().length === 0;
+          }
         });
       });
 
